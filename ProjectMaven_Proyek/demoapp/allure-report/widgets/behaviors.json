@@ -1,0 +1,1 @@
+{"total":4,"items":[{"uid":"a282d94dcb5a24526cb5b563bab395b8","name":"Login invalid credential","statistic":{"failed":0,"broken":1,"skipped":0,"passed":0,"unknown":0,"total":1}},{"uid":"812719f704650adb11ad209fc4ace290","name":"Login valid credential","statistic":{"failed":0,"broken":1,"skipped":0,"passed":0,"unknown":0,"total":1}}]}

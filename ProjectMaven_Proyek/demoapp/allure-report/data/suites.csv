@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","1","testSayHello","Surefire suite","2025-12-16","passed","2025-12-16","com.selenium.AppTest","Surefire test","com.selenium.AppTest","testSayHello"
+"Memastikan login berhasil saat username dan password benar","64","loginValid","Surefire suite","2025-12-16","broken","2025-12-16","com.selenium.LoginTest","Surefire test","com.selenium.LoginTest","loginValid"
+"","14","testAddNumbers","Surefire suite","2025-12-16","passed","2025-12-16","com.selenium.AppTest","Surefire test","com.selenium.AppTest","testAddNumbers"
+"Memastikan login gagal saat username dan password salah","3508","loginInvalid","Surefire suite","2025-12-16","broken","2025-12-16","com.selenium.LoginTest","Surefire test","com.selenium.LoginTest","loginInvalid"
