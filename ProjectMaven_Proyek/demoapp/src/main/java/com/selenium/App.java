@@ -1,12 +1,46 @@
 package com.selenium;
 
+import java.time.Duration;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class App {
-    public String sayHello(){
-        return "Hello";
+    // deklarasikan dulu
+    public static WebDriver driver;
+    public static WebDriverWait wait;
+    
+    // buka browser
+    public static void startDriver() { // saat pertama kali jalan panggil ini
+        if(driver == null){
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver(); // siapin chromedriver
+            driver.manage().window().maximize(); // kalau di run langsung maximize
+            wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // di set 10 detik
+        }
+        else{
+            System.out.println("driber Sudah Ada");
+        }
     }
 
-    public int addNumbers(int a, int b){
-        return a+b;
+    // tutup browser
+    public static void quitDriver() {
+        if(driver != null){
+            driver.quit();
+        }
+    }
+
+    public static void jedah(Integer second) { // pemberi jedah
+        try {
+            Thread.sleep(second * 1000);
+            System.out.println("\n Jedah Selesai \n");
+        } catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
+        }
     }
 
 }
