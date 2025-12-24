@@ -5,8 +5,9 @@
     <classes>
       <class name="com.selenium.AppTest">
         <methods>
-          <include name="testSayHello"/>
-          <include name="testAddNumbers"/>
+          <include name="start"/>
+          <include name="end"/>
+          <include name="scenario3"/>
         </methods>
       </class> <!-- com.selenium.AppTest -->
     </classes>

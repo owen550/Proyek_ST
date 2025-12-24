@@ -30,7 +30,26 @@ public class AppTest {
 
     @Test(priority = 3) // owen
     public void scenario3(){
+        // === deklarasi ===
+        scenario3 sc3 = new scenario3();
+        sc3.prepareTest();
         
+        // === register ===
+        sc3.testRegister(false);// email dan register password confirm salah
+        App.jedah(2);
+        
+        sc3.testRegister(true);// register yang benar
+        App.jedah(2);
+        
+        sc3.testRegister(true);// register ke akun yang sudah ada
+        App.jedah(2);
+
+        // === login ===
+        //sc3.testLogin();
+
+        // === demo ===
+
+        // === product ===
     }
 
     @AfterClass

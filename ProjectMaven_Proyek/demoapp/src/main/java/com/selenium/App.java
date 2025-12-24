@@ -37,10 +37,36 @@ public class App {
     public static void jedah(Integer second) { // pemberi jedah
         try {
             Thread.sleep(second * 1000);
-            System.out.println("\n Jedah Selesai \n");
+            // System.out.println("\n Jedah Selesai \n");
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
         }
+    }
+
+    public static void refreshToMainPage(){
+        String parent = null;
+        // ambil parent window (yang pertama)
+        for (String window : driver.getWindowHandles()) {
+            parent = window;
+            break;
+        }
+        // tutup semua tab kecuali parent
+        for (String window : driver.getWindowHandles()) {
+            if (!window.equals(parent)) {
+                driver.switchTo().window(window);
+                driver.close();
+            }
+        }
+        // balik ke parent
+        driver.switchTo().window(parent);
+        // load ulang homepage
+        driver.get("https://phptravels.com/");
+    }
+
+    public static void closeTabIni(){
+        App.driver.close(); // tutup tab saat ini
+        String parentWindow = App.driver.getWindowHandle(); // kembali ke window awal
+        App.driver.switchTo().window(parentWindow);
     }
 
 }

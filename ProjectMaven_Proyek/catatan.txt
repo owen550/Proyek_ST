@@ -1,0 +1,14 @@
+Owen (9):
+-Seluruh halaman Product
+-Halaman demo
+-Halaman login
+-Halaman sing up
+
+Mikael (9): 
+-Seluruh halaman Features
+-Halaman blog
+
+Richard (9) : 
+-Seluruh Halaman Company 
+-Halaman Pricing
+-Halaman Talk to sales
