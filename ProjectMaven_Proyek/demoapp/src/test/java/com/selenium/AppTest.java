@@ -38,8 +38,8 @@ public class AppTest {
         // sc3.testRegister(false);// email dan register password confirm salah
         // App.jedah(2);
         
-        sc3.testRegister(true);// register yang benar
-        App.jedah(2);
+        // sc3.testRegister(true);// register yang benar
+        // App.jedah(2);
         
         // sc3.testRegister(true);// register ke akun yang sudah ada
         // App.jedah(2);
@@ -59,15 +59,16 @@ public class AppTest {
         // App.refreshToMainPage();
         // App.jedah(1);
         
-        sc3.testLogin("benar"); // login dengan data yang benar
+        //sc3.testLogin("benar"); // login dengan data yang benar
 
         // === pasca login ===
-        sc3.testPascaLogin();
-
-
-        // === demo ===
+        //sc3.testPascaLogin();
 
         // === product ===
+
+        // === demo ===
+        sc3.testProduct();
+        
     }
 
     @AfterClass

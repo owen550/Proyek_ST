@@ -5,7 +5,13 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.time.Duration;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.openqa.selenium.support.ui.Select;
@@ -319,12 +325,279 @@ public class scenario3 {
     }
 
     public void testProduct(){
-        
+        // === klik Product ===
+        WebElement productMenu = App.driver.findElement(
+            By.xpath("//button[.//span[text()='Product']]")
+        );
+        productMenu.click();
+        App.jedah(1);
+
+        // === klik Docs ===
+        WebElement docsMenu = App.driver.findElement(
+            By.xpath("//a[normalize-space()='Docs']")
+        );
+        docsMenu.click();
+        App.jedah(2);
+
+        // == tes header doc ==
+        headerDoctes();
+        System.out.println("Lanjut");
+
+        // === tes welcome page ===
+        App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a")).click();
+        App.jedah(2);
+
+        // === test unsub ===
+        // !!! NANTI DIPERBAIKI (ERROR START VIDIO)
+        // App.driver.findElement(By.xpath("//*[@id=\"movie_player\"]/div[5]/button")).click();
+        // App.jedah(1);
+        App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a[2]")).click();
+        App.jedah(2);
+
+        // === test startup download ===
+        // !!! NANTI DIPERBAIKI (ERROR START VIDIO)
+        // App.driver.findElement(By.xpath("//*[@id=\"movie_player\"]/div[5]/button")).click();
+        // App.jedah(1);
+        App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a[2]")).click();
+        App.jedah(2);
+
+        // === test startup instalation ===
+        WebElement installButton = App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a[2]"));
+        ((JavascriptExecutor) App.driver).executeScript(
+            "arguments[0].scrollIntoView(true);", installButton
+        );
+        App.jedah(1);
+        installButton.click();
+        App.jedah(2);
+
+        // === test setup ===
+        App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a[2]")).click();
+        App.jedah(2);
+
+        // === test setup setting ===
+        App.driver.findElement(
+            By.xpath("//a[@href='/startup/setup/settings']")
+        ).click();
+        App.jedah(2);
+
+        // === test setup setting email ===
+        App.driver.findElement(
+            By.xpath("//a[@href='/startup/setup/settings/email-settings']")
+        ).click();
+        App.jedah(2);
+
+        // === test setup SMTP settings ===
+        App.driver.findElement(
+            By.xpath("//a[@href='/startup/setup/settings/email-settings/smtp-settings']")
+        ).click();
+        App.jedah(2);
+
+        // === test setup SMTP ===
+        WebElement smtp2goApi = App.driver.findElement(
+            By.xpath("//a[@href='/startup/setup/settings/email-settings/smtp2go-api']")
+        );
+        ((JavascriptExecutor) App.driver).executeScript(
+            "arguments[0].scrollIntoView(true);", smtp2goApi
+        );
+        App.jedah(1);
+        smtp2goApi.click();
+        App.jedah(2);
+
+        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(10));
+
+        // === test setup SMTP2 ===
+        WebElement smtp2goLink = wait.until(
+            ExpectedConditions.elementToBeClickable(
+                By.xpath("//a[@href='https://smtp2go.com']")
+            )
+        );
+        smtp2goLink.click();
+        App.jedah(2);
+        App.driver.navigate().back();
+        App.jedah(2);
+
+        WebElement verifiedSenders = wait.until(
+            ExpectedConditions.elementToBeClickable(
+                By.xpath("//a[contains(@href,'verified_senders')]")
+            )
+        );
+        verifiedSenders.click();
+        App.jedah(2);
+        App.driver.navigate().back();
+        App.jedah(2);
+
+        // === test setup currencies ===
+        WebElement currenciesBtn = wait.until(
+            ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//a[@href='/startup/setup/settings/currencies']")
+            )
+        );
+        ((JavascriptExecutor) App.driver).executeScript(
+            "arguments[0].scrollIntoView({block:'center'});", currenciesBtn
+        );
+        App.jedah(1);
+        ((JavascriptExecutor) App.driver).executeScript(
+            "arguments[0].click();", currenciesBtn
+        );
+        App.jedah(2);
+
+        // === test setup currencies API ===
+        WebElement currencyApi = wait.until(
+            ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//a[contains(@href,'apilayer.com/marketplace/currency_data-api')]")
+            )
+        );
+        ((JavascriptExecutor) App.driver).executeScript(
+            "arguments[0].scrollIntoView({block:'center'});", currencyApi
+        );
+        App.jedah(1);
+        ((JavascriptExecutor) App.driver).executeScript(
+            "arguments[0].click();", currencyApi
+        );
+        App.jedah(2);
+        App.driver.navigate().back();
+        App.jedah(2);
+
+        // === test setup markups ===
+        WebElement markupsBtn = wait.until(
+            ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//a[@href='/startup/setup/markups']")
+            )
+        );
+        ((JavascriptExecutor) App.driver).executeScript(
+            "arguments[0].scrollIntoView({block:'center'});", markupsBtn
+        );
+        App.jedah(1);
+        ((JavascriptExecutor) App.driver).executeScript(
+            "arguments[0].click();", markupsBtn
+        );
+        App.jedah(2);
+
+        // === test setup markup ===
+        // !!! NANTI DIPERBAIKI (ERROR START VIDIO)
+        // WebElement playMarkup = App.driver.findElement(
+        //     By.xpath("//button[contains(@class,'ytp-large-play-button')]")
+        // );
+        // ((JavascriptExecutor) App.driver).executeScript(
+        //     "arguments[0].scrollIntoView(true);", playMarkup
+        // );
+        // App.jedah(1);
+        // playMarkup.click();
+        // App.jedah(2);
+
+        App.driver.findElement(
+            By.xpath("//a[@href='/startup/setup/powered-by-linkback']")
+        ).click();
+        App.jedah(2);
+
+        // === test setup linkback ===
+        // !!! NANTI DIPERBAIKI (ERROR START VIDIO)
+        // WebElement playLinkback = App.driver.findElement(
+        //     By.xpath("//button[contains(@class,'ytp-large-play-button')]")
+        // );
+        // playLinkback.click();
+        // App.jedah(2);
+
+        App.driver.findElement(
+            By.xpath("//a[@href='/startup/ssl-force']")
+        ).click();
+        App.jedah(2);
+
+        // === test ssl force ===
+        App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[1]/div[2]/button")).click();
+        App.jedah(1);
+        App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a[2]")).click();
+        App.jedah(2);
+
+        // NANTIK LANJUT MODULES
+
     }
 
 
     // ==========================================
     // === lain lain ============================
     // ==========================================
+
+    public void headerDoctes(){
+        // === klik header link 1 ===
+        App.driver.findElement(
+            By.xpath("//*[@id='site-header']/div/div/div/div[3]/a[1]")
+        ).click();
+        App.jedah(2);
+        App.driver.navigate().back();
+        App.jedah(2);
+
+        // === klik header link 2 ===
+        App.driver.findElement(
+            By.xpath("//*[@id='site-header']/div/div/div/div[3]/a[2]")
+        ).click();
+        App.jedah(2);
+        App.driver.navigate().back();
+        App.jedah(2);
+
+        // === klik header link 3 ===
+        App.driver.findElement(
+            By.xpath("//*[@id='site-header']/div/div/div/div[3]/a[3]")
+        ).click();
+        App.jedah(2);
+        App.driver.navigate().back();
+        App.jedah(2);
+
+        // klik input search
+        WebElement searchInput = App.driver.findElement(
+            By.xpath("//*[@id='site-header']/div/div/div/div[2]/div/div/div[1]/input")
+        );
+        searchInput.click();
+        App.jedah(1);
+
+        // klik hasil search
+        App.driver.findElement(
+            By.xpath("//*[@id='search-results-_R_98qiv5ubsnpfivb_-0']/div[2]")
+        ).click();
+        App.jedah(2);
+
+        // klik dropdown hasil (radix)
+        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(10));
+        WebElement firstQuestion = wait.until(
+            ExpectedConditions.elementToBeClickable(
+                By.xpath("(//a[contains(@href,'?ask=')])[1]")
+            )
+        );
+        firstQuestion.click();
+        App.jedah(2);
+
+        // =============================
+        // === BUG TESTING ===
+        // =============================
+        // BUG: icon svg tidak bekerja dengan baik
+
+        try {
+            WebDriverWait waitBug = new WebDriverWait(App.driver, Duration.ofSeconds(5));
+            WebElement bugIconWrapper = waitBug.until(
+                ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//*[@id='site-header']/div/div/div/div[2]/div/div/div[1]/div[1]")
+                )
+            );
+            // pakai JS click agar tidak tergantung clickable state
+            ((JavascriptExecutor) App.driver).executeScript(
+                "arguments[0].click();", bugIconWrapper
+            );
+            System.out.println("BUG TEST: Icon search berhasil diklik");
+        } catch (Exception e) {
+            System.out.println(
+                "BUG TEST: Icon search TIDAK bisa diklik (expected bug). Pesan: "
+                + e.getClass().getSimpleName()
+            );
+        }
+        App.jedah(2);
+
+        // =============================
+        // === klik logo / home ===
+        // =============================
+        App.driver.findElement(
+            By.xpath("//*[@id=\'site-header\']/div/div/div/div[1]/a")
+        ).click();
+        App.jedah(2);
+    }
     
 }
