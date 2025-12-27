@@ -995,7 +995,106 @@ public class scenario3 {
     }
 
     public void testIntegrations(){
-        
+        // === klik Product ===
+        WebElement productMenu = App.driver.findElement(
+            By.xpath("//button[.//span[text()='Product']]")
+        );
+        productMenu.click();
+        App.jedah(1);
+
+        // === klik Themes ===
+        WebElement docsMenu = App.driver.findElement(
+            By.xpath("//a[normalize-space()='Integrations']")
+        );
+        docsMenu.click();
+        App.jedah(2);
+
+        // ================= LANJUT 1 : SCROLL PRESISI + FILTER INTEGRATIONS =================
+        JavascriptExecutor js = (JavascriptExecutor) App.driver;
+
+        // --- scroll presisi ke filter Flights ---
+        try {
+            WebElement flightsFilter = App.driver.findElement(
+                By.xpath("//button[@data-filter='Flights']")
+            );
+
+            js.executeScript(
+                "const r = arguments[0].getBoundingClientRect();" +
+                "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+                flightsFilter
+            );
+            App.jedah(1);
+
+        } catch (Exception e) {
+            System.out.println("INFO: Scroll ke filter gagal");
+        }
+
+        // Flights
+        try {
+            WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Flights']"));
+            js.executeScript("arguments[0].click();", btn);
+            App.jedah(2);
+        } catch (Exception e) {
+            System.out.println("BUG: Filter Flights tidak bisa diklik");
+        }
+
+        // Hotels
+        try {
+            WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Hotels']"));
+            js.executeScript("arguments[0].click();", btn);
+            App.jedah(2);
+        } catch (Exception e) {
+            System.out.println("BUG: Filter Hotels tidak bisa diklik");
+        }
+
+        // Tours
+        try {
+            WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Tours']"));
+            js.executeScript("arguments[0].click();", btn);
+            App.jedah(2);
+        } catch (Exception e) {
+            System.out.println("BUG: Filter Tours tidak bisa diklik");
+        }
+
+        // Cars / Transfer
+        try {
+            WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Transfer']"));
+            js.executeScript("arguments[0].click();", btn);
+            App.jedah(2);
+        } catch (Exception e) {
+            System.out.println("BUG: Filter Cars tidak bisa diklik");
+        }
+
+        // Payment Gateways
+        try {
+            WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Payment Gateway']"));
+            js.executeScript("arguments[0].click();", btn);
+            App.jedah(2);
+        } catch (Exception e) {
+            System.out.println("BUG: Filter Payment Gateways tidak bisa diklik");
+        }
+
+        // Others
+        try {
+            WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Others']"));
+            js.executeScript("arguments[0].click();", btn);
+            App.jedah(2);
+        } catch (Exception e) {
+            System.out.println("BUG: Filter Others tidak bisa diklik");
+        }
+
+        // Coming Soon
+        try {
+            WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Coming Soon']"));
+            js.executeScript("arguments[0].click();", btn);
+            App.jedah(2);
+        } catch (Exception e) {
+            System.out.println("BUG: Filter Coming Soon tidak bisa diklik");
+        }
+
+        // {LANJUT 2}
+        // LANJUTIN BESOK
+
     }
 
 
