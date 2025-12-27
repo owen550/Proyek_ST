@@ -64,11 +64,15 @@ public class AppTest {
         // === pasca login ===
         //sc3.testPascaLogin();
 
-        // === product ===
+        // === product Integrations ===
+        sc3.testIntegrations();
 
-        // === demo ===
-        sc3.testProduct();
-        
+        // === product Themes ===
+        //sc3.testThemes();
+
+        // === product doc ===
+        //sc3.testProduct();
+
     }
 
     @AfterClass

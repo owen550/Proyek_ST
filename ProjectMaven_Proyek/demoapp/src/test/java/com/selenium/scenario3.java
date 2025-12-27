@@ -4,7 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeoutException;
 import java.time.Duration;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -850,8 +851,151 @@ public class scenario3 {
         // === LANJUTIN NANTIK ===
         // === TEST SELECTION COPY ===
         
+    }
 
+    public void testThemes(){
+        // === klik Product ===
+        WebElement productMenu = App.driver.findElement(
+            By.xpath("//button[.//span[text()='Product']]")
+        );
+        productMenu.click();
+        App.jedah(1);
 
+        // === klik Themes ===
+        WebElement docsMenu = App.driver.findElement(
+            By.xpath("//a[normalize-space()='Themes']")
+        );
+        docsMenu.click();
+        App.jedah(2);
+
+        // ================= FREE DOWNLOAD (ANTI NAVBAR) =================
+        JavascriptExecutor js = (JavascriptExecutor) App.driver;
+
+        try {
+            // scroll bertahap agar card ter-load
+            for (int i = 0; i < 10; i++) {
+                js.executeScript("window.scrollBy(0, 300)");
+                App.jedah(1);
+            }
+
+            // cari tombol berdasarkan icon download (PALING STABIL)
+            WebElement freeDownloadBtn = App.driver.findElement(
+                By.xpath("//span[text()='download']/ancestor::button")
+            );
+
+            // paksa posisi: tengah layar (hindari navbar)
+            js.executeScript(
+                "const rect = arguments[0].getBoundingClientRect();" +
+                "window.scrollBy(0, rect.top - (window.innerHeight / 2));",
+                freeDownloadBtn
+            );
+            App.jedah(1);
+
+            // simpan URL sebelum klik
+            String before = App.driver.getCurrentUrl();
+
+            // KLIK VIA JAVASCRIPT (TEMBUS NAVBAR)
+            js.executeScript("arguments[0].click();", freeDownloadBtn);
+            App.jedah(3);
+
+            // cek respon
+            String after = App.driver.getCurrentUrl();
+
+            if (before.equals(after)) {
+                System.out.println("BUG: Free Download tak ada respon");
+            } else {
+                System.out.println("INFO: Free Download ada respon");
+            }
+
+        } catch (Exception e) {
+            System.out.println("BUG: Free Download tidak bisa ditemukan / diklik");
+        }
+
+        // {LANJUT 2}
+
+        /* ---------- Buy Now $100 (PERTAMA) ---------- */
+        try {
+            WebElement buyNowBtn = App.driver.findElement(
+                By.xpath("//a[@onclick='showEnterpriseAlert(event)']")
+            );
+
+            // scroll ke tengah layar (hindari navbar)
+            js.executeScript(
+                "const r = arguments[0].getBoundingClientRect();" +
+                "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+                buyNowBtn
+            );
+            App.jedah(1);
+
+            // WAJIB klik via JS
+            js.executeScript("arguments[0].click();", buyNowBtn);
+            App.jedah(2);
+
+        } catch (Exception e) {
+            System.out.println("BUG: Buy Now pertama tidak bisa diklik");
+        }
+
+        /* ---------- Cancel ---------- */
+        try {
+            WebElement cancelBtn = App.driver.findElement(
+                By.xpath("//button[@onclick='closeAlert()']")
+            );
+
+            js.executeScript("arguments[0].click();", cancelBtn);
+            App.jedah(2);
+
+        } catch (Exception e) {
+            System.out.println("BUG: Tombol Cancel tidak muncul / tidak bisa diklik");
+        }
+
+        /* ---------- Buy Now $100 (KEDUA) ---------- */
+        try {
+            WebElement buyNowBtn = App.driver.findElement(
+                By.xpath("//a[@onclick='showEnterpriseAlert(event)']")
+            );
+
+            js.executeScript(
+                "const r = arguments[0].getBoundingClientRect();" +
+                "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+                buyNowBtn
+            );
+            App.jedah(1);
+
+            js.executeScript("arguments[0].click();", buyNowBtn);
+            App.jedah(2);
+
+        } catch (Exception e) {
+            System.out.println("BUG: Buy Now kedua tidak bisa diklik");
+        }
+
+        /* ---------- Buy Enterprise ---------- */
+        try {
+            String beforeUrl = App.driver.getCurrentUrl();
+
+            WebElement buyEnterpriseBtn = App.driver.findElement(
+                By.xpath("//button[@onclick='redirectToEnterprise()']")
+            );
+
+            js.executeScript("arguments[0].click();", buyEnterpriseBtn);
+            App.jedah(3);
+
+            String afterUrl = App.driver.getCurrentUrl();
+
+            if (!beforeUrl.equals(afterUrl)) {
+                App.driver.navigate().back();
+                App.jedah(3);
+            } else {
+                System.out.println("BUG: Buy Enterprise tidak membuka halaman baru");
+            }
+
+        } catch (Exception e) {
+            System.out.println("BUG: Buy Enterprise tidak bisa diklik");
+        }
+
+    }
+
+    public void testIntegrations(){
+        
     }
 
 
