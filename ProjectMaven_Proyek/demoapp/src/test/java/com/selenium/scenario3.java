@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -509,7 +510,347 @@ public class scenario3 {
         App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a[2]")).click();
         App.jedah(2);
 
-        // NANTIK LANJUT MODULES
+        // === NANTIK LANJUT MODULES ===
+        JavascriptExecutor js = (JavascriptExecutor) App.driver;
+
+        // === helper scroll pelan ke element ===
+        java.util.function.Consumer<WebElement> scrollSlowTo = (el) -> {
+            js.executeScript("arguments[0].scrollIntoView({block:'center'});", el);
+            for (int i = 0; i < 3; i++) {
+                js.executeScript("window.scrollBy(0, 80);");
+                App.jedah(1);
+            }
+        };
+
+        // === Hotels ===
+        WebElement hotels = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/modules/hotels']")
+        ));
+        scrollSlowTo.accept(hotels);
+        hotels.click();
+        App.jedah(2);
+
+        // === Stuba ===
+        WebElement stuba = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/modules/hotels/stuba']")
+        ));
+        scrollSlowTo.accept(stuba);
+        stuba.click();
+        App.jedah(2);
+
+        // === link https://stuba.com (FIXED) ===
+        WebElement stubaLink = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//a[@href='https://stuba.com']")
+        ));
+        scrollSlowTo.accept(stubaLink);
+        js.executeScript("arguments[0].click();", stubaLink);
+        App.jedah(2);
+
+        App.driver.navigate().back();
+        App.jedah(2);
+
+        // === Hotelbeds ===
+        WebElement hotelbeds = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/modules/hotels/hotelbeds']")
+        ));
+        scrollSlowTo.accept(hotelbeds);
+        hotelbeds.click();
+        App.jedah(2);
+
+        // === Agoda ===
+        WebElement agoda = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/modules/hotels/agoda']")
+        ));
+        scrollSlowTo.accept(agoda);
+        agoda.click();
+        App.jedah(2);
+
+        // === Flights ===
+        WebElement flights = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/modules/flights']")
+        ));
+        scrollSlowTo.accept(flights);
+        flights.click();
+        App.jedah(2);
+
+        // === Amadeus Self Service ===
+        WebElement amadeusSelf = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/modules/flights/amadeus-self-service']")
+        ));
+        scrollSlowTo.accept(amadeusSelf);
+        amadeusSelf.click();
+        App.jedah(2);
+
+        // === Amadeus Entreprise ===
+        WebElement amadeusEnt = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/modules/flights/amadeus-entreprise']")
+        ));
+        scrollSlowTo.accept(amadeusEnt);
+        amadeusEnt.click();
+        App.jedah(2);
+
+        // === Duffel ===
+        WebElement duffel = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/modules/flights/duffel']")
+        ));
+        scrollSlowTo.accept(duffel);
+        duffel.click();
+        App.jedah(2);
+
+        // === Kiwi ===
+        WebElement kiwi = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/modules/flights/kiwi']")
+        ));
+        scrollSlowTo.accept(kiwi);
+        kiwi.click();
+        App.jedah(2);
+
+        // === link https://tequila.kiwi.com (FIXED) ===
+        WebElement kiwiApi = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//a[@href='https://tequila.kiwi.com/']")
+        ));
+        scrollSlowTo.accept(kiwiApi);
+        js.executeScript("arguments[0].click();", kiwiApi);
+        App.jedah(2);
+
+        App.driver.navigate().back();
+        App.jedah(2);
+
+        // === Pkfare ===
+        WebElement pkfare = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/modules/flights/pkfare']")
+        ));
+        scrollSlowTo.accept(pkfare);
+        pkfare.click();
+        App.jedah(2);
+
+        // === Tours ===
+        WebElement tours = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/modules/tours']")
+        ));
+        scrollSlowTo.accept(tours);
+        tours.click();
+        App.jedah(2);
+
+        // === Viator ===
+        WebElement viator = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/modules/tours/viator']")
+        ));
+        scrollSlowTo.accept(viator);
+        viator.click();
+        App.jedah(2);
+
+        // === Payment Gateways ===
+        WebElement payment = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/payment-gateways']")
+        ));
+        scrollSlowTo.accept(payment);
+        payment.click();
+        App.jedah(2);
+
+        // === PayPal ===
+        WebElement paypal = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/payment-gateways/paypal']")
+        ));
+        scrollSlowTo.accept(paypal);
+        paypal.click();
+        App.jedah(2);
+
+        // === link developer.paypal.com (external) ===
+        WebElement paypalDev = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//a[@href='https://developer.paypal.com/home']")
+        ));
+        scrollSlowTo.accept(paypalDev);
+        js.executeScript("arguments[0].click();", paypalDev);
+        App.jedah(2);
+
+        App.driver.navigate().back();
+        App.jedah(2);
+
+        // === Stripe (scroll sampai bawah) ===
+        WebElement stripe = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/payment-gateways/stripe']")
+        ));
+        scrollSlowTo.accept(stripe);
+        stripe.click();
+        App.jedah(2);
+
+        // === For Designers ===
+        WebElement forDesigners = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/support/for-designers']")
+        ));
+        scrollSlowTo.accept(forDesigners);
+        forDesigners.click();
+        App.jedah(2);
+
+        // === For Developers ===
+        WebElement forDevelopers = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/support/for-developers']")
+        ));
+        scrollSlowTo.accept(forDevelopers);
+        forDevelopers.click();
+        App.jedah(2);
+
+        // === API Version 9 ===
+        WebElement apiV9 = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/support/for-developers/api-version-9']")
+        ));
+        scrollSlowTo.accept(apiV9);
+        apiV9.click();
+        App.jedah(2);
+
+        // === link Postman docs (external) ===
+        WebElement postmanDoc = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//a[contains(@href,'documenter.getpostman.com')]")
+        ));
+        scrollSlowTo.accept(postmanDoc);
+        js.executeScript("arguments[0].click();", postmanDoc);
+        App.jedah(2);
+
+        App.driver.navigate().back();
+        App.jedah(2);
+
+        // === Submit Ticket ===
+        WebElement submitTicket = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/support/submit-ticket']")
+        ));
+        scrollSlowTo.accept(submitTicket);
+        submitTicket.click();
+        App.jedah(2);
+
+        // === License ===
+        WebElement license = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[@href='/support/license']")
+        ));
+        scrollSlowTo.accept(license);
+        license.click();
+        App.jedah(2);
+
+        // == bagian utama udah lanjut tes sisanya yang belum ==
+        // ================= Powered by GitBook =================
+
+        String mainTab = App.driver.getWindowHandle();
+        App.jedah(2);
+
+        // klik Powered by GitBook (open new tab)
+        WebElement poweredGitbook = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[contains(.,'Powered by GitBook')]")
+                )
+        );
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});", poweredGitbook);
+        App.jedah(2);
+        js.executeScript("arguments[0].click();", poweredGitbook);
+        App.jedah(2);
+
+        // pindah ke tab baru
+        for (String tab : App.driver.getWindowHandles()) {
+            if (!tab.equals(mainTab)) {
+                App.driver.switchTo().window(tab);
+                break;
+            }
+        }
+        App.jedah(2);
+
+        // tutup tab baru & balik ke tab utama
+        App.driver.close();
+        App.jedah(2);
+        App.driver.switchTo().window(mainTab);
+        App.jedah(2);
+
+        // ================= Theme Switch =================
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        App.jedah(2);
+
+        // light
+        js.executeScript("arguments[0].click();",
+                wait.until(ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//button[@aria-label='Switch to light theme']")
+                ))
+        );
+        App.jedah(2);
+
+        // system
+        js.executeScript("arguments[0].click();",
+                wait.until(ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//button[@aria-label='Switch to system theme']")
+                ))
+        );
+        App.jedah(2);
+
+        // dark
+        js.executeScript("arguments[0].click();",
+                wait.until(ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//button[@aria-label='Switch to dark theme']")
+                ))
+        );
+        App.jedah(2);
+
+        // ================= Feedback YES =================
+        js.executeScript("arguments[0].click();",
+                wait.until(ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//button[@aria-label='Yes, it was!']")
+                ))
+        );
+        App.jedah(2);
+
+        // isi textarea YES
+        WebElement textareaYes = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.name("page-feedback-comment")
+                )
+        );
+        textareaYes.sendKeys("Test Saya Puas");
+        App.jedah(2);
+
+        // submit
+        textareaYes.sendKeys(Keys.ENTER);
+        App.jedah(2);
+
+        // ================= Sidebar Submit Ticket =================
+        js.executeScript("arguments[0].click();",
+                wait.until(ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[@href='/support/submit-ticket']")
+                ))
+        );
+        App.jedah(2);
+
+        // ================= Sidebar License =================
+        js.executeScript("arguments[0].click();",
+                wait.until(ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[@href='/support/license']")
+                ))
+        );
+        App.jedah(2);
+
+        // ================= Feedback NO =================
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        App.jedah(2);
+
+        js.executeScript("arguments[0].click();",
+                wait.until(ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//button[@aria-label='No']")
+                ))
+        );
+        App.jedah(2);
+
+        // isi textarea NO
+        WebElement textareaNo = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.name("page-feedback-comment")
+                )
+        );
+        textareaNo.sendKeys("Tes saya tidak puas");
+        App.jedah(2);
+
+        // submit
+        textareaNo.sendKeys(Keys.ENTER);
+        App.jedah(2);
+
+        // === LANJUTIN NANTIK ===
+        // === TEST SELECTION COPY ===
+        
+
 
     }
 
