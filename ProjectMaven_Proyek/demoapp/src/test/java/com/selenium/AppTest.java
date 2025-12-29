@@ -64,6 +64,14 @@ public class AppTest {
         // === pasca login ===
         //sc3.testPascaLogin();
 
+        // === test demo salah ===
+        sc3.testDemo(false);
+        App.refreshToMainPage();
+        App.jedah(1);
+
+        // === test demo benar ===
+        sc3.testDemo(true);
+
         // === production Requirement ===
         sc3.testRequirement();
 

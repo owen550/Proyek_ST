@@ -9,7 +9,7 @@ import java.util.concurrent.TimeoutException;
 import java.time.Duration;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -1644,7 +1644,101 @@ public class scenario3 {
             System.out.println("BUG: View Pricing tidak bisa diklik");
         }
 
+    }
 
+    public void testDemo(Boolean benar){
+        App.driver.findElement(By.xpath("/html/body/header/div[1]/div/nav/a[2]")).click();
+        // === Test Demo Isi Formulir ===
+        App.driver.findElement(By.xpath("//*[@id=\'demo-form\']/div/div/div[1]/div[1]/div[2]/div[1]/div[1]/input")).sendKeys(firstname); // firstname
+        App.driver.findElement(By.xpath("//*[@id=\'demo-form\']/div/div/div[1]/div[1]/div[2]/div[1]/div[2]/input")).sendKeys(lastname); // lastname
+        App.driver.findElement(By.xpath("//*[@id=\'demo-form\']/div/div/div[1]/div[1]/div[2]/div[2]/input")).sendKeys("Institut Sains dan Teknologi Surabaya"); // buisnisname
+        App.driver.findElement(By.xpath("//*[@id=\'demo-form\']/div/div/div[1]/div[1]/div[2]/div[3]/div[2]/input")).sendKeys(wanumber); // wanumber
+        App.driver.findElement(By.xpath("//*[@id=\'demo-form\']/div/div/div[1]/div[1]/div[2]/div[4]/input")).sendKeys(email); // emailaddres
+        
+        // === Kerjakan cek mat ===
+        WebElement el1 = App.driver.findElement(By.id("numb1")); // ambil elemen
+        WebElement el2 = App.driver.findElement(By.id("numb2"));
+
+        // ambil nilai (value → text fallback)
+        String val1 = el1.getAttribute("value");
+        if (val1 == null || val1.isEmpty()) {
+            val1 = el1.getText();
+        }
+
+        String val2 = el2.getAttribute("value");
+        if (val2 == null || val2.isEmpty()) {
+            val2 = el2.getText();
+        }
+
+        // trim & validasi
+        val1 = val1.trim();
+        val2 = val2.trim();
+
+        // konversi aman
+        int bilangan1 = Integer.parseInt(val1);
+        int bilangan2 = Integer.parseInt(val2);
+
+        // LOGIKA ANDA
+        int hasil;
+
+        if (benar) {
+            hasil = bilangan1 + bilangan2;
+        } else {
+            hasil = 0;
+        }
+
+        // isi ke field hasil
+        WebElement resultField = App.driver.findElement(By.id("number"));
+        resultField.clear();
+        resultField.sendKeys(String.valueOf(hasil));
+
+        App.jedah(2);
+
+        // submit
+        App.driver.findElement(By.xpath("//*[@id=\'demo\']")).click();
+        
+        if (!benar) {
+            try {
+                WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(5));
+
+                // tunggu alert muncul
+                Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+
+                // klik OK
+                alert.accept();
+
+                System.out.println("INFO: Alert muncul dan berhasil diklik OK");
+
+            } catch (Exception e) {
+                System.out.println("BUG: Alert seharusnya muncul tapi tidak terdeteksi");
+            }
+        }
+        App.jedah(3);
+        if(!benar){
+            return;
+        }
+
+        // LANJUT 2
+        // === lanjut buka kalau berhasil ===
+        JavascriptExecutor js = (JavascriptExecutor) App.driver;
+
+        // scroll turun 20 kali
+        for (int i = 0; i < 15; i++) {
+            js.executeScript("window.scrollBy(0, 200)");
+            App.jedah(1);
+        }
+
+        // coba klik card
+        App.driver.findElement(By.xpath("/html/body/main/section[6]/div/div/div[1]/figure[1]/div/div/button")).click();
+        App.jedah(2);
+        App.driver.findElement(By.xpath("")).click(); // lanjutkan nanti !-!
+        App.jedah(2)
+
+        App.driver.findElement(By.xpath("")).click();
+        App.jedah(2);
+
+        App.driver.findElement(By.xpath("")).click();
+        App.jedah(2);
 
     }
 
