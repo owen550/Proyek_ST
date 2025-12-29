@@ -64,8 +64,17 @@ public class AppTest {
         // === pasca login ===
         //sc3.testPascaLogin();
 
+        // === production Requirement ===
+        sc3.testRequirement();
+
+        // === production Technology ===
+        //sc3.testTechnology();
+
+        // === production Customization ===
+        //sc3.testCustomizations();
+
         // === product Integrations ===
-        sc3.testIntegrations();
+        //sc3.testIntegrations();
 
         // === product Themes ===
         //sc3.testThemes();

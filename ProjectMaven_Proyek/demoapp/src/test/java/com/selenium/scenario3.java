@@ -17,6 +17,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 
 public class scenario3 {
@@ -1002,7 +1003,7 @@ public class scenario3 {
         productMenu.click();
         App.jedah(1);
 
-        // === klik Themes ===
+        // === klik Integrations ===
         WebElement docsMenu = App.driver.findElement(
             By.xpath("//a[normalize-space()='Integrations']")
         );
@@ -1092,8 +1093,558 @@ public class scenario3 {
             System.out.println("BUG: Filter Coming Soon tidak bisa diklik");
         }
 
-        // {LANJUT 2}
-        // LANJUTIN BESOK
+        // ================= LANJUT 2 =================
+        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(15));
+
+        /* --- scroll sedikit --- */
+        js.executeScript("window.scrollBy(0, 200)");
+        App.jedah(2);
+
+        /* ---------- All Suppliers ---------- */
+        try {
+            WebElement allSuppliersBtn = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//button[@data-filter='all']")
+                )
+            );
+
+            js.executeScript(
+                "const r = arguments[0].getBoundingClientRect();" +
+                "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+                allSuppliersBtn
+            );
+            App.jedah(2);
+
+            js.executeScript("arguments[0].click();", allSuppliersBtn);
+            App.jedah(2);
+
+        } catch (Exception e) {
+            System.out.println("BUG: All Suppliers tidak bisa diklik");
+        }
+
+        /* ---------- Search Input ---------- */
+        WebElement searchInput = wait.until(
+            ExpectedConditions.visibilityOfElementLocated(By.id("searchInput"))
+        );
+        App.jedah(2);
+
+        /* ================= KIWI ================= */
+        try {
+            searchInput.clear();
+            App.jedah(2);
+
+            searchInput.sendKeys("Kiw");
+            App.jedah(2);
+
+            WebElement kiwiLink = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//a[contains(@href,'/modules/flights/kiwi')]")
+                )
+            );
+            App.jedah(2);
+
+            js.executeScript(
+                "const r = arguments[0].getBoundingClientRect();" +
+                "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+                kiwiLink
+            );
+            App.jedah(2);
+
+            String mainTab = App.driver.getWindowHandle();
+            js.executeScript("arguments[0].click();", kiwiLink);
+            App.jedah(2);
+
+            wait.until(d -> d.getWindowHandles().size() > 1);
+            App.jedah(2);
+
+            for (String tab : App.driver.getWindowHandles()) {
+                if (!tab.equals(mainTab)) {
+                    App.driver.switchTo().window(tab);
+                    App.jedah(2);
+                    App.driver.close();
+                    App.jedah(2);
+                }
+            }
+
+            App.driver.switchTo().window(mainTab);
+            App.jedah(2);
+
+        } catch (Exception e) {
+            System.out.println("BUG: Kiwi View Details gagal");
+        }
+
+        /* ================= AGODA ================= */
+        try {
+            searchInput.clear();
+            App.jedah(2);
+
+            searchInput.sendKeys("Ago");
+            App.jedah(2);
+
+            WebElement agodaLink = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//a[contains(@href,'/modules/hotels/agoda')]")
+                )
+            );
+            App.jedah(2);
+
+            js.executeScript(
+                "const r = arguments[0].getBoundingClientRect();" +
+                "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+                agodaLink
+            );
+            App.jedah(2);
+
+            String mainTab = App.driver.getWindowHandle();
+            js.executeScript("arguments[0].click();", agodaLink);
+            App.jedah(2);
+
+            wait.until(d -> d.getWindowHandles().size() > 1);
+            App.jedah(2);
+
+            for (String tab : App.driver.getWindowHandles()) {
+                if (!tab.equals(mainTab)) {
+                    App.driver.switchTo().window(tab);
+                    App.jedah(2);
+                    App.driver.close();
+                    App.jedah(2);
+                }
+            }
+
+            App.driver.switchTo().window(mainTab);
+            App.jedah(2);
+
+        } catch (Exception e) {
+            System.out.println("BUG: Agoda View Details gagal");
+        }
+
+        // ================= LANJUT 3 =================
+
+        /* ---------- Reset Filters ---------- */
+        try {
+            WebElement resetBtn = wait.until(
+                ExpectedConditions.presenceOfElementLocated(By.id("resetBtn"))
+            );
+
+            js.executeScript(
+                "const r = arguments[0].getBoundingClientRect();" +
+                "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+                resetBtn
+            );
+            App.jedah(2);
+
+            js.executeScript("arguments[0].click();", resetBtn);
+            App.jedah(2);
+
+        } catch (Exception e) {
+            System.out.println("BUG: Reset Filters tidak bisa diklik");
+        }
+
+        /* ---------- Assert 0 integrations found ---------- */
+        try {
+            WebElement resultsCount = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("resultsCount"))
+            );
+            App.jedah(2);
+
+            String actualText = resultsCount.getText();
+            Assert.assertEquals(
+                resultsCount.getText(),
+                "23 integrations found",
+                "BUG: Jumlah integration tidak 23"
+            );
+
+        } catch (AssertionError ae) {
+            throw ae; // wajib fail test
+        } catch (Exception e) {
+            System.out.println("BUG: resultsCount tidak ditemukan");
+        }
+
+        /* ---------- Scroll perlahan sampai Live Demo ---------- */
+        WebElement liveDemoBtn = wait.until(
+            ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//a[contains(@href,'/demo')]")
+            )
+        );
+        App.jedah(2);
+
+        // scroll bertahap (smooth & aman)
+        for (int i = 0; i < 8; i++) {
+            js.executeScript("window.scrollBy(0, 150)");
+            App.jedah(2);
+        }
+
+        /* pastikan tombol di tengah layar */
+        js.executeScript(
+            "const r = arguments[0].getBoundingClientRect();" +
+            "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+            liveDemoBtn
+        );
+        App.jedah(2);
+
+        /* klik via JS */
+        js.executeScript("arguments[0].click();", liveDemoBtn);
+        App.jedah(2);
+
+        /* ---------- Back ke halaman awal ---------- */
+        App.driver.navigate().back();
+        App.jedah(2);
+
+        /* ---------- View Pricing ---------- */
+        WebElement pricingBtn = wait.until(
+            ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//a[contains(@href,'/pricing')]")
+            )
+        );
+        App.jedah(2);
+
+        js.executeScript(
+            "const r = arguments[0].getBoundingClientRect();" +
+            "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+            pricingBtn
+        );
+        App.jedah(2);
+
+        js.executeScript("arguments[0].click();", pricingBtn);
+        App.jedah(2);
+
+        /* ---------- Back ke halaman awal ---------- */
+        App.driver.navigate().back();
+        App.jedah(2);
+        
+        // ================= LANJUT 4 =================
+
+        /* ---------- Scroll perlahan ke paling bawah ---------- */
+        for (int i = 0; i < 15; i++) {
+            js.executeScript("window.scrollBy(0, 200)");
+            App.jedah(2);
+        }
+
+        /* ---------- Privacy (tab sama) ---------- */
+        try {
+            WebElement privacyLink = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//a[contains(@href,'/privacy-statement')]")
+                )
+            );
+
+            js.executeScript(
+                "arguments[0].scrollIntoView({block:'center'});",
+                privacyLink
+            );
+            App.jedah(2);
+
+            js.executeScript("arguments[0].click();", privacyLink);
+            App.jedah(2);
+
+            App.driver.navigate().back();
+            App.jedah(2);
+
+        } catch (Exception e) {
+            System.out.println("BUG: Privacy link gagal");
+        }
+
+        /* ---------- Terms (tab sama) ---------- */
+        try {
+            WebElement termsLink = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//a[contains(@href,'/terms-and-conditions')]")
+                )
+            );
+
+            js.executeScript(
+                "arguments[0].scrollIntoView({block:'center'});",
+                termsLink
+            );
+            App.jedah(2);
+
+            js.executeScript("arguments[0].click();", termsLink);
+            App.jedah(2);
+
+            App.driver.navigate().back();
+            App.jedah(2);
+
+        } catch (Exception e) {
+            System.out.println("BUG: Terms link gagal");
+        }
+
+        /* ---------- Support (tab baru) ---------- */
+        try {
+            WebElement supportLink = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//a[contains(@href,'direct.lc.chat')]")
+                )
+            );
+
+            js.executeScript(
+                "arguments[0].scrollIntoView({block:'center'});",
+                supportLink
+            );
+            App.jedah(2);
+
+            String mainTab = App.driver.getWindowHandle();
+            js.executeScript("arguments[0].click();", supportLink);
+            App.jedah(2);
+
+            wait.until(d -> d.getWindowHandles().size() > 1);
+            App.jedah(2);
+
+            for (String tab : App.driver.getWindowHandles()) {
+                if (!tab.equals(mainTab)) {
+                    App.driver.switchTo().window(tab);
+                    App.jedah(2);
+                    App.driver.close();
+                    App.jedah(2);
+                }
+            }
+
+            App.driver.switchTo().window(mainTab);
+            App.jedah(2);
+
+        } catch (Exception e) {
+            System.out.println("BUG: Support link gagal");
+        }
+    }
+
+    public void testCustomizations(){
+        // === klik Product ===
+        WebElement productMenu = App.driver.findElement(
+            By.xpath("//button[.//span[text()='Product']]")
+        );
+        productMenu.click();
+        App.jedah(1);
+
+        // === klik Customizations ===
+        WebElement docsMenu = App.driver.findElement(
+            By.xpath("//a[normalize-space()='Customization']")
+        );
+        docsMenu.click();
+        App.jedah(2);
+
+        // ================= LANJUT 2 =================
+        JavascriptExecutor js = (JavascriptExecutor) App.driver;
+        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(15));
+
+        /* ---------- scroll sedikit sampai tombol muncul ---------- */
+        for (int i = 0; i < 4; i++) {
+            js.executeScript("window.scrollBy(0, 200)");
+            App.jedah(2);
+        }
+
+        /* ---------- Live Demo ---------- */
+        try {
+            WebElement liveDemoBtn = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//a[contains(@href,'/demo')]")
+                )
+            );
+            App.jedah(2);
+
+            js.executeScript(
+                "arguments[0].scrollIntoView({block:'center'});",
+                liveDemoBtn
+            );
+            App.jedah(2);
+
+            js.executeScript("arguments[0].click();", liveDemoBtn);
+            App.jedah(2);
+
+            App.driver.navigate().back();
+            App.jedah(2);
+
+        } catch (Exception e) {
+            System.out.println("BUG: Live Demo tidak bisa diklik");
+        }
+
+        /* ---------- View Pricing ---------- */
+        try {
+            WebElement pricingBtn = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//a[contains(@href,'/pricing')]")
+                )
+            );
+            App.jedah(2);
+
+            js.executeScript(
+                "arguments[0].scrollIntoView({block:'center'});",
+                pricingBtn
+            );
+            App.jedah(2);
+
+            js.executeScript("arguments[0].click();", pricingBtn);
+            App.jedah(2);
+
+            App.driver.navigate().back();
+            App.jedah(2);
+
+        } catch (Exception e) {
+            System.out.println("BUG: View Pricing tidak bisa diklik");
+        }
+
+        /* ---------- scroll sampai mentok ke bawah ---------- */
+        for (int i = 0; i < 15; i++) {
+            js.executeScript("window.scrollBy(0, 200)");
+            App.jedah(2);
+        }
+    }
+
+    public void testTechnology(){
+        // === klik Product ===
+        WebElement productMenu = App.driver.findElement(
+            By.xpath("//button[.//span[text()='Product']]")
+        );
+        productMenu.click();
+        App.jedah(1);
+
+        // === klik Technology ===
+        WebElement docsMenu = App.driver.findElement(
+            By.xpath("//a[normalize-space()='Technology']")
+        );
+        docsMenu.click();
+        App.jedah(2);
+
+        // ================= LANJUT 2 =================
+        JavascriptExecutor js = (JavascriptExecutor) App.driver;
+
+        /* ===== scroll perlahan seperti manusia ===== */
+        for (int i = 0; i < 14; i++) {
+            js.executeScript("window.scrollBy(0, 200)");
+            App.jedah(2);
+        }
+        
+        // ==== LANJUT 3 ======
+        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(15));
+
+        /* ===== Live Demo ===== */
+        try {
+            WebElement liveDemoBtn = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//a[contains(@href,'/demo')]")
+                )
+            );
+
+            // pastikan posisi aman (tengah layar)
+            js.executeScript(
+                "arguments[0].scrollIntoView({block:'center'});",
+                liveDemoBtn
+            );
+            App.jedah(2);
+
+            // klik via JS
+            js.executeScript("arguments[0].click();", liveDemoBtn);
+            App.jedah(3);
+
+            // kembali ke halaman awal
+            App.driver.navigate().back();
+            App.jedah(3);
+
+        } catch (Exception e) {
+            System.out.println("BUG: Live Demo tidak bisa dibuka");
+        }
+
+        /* ===== View Pricing ===== */
+        try {
+            WebElement pricingBtn = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//a[contains(@href,'/pricing')]")
+                )
+            );
+
+            js.executeScript(
+                "arguments[0].scrollIntoView({block:'center'});",
+                pricingBtn
+            );
+            App.jedah(2);
+
+            js.executeScript("arguments[0].click();", pricingBtn);
+            App.jedah(3);
+
+            App.driver.navigate().back();
+            App.jedah(3);
+
+        } catch (Exception e) {
+            System.out.println("BUG: View Pricing tidak bisa dibuka");
+        }
+
+    }
+
+    public void testRequirement(){
+        // === klik Product ===
+        WebElement productMenu = App.driver.findElement(
+            By.xpath("//button[.//span[text()='Product']]")
+        );
+        productMenu.click();
+        App.jedah(1);
+
+        // === klik Customizations ===
+        WebElement docsMenu = App.driver.findElement(
+            By.xpath("//a[normalize-space()='Requirements']")
+        );
+        docsMenu.click();
+        App.jedah(2);
+
+        // scroll sampek bawah
+        JavascriptExecutor js = (JavascriptExecutor) App.driver;
+
+        /* ===== scroll perlahan seperti manusia ===== */
+        for (int i = 0; i < 13; i++) {
+            js.executeScript("window.scrollBy(0, 200)");
+            App.jedah(1);
+        }
+
+        // ====== klik tombol demo dama live ======
+        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(15));
+
+        /* ===== Live Demo ===== */
+        try {
+            WebElement liveDemoBtn = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//a[contains(@href,'/demo')]")
+                )
+            );
+
+            // pastikan posisi aman (tengah layar)
+            js.executeScript(
+                "arguments[0].scrollIntoView({block:'center'});",
+                liveDemoBtn
+            );
+            App.jedah(2);
+
+            js.executeScript("arguments[0].click();", liveDemoBtn);
+            App.jedah(3);
+
+            App.driver.navigate().back();
+            App.jedah(3);
+
+        } catch (Exception e) {
+            System.out.println("BUG: Tombol bland dengan background");
+        }
+
+        /* ===== View Pricing ===== */
+        try {
+            WebElement pricingBtn = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//a[contains(@href,'/pricing')]")
+                )
+            );
+
+            js.executeScript(
+                "arguments[0].scrollIntoView({block:'center'});",
+                pricingBtn
+            );
+            App.jedah(2);
+
+            js.executeScript("arguments[0].click();", pricingBtn);
+            App.jedah(3);
+
+            App.driver.navigate().back();
+            App.jedah(3);
+
+        } catch (Exception e) {
+            System.out.println("BUG: View Pricing tidak bisa diklik");
+        }
+
+
 
     }
 
