@@ -1699,6 +1699,7 @@ public class scenario3 {
         
         if (!benar) {
             try {
+                App.jedah(2);
                 WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(5));
 
                 // tunggu alert muncul
@@ -1718,9 +1719,78 @@ public class scenario3 {
             return;
         }
 
+        // kalau berhasil ntik klik 2 tombol sisa
+        //*[@id="demo-form"]/div/div/div[1]/div[2]/div/div[3]/button[1]
+        //*[@id="demo-form"]/div/div/div[1]/div[2]/div/div[3]/button[2]
+        JavascriptExecutor js = (JavascriptExecutor) App.driver;
+        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(10));
+
+        String mainTab = App.driver.getWindowHandle();
+
+        // tombol pertama
+        try {
+            WebElement btn1 = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//*[@id='demo-form']/div/div/div[1]/div[2]/div/div[3]/button[1]")
+                )
+            );
+
+            js.executeScript("arguments[0].scrollIntoView({block:'center'});", btn1);
+            App.jedah(2);
+
+            js.executeScript("arguments[0].click();", btn1);
+            App.jedah(3);
+
+            // pindah ke tab baru & tutup
+            for (String tab : App.driver.getWindowHandles()) {
+                if (!tab.equals(mainTab)) {
+                    App.driver.switchTo().window(tab);
+                    App.jedah(2);
+                    App.driver.close();
+                }
+            }
+
+            // kembali ke tab utama
+            App.driver.switchTo().window(mainTab);
+            App.jedah(2);
+
+        } catch (Exception e) {
+            System.out.println("BUG: Tombol pertama gagal dibuka");
+        }
+
+        // tombol kedua
+        try {
+            WebElement btn2 = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//*[@id='demo-form']/div/div/div[1]/div[2]/div/div[3]/button[2]")
+                )
+            );
+
+            js.executeScript("arguments[0].scrollIntoView({block:'center'});", btn2);
+            App.jedah(2);
+
+            js.executeScript("arguments[0].click();", btn2);
+            App.jedah(3);
+
+            // pindah ke tab baru & tutup
+            for (String tab : App.driver.getWindowHandles()) {
+                if (!tab.equals(mainTab)) {
+                    App.driver.switchTo().window(tab);
+                    App.jedah(2);
+                    App.driver.close();
+                }
+            }
+
+            // kembali ke tab utama
+            App.driver.switchTo().window(mainTab);
+            App.jedah(2);
+
+        } catch (Exception e) {
+            System.out.println("BUG: Tombol kedua gagal dibuka");
+        }
+
         // LANJUT 2
         // === lanjut buka kalau berhasil ===
-        JavascriptExecutor js = (JavascriptExecutor) App.driver;
 
         // scroll turun 20 kali
         for (int i = 0; i < 15; i++) {
@@ -1731,14 +1801,42 @@ public class scenario3 {
         // coba klik card
         App.driver.findElement(By.xpath("/html/body/main/section[6]/div/div/div[1]/figure[1]/div/div/button")).click();
         App.jedah(2);
-        App.driver.findElement(By.xpath("")).click(); // lanjutkan nanti !-!
-        App.jedah(2)
-
-        App.driver.findElement(By.xpath("")).click();
+        App.driver.findElement(By.xpath("//*[@id=\'lightbox\']/button/span")).click(); // lanjutkan nanti !-!
         App.jedah(2);
 
-        App.driver.findElement(By.xpath("")).click();
+        App.driver.findElement(By.xpath("/html/body/main/section[6]/div/div/div[1]/figure[2]/div/div/button")).click();
         App.jedah(2);
+        App.driver.findElement(By.xpath("//*[@id=\"lightbox\"]/button/span")).click();
+        App.jedah(2);
+
+        App.driver.findElement(By.xpath("/html/body/main/section[6]/div/div/div[1]/figure[3]/div/div/button")).click();
+        App.jedah(2);
+        App.driver.findElement(By.xpath("//*[@id=\"lightbox\"]/button/span")).click();
+        App.jedah(2);
+
+        // scroll turun lagi
+        for (int i = 0; i < 7; i++) {
+            js.executeScript("window.scrollBy(0, 200)");
+            App.jedah(1);
+        }
+
+        // coba klik expand info
+        App.driver.findElement(By.xpath("//*[@id=\'demoAccordion\']/div[2]/button")).click();
+        App.jedah(2);
+        App.driver.findElement(By.xpath("//*[@id=\'demoAccordion\']/div[3]/button")).click();
+        App.jedah(2);
+        App.driver.findElement(By.xpath("//*[@id=\'demoAccordion\']/div[4]/button")).click();
+        App.jedah(2);
+        App.driver.findElement(By.xpath("//*[@id=\'demoAccordion\']/div[5]/button")).click();
+        App.jedah(2);
+        App.driver.findElement(By.xpath("//*[@id=\'demoAccordion\']/div[6]/button")).click();
+        App.jedah(2);
+
+        // scroll lagi
+        for (int i = 0; i < 3; i++) {
+            js.executeScript("window.scrollBy(0, 200)");
+            App.jedah(1);
+        }
 
     }
 

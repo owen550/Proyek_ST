@@ -148,15 +148,15 @@
                   <a name="scenario3">
                   </a> <!-- scenario3 -->
                   <span class="method-name">scenario3</span>
-                  <div class="stack-trace">org.openqa.selenium.WebDriverException: target frame detached
-  (failed to check if window was closed: disconnected: Unable to receive message from renderer)
+                  <div class="stack-trace">org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;/html/body/div[1]/div/div[2]/div[1]/a[1]&quot;}
   (Session info: chrome=143.0.7499.170)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
 Build info: version: &apos;4.38.0&apos;, revision: &apos;6b412e825c*&apos;
 System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;25.0.1&apos;
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [f1d137d587e94ef39cbbd7caa671b8b5, executeScript {args=[], script=window.scrollBy(0, 200)}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.170, chrome: {chromedriverVersion: 143.0.7499.169 (164b20aab62..., userDataDir: C:\Users\HP\AppData\Local\T...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:57957}, goog:processID: 16788, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:57957/devtoo..., se:cdpVersion: 143.0.7499.170, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: f1d137d587e94ef39cbbd7caa671b8b5
+Command: [d5c64589e6f8aa4899303c8818085148, findElement {value=/html/body/div[1]/div/div[2]/div[1]/a[1], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.170, chrome: {chromedriverVersion: 143.0.7499.169 (164b20aab62..., userDataDir: C:\Users\HP\AppData\Local\T...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53439}, goog:processID: 8564, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:53439/devtoo..., se:cdpVersion: 143.0.7499.170, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: d5c64589e6f8aa4899303c8818085148
 	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
 	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
 	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
@@ -164,9 +164,12 @@ Session ID: f1d137d587e94ef39cbbd7caa671b8b5
 	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
 	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
 	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
-	at org.openqa.selenium.remote.RemoteWebDriver.executeScript(RemoteWebDriver.java:488)
-	at com.selenium.scenario3.testRequirement(scenario3.java:1591)
-	at com.selenium.AppTest.scenario3(AppTest.java:76)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:380)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.selenium.scenario3.testPascaLogin(scenario3.java:178)
+	at com.selenium.AppTest.scenario3(AppTest.java:65)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 ... Removed 33 stack frames
 </div> <!-- stack-trace -->
@@ -251,15 +254,15 @@ data.addRows(3);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'scenario3')
 data.setCell(0, 2, 'com.selenium.AppTest')
-data.setCell(0, 3, 78850);
+data.setCell(0, 3, 105404);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'scenario1')
 data.setCell(1, 2, 'com.selenium.AppTest')
-data.setCell(1, 3, 119);
+data.setCell(1, 3, 91);
 data.setCell(2, 0, 2)
 data.setCell(2, 1, 'scenario2')
 data.setCell(2, 2, 'com.selenium.AppTest')
-data.setCell(2, 3, 16);
+data.setCell(2, 3, 4);
 window.suiteTableData['Surefire_suite']= { tableData: data, tableDiv: 'times-div-Surefire_suite'}
 return data;
 }
@@ -297,21 +300,21 @@ return data;
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">scenario1</span>
-                <span class="method-start">21170 ms</span>
+                <span class="method-start">5786 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">scenario2</span>
-                <span class="method-start">21484 ms</span>
+                <span class="method-start">6046 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
                 <span class="method-name">scenario3</span>
-                <span class="method-start">21500 ms</span>
+                <span class="method-start">6056 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <span class="method-name">end</span>
-                <span class="method-start">100475 ms</span>
+                <span class="method-start">111483 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
