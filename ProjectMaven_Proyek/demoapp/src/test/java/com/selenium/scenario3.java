@@ -342,9 +342,11 @@ public class scenario3 {
         docsMenu.click();
         App.jedah(2);
 
+        // === dropdown ===
+        dropdownHeaderTest();
+
         // == tes header doc ==
         headerDoctes();
-        System.out.println("Lanjut");
 
         // === tes welcome page ===
         App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a")).click();
@@ -406,7 +408,7 @@ public class scenario3 {
         smtp2goApi.click();
         App.jedah(2);
 
-        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
 
         // === test setup SMTP2 ===
         WebElement smtp2goLink = wait.until(
@@ -644,7 +646,7 @@ public class scenario3 {
 
         // === Payment Gateways ===
         WebElement payment = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/payment-gateways']")
+            By.xpath("//a[@href='/payments']")
         ));
         scrollSlowTo.accept(payment);
         payment.click();
@@ -652,7 +654,7 @@ public class scenario3 {
 
         // === PayPal ===
         WebElement paypal = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/payment-gateways/paypal']")
+            By.xpath("//a[@href='/payments/paypal']")
         ));
         scrollSlowTo.accept(paypal);
         paypal.click();
@@ -671,7 +673,7 @@ public class scenario3 {
 
         // === Stripe (scroll sampai bawah) ===
         WebElement stripe = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/payment-gateways/stripe']")
+            By.xpath("//a[@href='/payments/stripe']")
         ));
         scrollSlowTo.accept(stripe);
         stripe.click();
@@ -1094,7 +1096,7 @@ public class scenario3 {
         }
 
         // ================= LANJUT 2 =================
-        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
 
         /* --- scroll sedikit --- */
         js.executeScript("window.scrollBy(0, 200)");
@@ -1423,7 +1425,7 @@ public class scenario3 {
 
         // ================= LANJUT 2 =================
         JavascriptExecutor js = (JavascriptExecutor) App.driver;
-        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
 
         /* ---------- scroll sedikit sampai tombol muncul ---------- */
         for (int i = 0; i < 4; i++) {
@@ -1513,7 +1515,7 @@ public class scenario3 {
         }
         
         // ==== LANJUT 3 ======
-        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
 
         /* ===== Live Demo ===== */
         try {
@@ -1593,7 +1595,7 @@ public class scenario3 {
         }
 
         // ====== klik tombol demo dama live ======
-        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
 
         /* ===== Live Demo ===== */
         try {
@@ -1700,7 +1702,7 @@ public class scenario3 {
         if (!benar) {
             try {
                 App.jedah(2);
-                WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(5));
+                WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
 
                 // tunggu alert muncul
                 Alert alert = wait.until(ExpectedConditions.alertIsPresent());
@@ -1723,7 +1725,7 @@ public class scenario3 {
         //*[@id="demo-form"]/div/div/div[1]/div[2]/div/div[3]/button[1]
         //*[@id="demo-form"]/div/div/div[1]/div[2]/div/div[3]/button[2]
         JavascriptExecutor js = (JavascriptExecutor) App.driver;
-        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
 
         String mainTab = App.driver.getWindowHandle();
 
@@ -1845,6 +1847,72 @@ public class scenario3 {
     // === lain lain ============================
     // ==========================================
 
+    public void dropdownHeaderTest(){
+
+        App.driver.findElement(By.xpath("//*[@id='radix-_R_8mqav5ukqiv5ubsnpfivb_']")).click();
+        App.jedah(2);
+
+        // === test semua satu per satu ===
+
+        App.driver.findElement(By.xpath("//*[@id='radix-_R_8mqav5ukqiv5ubsnpfivbH1_']/div/a[4]")).click(); // vscode
+        App.jedah(2);
+
+        // akan terbuka tab baru, tutup tab itu sehingga kembali ke awal
+        String mainWindow = App.driver.getWindowHandle();
+        for (String win : App.driver.getWindowHandles()) {
+            if (!win.equals(mainWindow)) {
+                App.driver.switchTo().window(win);
+                App.driver.close();
+            }
+        }
+        App.driver.switchTo().window(mainWindow);
+
+        App.driver.findElement(By.xpath("//*[@id='radix-_R_8mqav5ukqiv5ubsnpfivbH1_']/div/div[5]")).click(); // mcp
+        App.jedah(3);
+
+        App.driver.findElement(By.xpath("//*[@id='radix-_R_8mqav5ukqiv5ubsnpfivb_']")).click();
+        App.jedah(2);
+
+        App.driver.findElement(By.xpath("//*[@id='radix-_R_8mqav5ukqiv5ubsnpfivbH1_']/div/a[3]")).click(); // claude
+        App.jedah(2);
+
+        // akan terbuka tab baru, tutup tab itu sehingga kembali ke awal
+        for (String win : App.driver.getWindowHandles()) {
+            if (!win.equals(mainWindow)) {
+                App.driver.switchTo().window(win);
+                App.driver.close();
+            }
+        }
+        App.driver.switchTo().window(mainWindow);
+
+        App.driver.findElement(By.xpath("//*[@id='radix-_R_8mqav5ukqiv5ubsnpfivbH1_']/div/a[2]")).click(); // chat gpt
+        App.jedah(2);
+
+        // akan terbuka tab baru, tutup tab itu sehingga kembali ke awal
+        for (String win : App.driver.getWindowHandles()) {
+            if (!win.equals(mainWindow)) {
+                App.driver.switchTo().window(win);
+                App.driver.close();
+            }
+        }
+        App.driver.switchTo().window(mainWindow);
+
+        App.driver.findElement(By.xpath("//*[@id='radix-_R_8mqav5ukqiv5ubsnpfivbH1_']/div/a[1]")).click(); // markdown
+        App.jedah(2);
+
+        // akan terbuka tab baru, tutup tab itu sehingga kembali ke awal
+        for (String win : App.driver.getWindowHandles()) {
+            if (!win.equals(mainWindow)) {
+                App.driver.switchTo().window(win);
+                App.driver.close();
+            }
+        }
+        App.driver.switchTo().window(mainWindow);
+
+        App.driver.findElement(By.xpath("//*[@id='radix-_R_8mqav5ukqiv5ubsnpfivbH1_']/div/div[2]")).click(); // copy
+        App.jedah(2);
+    }
+
     public void headerDoctes(){
         // === klik header link 1 ===
         App.driver.findElement(
@@ -1884,7 +1952,7 @@ public class scenario3 {
         App.jedah(2);
 
         // klik dropdown hasil (radix)
-        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
         WebElement firstQuestion = wait.until(
             ExpectedConditions.elementToBeClickable(
                 By.xpath("(//a[contains(@href,'?ask=')])[1]")
