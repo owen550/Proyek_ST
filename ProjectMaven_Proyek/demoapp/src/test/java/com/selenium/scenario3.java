@@ -16,6 +16,10 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
+
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
@@ -24,115 +28,154 @@ public class scenario3 {
     
     String email,password,firstname,lastname,wanumber,passwordbaru;
 
+    @Step("Prepare test data from form.txt")
     public void prepareTest(){
-        // === baca data dari txt ===
-        Map<String, String> data = new HashMap<>();
-        String filePath = "form.txt";
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] split = line.split(":");
-                if (split.length == 2) {
-                    data.put(split[0].trim(), split[1].trim());
+        Allure.step("Prepare test data from form.txt", () -> {
+            // === baca data dari txt ===
+            Map<String, String> data = new HashMap<>();
+            String filePath = "form.txt";
+            try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    String[] split = line.split(":");
+                    if (split.length == 2) {
+                        data.put(split[0].trim(), split[1].trim());
+                    }
                 }
+            } catch (Exception e) {
+                System.out.println("Gagal membaca file txt: " + e.getMessage());
             }
-        } catch (Exception e) {
-            System.out.println("Gagal membaca file txt: " + e.getMessage());
-        }
 
-        // === set semua nilai var ===
-        email = data.get("email");
-        password = data.get("password");
-        firstname = data.get("firstname");
-        lastname = data.get("lastname");
-        wanumber = data.get("wanumber");
-        passwordbaru = data.get("passwordbaru");
+            // === set semua nilai var ===
+            email = data.get("email");
+            password = data.get("password");
+            firstname = data.get("firstname");
+            lastname = data.get("lastname");
+            wanumber = data.get("wanumber");
+            passwordbaru = data.get("passwordbaru");
+        });
     }
 
     public void testRegister(Boolean konfirmbenar) {
-         // === klik Get Started ===
-        App.driver.findElement(By.xpath("/html/body/header/div[1]/div/div[2]/a[2]")).click();
-        App.jedah(2);
+        String stepName;
+        if (!konfirmbenar) {
+            stepName = "Register attempt with INVALID confirmation data";
+        } else {
+            stepName = "Register attempt with VALID data";
+        }
+        Allure.step(stepName, () -> {
+            // === klik Get Started ===
+            App.driver.findElement(
+                By.xpath("/html/body/header/div[1]/div/div[2]/a[2]")
+            ).click();
+            App.jedah(2);
 
-        // === PINDAH KE TAB BARU ===
-        String parentWindow = App.driver.getWindowHandle();
-
-        for (String window : App.driver.getWindowHandles()) {
-            if (!window.equals(parentWindow)) {
-                App.driver.switchTo().window(window);
-                break;
+            // === PINDAH KE TAB BARU ===
+            String parentWindow = App.driver.getWindowHandle();
+            for (String window : App.driver.getWindowHandles()) {
+                if (!window.equals(parentWindow)) {
+                    App.driver.switchTo().window(window);
+                    break;
+                }
             }
-        }
 
-        App.jedah(1);
+            App.jedah(1);
 
-        //  === ke signup ===
-        App.driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[2]/p/a")).click();
-        App.jedah(1);
+            // === ke signup ===
+            App.driver.findElement(
+                By.xpath("/html/body/div[1]/div/div/div/div/div[2]/p/a")
+            ).click();
+            App.jedah(1);
 
-        // === isi form ===
-        App.driver.findElement(By.xpath("//*[@id=\'first_name\']")).sendKeys(firstname);
-        App.driver.findElement(By.xpath("//*[@id=\'last_name\']")).sendKeys(lastname);
-        App.driver.findElement(By.xpath("//*[@id=\'email\']")).sendKeys(email);
-        App.driver.findElement(By.xpath("//*[@id=\'password\']")).sendKeys(password);
-        // === konfirmasi password ===
-        if(konfirmbenar){// klo konfiorm benar
-            App.driver.findElement(By.xpath("//*[@id=\'confirm_password\']")).sendKeys(password);
-        }
-        else{ // salah
-            App.driver.findElement(By.xpath("//*[@id=\'email\']")).sendKeys("notemail");
-            App.driver.findElement(By.xpath("//*[@id=\'confirm_password\']")).sendKeys("isiPasssalaha");
-        }
-        App.driver.findElement(By.xpath("//*[@id=\'signupForm\']/div[5]/div/div/div/span")).click();
-        App.driver.findElement(By.xpath("//*[@id=\'mobile\']")).sendKeys(wanumber);
-        App.jedah(1);
-        App.driver.findElement(By.xpath("//*[@id=\"submit\"]")).click();
-        App.jedah(3);
+            // === isi form ===
+            App.driver.findElement(By.id("first_name")).sendKeys(firstname);
+            App.driver.findElement(By.id("last_name")).sendKeys(lastname);
+            App.driver.findElement(By.id("email")).sendKeys(email);
+            App.driver.findElement(By.id("password")).sendKeys(password);
 
-        // === tutup tab sekarang ===
-        App.refreshToMainPage();
-        App.jedah(3);
+            // === konfirmasi password ===
+            if (konfirmbenar) {
+                App.driver.findElement(By.id("confirm_password")).sendKeys(password);
+            } else {
+                App.driver.findElement(By.id("email")).sendKeys("notemail");
+                App.driver.findElement(By.id("confirm_password")).sendKeys("isiPasssalaha");
+            }
+
+            // === captcha & mobile ===
+            App.driver.findElement(
+                By.xpath("//*[@id='signupForm']/div[5]/div/div/div/span")
+            ).click();
+
+            App.driver.findElement(By.id("mobile")).sendKeys(wanumber);
+            App.jedah(1);
+
+            // === submit ===
+            App.driver.findElement(By.id("submit")).click();
+            App.jedah(3);
+
+            // === kembali ke main page ===
+            App.refreshToMainPage();
+            App.jedah(3);
+        });
     }
 
     public void testLogin(String test){
-        // === klik Get Started ===
-        App.driver.findElement(By.xpath("/html/body/header/div[1]/div/div[2]/a[2]")).click();
-        App.jedah(2);
 
-        // === PINDAH KE TAB BARU ===
-        String parentWindow = App.driver.getWindowHandle();
+        String stepName;
 
-        for (String window : App.driver.getWindowHandles()) {
-            if (!window.equals(parentWindow)) {
-                App.driver.switchTo().window(window);
+        switch (test) {
+            case "email":
+                stepName = "Login attempt with INVALID email format";
                 break;
+            case "email_salah":
+                stepName = "Login attempt with WRONG credentials";
+                break;
+            case "benar":
+                stepName = "Login attempt with VALID credentials";
+                break;
+            default:
+                stepName = "Login attempt with UNKNOWN case";
+        }
+
+        Allure.step(stepName, () -> {
+
+            // === klik Get Started ===
+            App.driver.findElement(By.xpath("/html/body/header/div[1]/div/div[2]/a[2]")).click();
+            App.jedah(2);
+
+            // === PINDAH KE TAB BARU ===
+            String parentWindow = App.driver.getWindowHandle();
+            for (String window : App.driver.getWindowHandles()) {
+                if (!window.equals(parentWindow)) {
+                    App.driver.switchTo().window(window);
+                    break;
+                }
             }
-        }
 
-        App.jedah(1);
+            App.jedah(1);
 
-        if(test.equals("email")){
             // === isi email ===
-            App.driver.findElement(By.xpath("//*[@id='email']")).sendKeys("notemail");
-        }
-        else if(test.equals("email_salah")){
-            // === isi email ===
-            App.driver.findElement(By.xpath("//*[@id='email']")).sendKeys("salah" + email);
-        }
-        else{
-            // === isi email ===
-            App.driver.findElement(By.xpath("//*[@id='email']")).sendKeys(email);
-        }
-        App.jedah(1);
+            if(test.equals("email")){
+                App.driver.findElement(By.xpath("//*[@id='email']")).sendKeys("notemail");
+            }
+            else if(test.equals("email_salah")){
+                App.driver.findElement(By.xpath("//*[@id='email']")).sendKeys("salah" + email);
+            }
+            else{
+                App.driver.findElement(By.xpath("//*[@id='email']")).sendKeys(email);
+            }
 
-        // === isi password ===
-        App.driver.findElement(By.xpath("//*[@id='password']")).sendKeys(password);
-        App.jedah(1);
+            App.jedah(1);
 
-        // === klik login ===
-        App.driver.findElement(By.xpath("//*[@id='login-form']/div[4]/button")).click();
-        
+            // === isi password ===
+            App.driver.findElement(By.xpath("//*[@id='password']")).sendKeys(password);
+            App.jedah(1);
+
+            // === klik login ===
+            App.driver.findElement(By.xpath("//*[@id='login-form']/div[4]/button")).click();
+        });
     }
+
 
     public void testForgetPass(){
         App.driver.findElement(By.xpath("/html/body/header/div[1]/div/div[2]/a[2]")).click();
@@ -173,159 +216,182 @@ public class scenario3 {
     }
 
     public void testPascaLogin(){
-        // === cek Dashboard ===
-        App.jedah(3);
-        App.driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[1]/a[1]")).click(); 
-        App.jedah(2);
-        App.driver.findElement(By.xpath("/html/body/aside/nav/a[1]")).click();
-        App.jedah(2);
-        App.driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[1]/a[2]")).click();
-        App.jedah(2);
 
-        // === cek Orders ===
-        App.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div[2]/a[2]")).click();
-        App.jedah(1);
-        App.driver.findElement(By.xpath("/html/body/aside/nav/a[2]")).click();
-        App.jedah(1);
-        App.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div[2]/a[1]/button")).click();
-        App.jedah(1);
+        Allure.step("Post-login user journey", () -> {
 
-        App.driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[1]/div[1]/form/button")).click();
-        App.jedah(1);
-        try {
-            App.driver.switchTo().alert().accept(); // klik OK
-            System.out.println("Alert berhasil di-OK");
-        } catch (Exception e) {
-            System.out.println("Tidak ada alert muncul");
-        }
-        App.jedah(2);
+            /* ================= DASHBOARD ================= */
+            Allure.step("Verify dashboard navigation", () -> {
+                App.jedah(3);
+                App.driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[1]/a[1]")).click();
+                App.jedah(2);
+                App.driver.findElement(By.xpath("/html/body/aside/nav/a[1]")).click();
+                App.jedah(2);
+                App.driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[1]/a[2]")).click();
+                App.jedah(2);
+            });
 
-        // === cek Proporsal ===
-        App.driver.findElement(By.xpath("/html/body/aside/nav/a[3]")).click();
-        App.jedah(2);
-        
-        // === cek Tickets ===
-        App.driver.findElement(By.xpath("/html/body/aside/nav/a[4]")).click();
-        App.jedah(1);
-        
-        // === cek semua navigasi tickets
-        App.driver.findElement(By.xpath("//a[@href='https://app.phptravels.com/tickets']")).click();
-        App.jedah(1);
-        App.driver.findElement(By.xpath("//a[@href='https://app.phptravels.com/tickets/open']")).click();
-        App.jedah(1);
-        App.driver.findElement(By.xpath("//a[@href='https://app.phptravels.com/tickets/in-progress']")).click();
-        App.jedah(1);
-        App.driver.findElement(By.xpath("//a[@href='https://app.phptravels.com/tickets/close']")).click();
-        App.jedah(1);
+            /* ================= ORDERS ================= */
+            Allure.step("Verify orders & cancel order", () -> {
+                App.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div[2]/a[2]")).click();
+                App.jedah(1);
+                App.driver.findElement(By.xpath("/html/body/aside/nav/a[2]")).click();
+                App.jedah(1);
+                App.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div[2]/a[1]/button")).click();
+                App.jedah(1);
 
-        // === buat tiket baru ===
-        App.driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[2]/a")).click();
-        App.jedah(1);
-        App.driver.findElement(By.xpath("//*[@id=\'subject\']")).sendKeys("Tes Tiket Subject");
-        App.jedah(1);
-        App.driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/form/div/div[1]/div[3]/div/div[2]/div")).sendKeys("Ini adalah isi dari tiket untuk keperluan testing.");
-        App.jedah(1);
-        Select department = new Select(  // === pilih Department : Technical Support ===
-            App.driver.findElement(By.xpath("//*[@id='department']"))
-        );
-        department.selectByVisibleText("Technical Support");
-        App.jedah(1);
-        Select related = new Select( // === pilih Related : Other ===
-            App.driver.findElement(By.xpath("//*[@id='related']"))
-        );
-        related.selectByVisibleText("Other");
-        App.jedah(1);
-        Select priority = new Select( // === pilih Priority : High ===
-            App.driver.findElement(By.xpath("//*[@id='priority']"))
-        );
-        priority.selectByVisibleText("High");
-        App.jedah(1);
-        App.driver.findElement(By.xpath("//*[@id=\'submitBtn\']")).click();
-        App.jedah(2);
-        App.driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[5]/form/div[1]/div/div[2]/div")).sendKeys("Tes replay");
-        App.jedah(1);
-        App.driver.findElement(By.xpath("//*[@id=\'replySubmitBtn\']")).click();
-        App.jedah(2);
-        
-        // === cek Affiliate ===
-        App.driver.findElement(By.xpath("/html/body/aside/nav/a[5]")).click();
-        App.jedah(2);
+                App.driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[1]/div[1]/form/button")).click();
+                App.jedah(1);
+                try {
+                    App.driver.switchTo().alert().accept();
+                } catch (Exception ignored) {}
+                App.jedah(2);
+            });
 
-        // === cek tiket yang sudah dibuat ===
-        App.driver.findElement(By.xpath("/html/body/aside/nav/a[1]")).click();
-        App.jedah(1);
+            /* ================= PROPOSALS ================= */
+            Allure.step("Verify proposals page", () -> {
+                App.driver.findElement(By.xpath("/html/body/aside/nav/a[3]")).click();
+                App.jedah(2);
+            });
 
-        // === coba semua filter ===
-        App.driver.findElement(By.xpath("//*[@id=\'columnToggleBtn\']")).click();
-        App.jedah(1);
-        App.driver.findElement(By.xpath("//*[@id='columnCheckboxes']/label[1]/input")).click();
-        App.jedah(1);
-        App.driver.findElement(By.xpath("//*[@id='columnCheckboxes']/label[2]/input")).click();
-        App.jedah(1);
-        App.driver.findElement(By.xpath("//*[@id='columnCheckboxes']/label[3]/input")).click();
-        App.jedah(1);
-        App.driver.findElement(By.xpath("//*[@id='columnCheckboxes']/label[4]/input")).click();
-        App.jedah(1);
-        App.driver.findElement(By.xpath("//*[@id='columnCheckboxes']/label[5]/input")).click();
-        App.jedah(1);
-        App.driver.findElement(By.xpath("//*[@id='columnCheckboxes']/label[6]/input")).click();
-        App.jedah(1);
-        App.driver.findElement(By.xpath("//*[@id='columnDropdown']/div/div[1]/button")).click();
-        App.jedah(1);
+            /* ================= TICKETS NAV ================= */
+            Allure.step("Verify tickets navigation", () -> {
+                App.driver.findElement(By.xpath("/html/body/aside/nav/a[4]")).click();
+                App.jedah(1);
+                App.driver.findElement(By.xpath("//a[@href='https://app.phptravels.com/tickets']")).click();
+                App.jedah(1);
+                App.driver.findElement(By.xpath("//a[@href='https://app.phptravels.com/tickets/open']")).click();
+                App.jedah(1);
+                App.driver.findElement(By.xpath("//a[@href='https://app.phptravels.com/tickets/in-progress']")).click();
+                App.jedah(1);
+                App.driver.findElement(By.xpath("//a[@href='https://app.phptravels.com/tickets/close']")).click();
+                App.jedah(1);
+            });
 
-        // === tutup drop down filter ===
-        App.driver.findElement(By.xpath("//*[@id='columnToggleBtn']")).click(); // Klik lagi untuk tutup
-        App.jedah(2);
+            /* ================= CREATE TICKET ================= */
+            Allure.step("Create & reply support ticket", () -> {
+                App.driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[2]/a")).click();
+                App.jedah(1);
+                App.driver.findElement(By.id("subject")).sendKeys("Tes Tiket Subject");
+                App.jedah(1);
+                App.driver.findElement(By.xpath("//div[@contenteditable='true']")).sendKeys(
+                    "Ini adalah isi dari tiket untuk keperluan testing."
+                );
+                App.jedah(1);
 
-        // === klik detail tiket ===
-        App.driver.findElement(By.xpath("//*[@id=\'tableBody\']/tr/td[9]/div/a")).click();
-        App.jedah(2);
+                new Select(App.driver.findElement(By.id("department")))
+                    .selectByVisibleText("Technical Support");
+                new Select(App.driver.findElement(By.id("related")))
+                    .selectByVisibleText("Other");
+                new Select(App.driver.findElement(By.id("priority")))
+                    .selectByVisibleText("High");
 
-        // === buka profil ===
-        App.driver.findElement(By.xpath("/html/body/aside/div[3]/a[2]")).click();
-        App.jedah(1);
+                App.driver.findElement(By.id("submitBtn")).click();
+                App.jedah(2);
 
-        // === ubah profile di pengaturan ===
-        Select selectNegara = new Select(App.driver.findElement(By.xpath("//*[@id='country_code']")));
-        selectNegara.selectByVisibleText("INDONESIA");
-        App.jedah(1);
-        App.driver.findElement(By.xpath("//*[@id='address']")).sendKeys("Jl Darmo No 34 Surabaya");
-        App.jedah(1);
-        App.driver.findElement(By.xpath("//button[@type='submit' and contains(., 'Update')]")).click();
-        App.jedah(1);
+                App.driver.findElement(By.xpath("//div[@contenteditable='true']")).sendKeys("Tes replay");
+                App.jedah(1);
+                App.driver.findElement(By.id("replySubmitBtn")).click();
+                App.jedah(2);
+            });
 
-        // === ganti password ===
-        App.driver.findElement(By.xpath("//*[@id='new_password']")).sendKeys(passwordbaru); // tidak valid
-        App.driver.findElement(By.xpath("//*[@id='confirm_password']")).sendKeys(passwordbaru + "salah");
-        App.jedah(1);
-        App.driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[1]/div[2]/form/button")).click();
-        App.jedah(1);
+            /* ================= AFFILIATE ================= */
+            Allure.step("Verify affiliate section", () -> {
+                App.driver.findElement(By.xpath("/html/body/aside/nav/a[5]")).click();
+                App.jedah(2);
+            });
 
-        App.driver.findElement(By.xpath("//*[@id='new_password']")).sendKeys(passwordbaru); // valid
-        App.driver.findElement(By.xpath("//*[@id='confirm_password']")).sendKeys(passwordbaru);
-        App.jedah(1);
-        App.driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[1]/div[2]/form/button")).click();
-        App.jedah(2);
+            /* ================= FILTER & DETAIL ================= */
+            Allure.step("Verify ticket filters & detail", () -> {
+                App.driver.findElement(By.xpath("/html/body/aside/nav/a[1]")).click();
+                App.jedah(1);
+                App.driver.findElement(By.id("columnToggleBtn")).click();
+                App.jedah(1);
 
-        // === cek order dari profil ===
-        App.driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/div[2]/a[1]")).click();
-        App.jedah(1);
-        App.driver.findElement(By.xpath("/html/body/aside/div[2]/button")).click();
-        App.jedah(1);
-        App.driver.findElement(By.xpath("/html/body/aside/div[2]/div[3]/a[1]")).click();
-        App.jedah(2);
+                for (int i = 1; i <= 6; i++) {
+                    App.driver.findElement(By.xpath("//*[@id='columnCheckboxes']/label[" + i + "]/input")).click();
+                    App.jedah(1);
+                }
 
-        // === ubah Newsletter Preferences ===
-        App.driver.findElement(By.xpath("//*[@id=\'email_newsletter\']")).click();
-        App.jedah(1);
-        App.driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[2]/div[3]/form/button")).click();
-        App.jedah(2);
+                App.driver.findElement(By.id("columnToggleBtn")).click();
+                App.jedah(2);
+                App.driver.findElement(By.xpath("//*[@id='tableBody']/tr/td[9]/div/a")).click();
+                App.jedah(2);
+            });
 
-        // === logout ===
-        App.driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div[2]/div[2]/a[2]")).click();
-        App.refreshToMainPage();
-        App.jedah(1);
+            /* ================= PROFILE ================= */
+            Allure.step("Update profile & change password", () -> {
+                App.driver.findElement(By.xpath("/html/body/aside/div[3]/a[2]")).click();
+                App.jedah(1);
+
+                new Select(App.driver.findElement(By.id("country_code")))
+                    .selectByVisibleText("INDONESIA");
+                App.driver.findElement(By.id("address"))
+                    .sendKeys("Jl Darmo No 34 Surabaya");
+                App.jedah(1);
+                App.driver.findElement(By.xpath("//button[contains(.,'Update')]")).click();
+                App.jedah(1);
+
+                App.driver.findElement(By.id("new_password")).sendKeys(passwordbaru);
+                App.driver.findElement(By.id("confirm_password")).sendKeys(passwordbaru + "salah");
+                App.jedah(1);
+                App.driver.findElement(By.xpath("//form/button")).click();
+                App.jedah(1);
+
+                App.driver.findElement(By.id("new_password")).sendKeys(passwordbaru);
+                App.driver.findElement(By.id("confirm_password")).sendKeys(passwordbaru);
+                App.jedah(1);
+                App.driver.findElement(By.xpath("//form/button")).click();
+                App.jedah(2);
+            });
+
+            /* ================= NEWSLETTER ================= */
+            Allure.step("Update newsletter preferences", () -> {
+                App.driver.findElement(By.id("email_newsletter")).click();
+                App.jedah(1);
+                App.driver.findElement(By.xpath("//form/button")).click();
+                App.jedah(2);
+            });
+
+            /* ================= LOGOUT ================= */
+            Allure.step("Logout user", () -> {
+
+                WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(20));
+                JavascriptExecutor js = (JavascriptExecutor) App.driver;
+
+                // === PASTIKAN SIDEBAR TERBUKA (kalau ada toggle) ===
+                try {
+                    WebElement sidebarToggle = wait.until(
+                        ExpectedConditions.presenceOfElementLocated(
+                            By.xpath("//button[contains(@aria-label,'menu') or contains(@class,'menu')]")
+                        )
+                    );
+                    if (sidebarToggle.isDisplayed()) {
+                        js.executeScript("arguments[0].click();", sidebarToggle);
+                        App.jedah(1);
+                    }
+                } catch (Exception ignored) {}
+
+                // === SCROLL KE BAWAH SIDEBAR ===
+                js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+                App.jedah(1);
+
+                // === AMBIL LOGOUT BERDASARKAN HREF (PALING STABIL) ===
+                WebElement logoutBtn = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[contains(@href,'/logout')]")
+                    )
+                );
+
+                // === PAKSA KLIK VIA JS (ANTI ANIMASI / OVERLAY) ===
+                js.executeScript("arguments[0].scrollIntoView({block:'center'});", logoutBtn);
+                App.jedah(1);
+                js.executeScript("arguments[0].click();", logoutBtn);
+
+                App.jedah(2);
+            });
+        });
     }
+
 
     public void testProduct(){
         // === klik Product ===
@@ -1649,197 +1715,204 @@ public class scenario3 {
     }
 
     public void testDemo(Boolean benar){
-        App.driver.findElement(By.xpath("/html/body/header/div[1]/div/nav/a[2]")).click();
-        // === Test Demo Isi Formulir ===
-        App.driver.findElement(By.xpath("//*[@id=\'demo-form\']/div/div/div[1]/div[1]/div[2]/div[1]/div[1]/input")).sendKeys(firstname); // firstname
-        App.driver.findElement(By.xpath("//*[@id=\'demo-form\']/div/div/div[1]/div[1]/div[2]/div[1]/div[2]/input")).sendKeys(lastname); // lastname
-        App.driver.findElement(By.xpath("//*[@id=\'demo-form\']/div/div/div[1]/div[1]/div[2]/div[2]/input")).sendKeys("Institut Sains dan Teknologi Surabaya"); // buisnisname
-        App.driver.findElement(By.xpath("//*[@id=\'demo-form\']/div/div/div[1]/div[1]/div[2]/div[3]/div[2]/input")).sendKeys(wanumber); // wanumber
-        App.driver.findElement(By.xpath("//*[@id=\'demo-form\']/div/div/div[1]/div[1]/div[2]/div[4]/input")).sendKeys(email); // emailaddres
-        
-        // === Kerjakan cek mat ===
-        WebElement el1 = App.driver.findElement(By.id("numb1")); // ambil elemen
-        WebElement el2 = App.driver.findElement(By.id("numb2"));
+        String allureTitle = benar
+            ? "Demo Form - VALID calculation"
+            : "Demo Form - INVALID calculation";
 
-        // ambil nilai (value → text fallback)
-        String val1 = el1.getAttribute("value");
-        if (val1 == null || val1.isEmpty()) {
-            val1 = el1.getText();
-        }
+        Allure.step(allureTitle, () -> {
 
-        String val2 = el2.getAttribute("value");
-        if (val2 == null || val2.isEmpty()) {
-            val2 = el2.getText();
-        }
+            App.driver.findElement(By.xpath("/html/body/header/div[1]/div/nav/a[2]")).click();
+            // === Test Demo Isi Formulir ===
+            App.driver.findElement(By.xpath("//*[@id='demo-form']/div/div/div[1]/div[1]/div[2]/div[1]/div[1]/input")).sendKeys(firstname); // firstname
+            App.driver.findElement(By.xpath("//*[@id='demo-form']/div/div/div[1]/div[1]/div[2]/div[1]/div[2]/input")).sendKeys(lastname); // lastname
+            App.driver.findElement(By.xpath("//*[@id='demo-form']/div/div/div[1]/div[1]/div[2]/div[2]/input")).sendKeys("Institut Sains dan Teknologi Surabaya"); // buisnisname
+            App.driver.findElement(By.xpath("//*[@id='demo-form']/div/div/div[1]/div[1]/div[2]/div[3]/div[2]/input")).sendKeys(wanumber); // wanumber
+            App.driver.findElement(By.xpath("//*[@id='demo-form']/div/div/div[1]/div[1]/div[2]/div[4]/input")).sendKeys(email); // emailaddres
+            
+            // === Kerjakan cek mat ===
+            WebElement el1 = App.driver.findElement(By.id("numb1")); // ambil elemen
+            WebElement el2 = App.driver.findElement(By.id("numb2"));
 
-        // trim & validasi
-        val1 = val1.trim();
-        val2 = val2.trim();
+            // ambil nilai (value → text fallback)
+            String val1 = el1.getAttribute("value");
+            if (val1 == null || val1.isEmpty()) {
+                val1 = el1.getText();
+            }
 
-        // konversi aman
-        int bilangan1 = Integer.parseInt(val1);
-        int bilangan2 = Integer.parseInt(val2);
+            String val2 = el2.getAttribute("value");
+            if (val2 == null || val2.isEmpty()) {
+                val2 = el2.getText();
+            }
 
-        // LOGIKA ANDA
-        int hasil;
+            // trim & validasi
+            val1 = val1.trim();
+            val2 = val2.trim();
 
-        if (benar) {
-            hasil = bilangan1 + bilangan2;
-        } else {
-            hasil = 0;
-        }
+            // konversi aman
+            int bilangan1 = Integer.parseInt(val1);
+            int bilangan2 = Integer.parseInt(val2);
 
-        // isi ke field hasil
-        WebElement resultField = App.driver.findElement(By.id("number"));
-        resultField.clear();
-        resultField.sendKeys(String.valueOf(hasil));
+            // LOGIKA ANDA
+            int hasil;
 
-        App.jedah(2);
+            if (benar) {
+                hasil = bilangan1 + bilangan2;
+            } else {
+                hasil = 0;
+            }
 
-        // submit
-        App.driver.findElement(By.xpath("//*[@id=\'demo\']")).click();
-        
-        if (!benar) {
+            // isi ke field hasil
+            WebElement resultField = App.driver.findElement(By.id("number"));
+            resultField.clear();
+            resultField.sendKeys(String.valueOf(hasil));
+
+            App.jedah(2);
+
+            // submit
+            App.driver.findElement(By.xpath("//*[@id='demo']")).click();
+            
+            if (!benar) {
+                try {
+                    App.jedah(2);
+                    WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
+
+                    // tunggu alert muncul
+                    Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+
+                    // klik OK
+                    alert.accept();
+
+                    System.out.println("INFO: Alert muncul dan berhasil diklik OK");
+
+                } catch (Exception e) {
+                    System.out.println("BUG: Alert seharusnya muncul tapi tidak terdeteksi");
+                }
+            }
+            App.jedah(3);
+            if(!benar){
+                return;
+            }
+
+            // kalau berhasil ntik klik 2 tombol sisa
+            //*[@id="demo-form"]/div/div/div[1]/div[2]/div/div[3]/button[1]
+            //*[@id="demo-form"]/div/div/div[1]/div[2]/div/div[3]/button[2]
+            JavascriptExecutor js = (JavascriptExecutor) App.driver;
+            WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
+
+            String mainTab = App.driver.getWindowHandle();
+
+            // tombol pertama
             try {
+                WebElement btn1 = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//*[@id='demo-form']/div/div/div[1]/div[2]/div/div[3]/button[1]")
+                    )
+                );
+
+                js.executeScript("arguments[0].scrollIntoView({block:'center'});", btn1);
                 App.jedah(2);
-                WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
 
-                // tunggu alert muncul
-                Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+                js.executeScript("arguments[0].click();", btn1);
+                App.jedah(3);
 
-                // klik OK
-                alert.accept();
+                // pindah ke tab baru & tutup
+                for (String tab : App.driver.getWindowHandles()) {
+                    if (!tab.equals(mainTab)) {
+                        App.driver.switchTo().window(tab);
+                        App.jedah(2);
+                        App.driver.close();
+                    }
+                }
 
-                System.out.println("INFO: Alert muncul dan berhasil diklik OK");
+                // kembali ke tab utama
+                App.driver.switchTo().window(mainTab);
+                App.jedah(2);
 
             } catch (Exception e) {
-                System.out.println("BUG: Alert seharusnya muncul tapi tidak terdeteksi");
+                System.out.println("BUG: Tombol pertama gagal dibuka");
             }
-        }
-        App.jedah(3);
-        if(!benar){
-            return;
-        }
 
-        // kalau berhasil ntik klik 2 tombol sisa
-        //*[@id="demo-form"]/div/div/div[1]/div[2]/div/div[3]/button[1]
-        //*[@id="demo-form"]/div/div/div[1]/div[2]/div/div[3]/button[2]
-        JavascriptExecutor js = (JavascriptExecutor) App.driver;
-        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
+            // tombol kedua
+            try {
+                WebElement btn2 = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//*[@id='demo-form']/div/div/div[1]/div[2]/div/div[3]/button[2]")
+                    )
+                );
 
-        String mainTab = App.driver.getWindowHandle();
+                js.executeScript("arguments[0].scrollIntoView({block:'center'});", btn2);
+                App.jedah(2);
 
-        // tombol pertama
-        try {
-            WebElement btn1 = wait.until(
-                ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//*[@id='demo-form']/div/div/div[1]/div[2]/div/div[3]/button[1]")
-                )
-            );
+                js.executeScript("arguments[0].click();", btn2);
+                App.jedah(3);
 
-            js.executeScript("arguments[0].scrollIntoView({block:'center'});", btn1);
-            App.jedah(2);
-
-            js.executeScript("arguments[0].click();", btn1);
-            App.jedah(3);
-
-            // pindah ke tab baru & tutup
-            for (String tab : App.driver.getWindowHandles()) {
-                if (!tab.equals(mainTab)) {
-                    App.driver.switchTo().window(tab);
-                    App.jedah(2);
-                    App.driver.close();
+                // pindah ke tab baru & tutup
+                for (String tab : App.driver.getWindowHandles()) {
+                    if (!tab.equals(mainTab)) {
+                        App.driver.switchTo().window(tab);
+                        App.jedah(2);
+                        App.driver.close();
+                    }
                 }
+
+                // kembali ke tab utama
+                App.driver.switchTo().window(mainTab);
+                App.jedah(2);
+
+            } catch (Exception e) {
+                System.out.println("BUG: Tombol kedua gagal dibuka");
             }
 
-            // kembali ke tab utama
-            App.driver.switchTo().window(mainTab);
-            App.jedah(2);
+            // LANJUT 2
+            // === lanjut buka kalau berhasil ===
 
-        } catch (Exception e) {
-            System.out.println("BUG: Tombol pertama gagal dibuka");
-        }
-
-        // tombol kedua
-        try {
-            WebElement btn2 = wait.until(
-                ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//*[@id='demo-form']/div/div/div[1]/div[2]/div/div[3]/button[2]")
-                )
-            );
-
-            js.executeScript("arguments[0].scrollIntoView({block:'center'});", btn2);
-            App.jedah(2);
-
-            js.executeScript("arguments[0].click();", btn2);
-            App.jedah(3);
-
-            // pindah ke tab baru & tutup
-            for (String tab : App.driver.getWindowHandles()) {
-                if (!tab.equals(mainTab)) {
-                    App.driver.switchTo().window(tab);
-                    App.jedah(2);
-                    App.driver.close();
-                }
+            // scroll turun 20 kali
+            for (int i = 0; i < 15; i++) {
+                js.executeScript("window.scrollBy(0, 200)");
+                App.jedah(1);
             }
 
-            // kembali ke tab utama
-            App.driver.switchTo().window(mainTab);
+            // coba klik card
+            App.driver.findElement(By.xpath("/html/body/main/section[6]/div/div/div[1]/figure[1]/div/div/button")).click();
+            App.jedah(2);
+            App.driver.findElement(By.xpath("//*[@id='lightbox']/button/span")).click();
             App.jedah(2);
 
-        } catch (Exception e) {
-            System.out.println("BUG: Tombol kedua gagal dibuka");
-        }
+            App.driver.findElement(By.xpath("/html/body/main/section[6]/div/div/div[1]/figure[2]/div/div/button")).click();
+            App.jedah(2);
+            App.driver.findElement(By.xpath("//*[@id='lightbox']/button/span")).click();
+            App.jedah(2);
 
-        // LANJUT 2
-        // === lanjut buka kalau berhasil ===
+            App.driver.findElement(By.xpath("/html/body/main/section[6]/div/div/div[1]/figure[3]/div/div/button")).click();
+            App.jedah(2);
+            App.driver.findElement(By.xpath("//*[@id='lightbox']/button/span")).click();
+            App.jedah(2);
 
-        // scroll turun 20 kali
-        for (int i = 0; i < 15; i++) {
-            js.executeScript("window.scrollBy(0, 200)");
-            App.jedah(1);
-        }
+            // scroll turun lagi
+            for (int i = 0; i < 7; i++) {
+                js.executeScript("window.scrollBy(0, 200)");
+                App.jedah(1);
+            }
 
-        // coba klik card
-        App.driver.findElement(By.xpath("/html/body/main/section[6]/div/div/div[1]/figure[1]/div/div/button")).click();
-        App.jedah(2);
-        App.driver.findElement(By.xpath("//*[@id=\'lightbox\']/button/span")).click(); // lanjutkan nanti !-!
-        App.jedah(2);
+            // coba klik expand info
+            App.driver.findElement(By.xpath("//*[@id='demoAccordion']/div[2]/button")).click();
+            App.jedah(2);
+            App.driver.findElement(By.xpath("//*[@id='demoAccordion']/div[3]/button")).click();
+            App.jedah(2);
+            App.driver.findElement(By.xpath("//*[@id='demoAccordion']/div[4]/button")).click();
+            App.jedah(2);
+            App.driver.findElement(By.xpath("//*[@id='demoAccordion']/div[5]/button")).click();
+            App.jedah(2);
+            App.driver.findElement(By.xpath("//*[@id='demoAccordion']/div[6]/button")).click();
+            App.jedah(2);
 
-        App.driver.findElement(By.xpath("/html/body/main/section[6]/div/div/div[1]/figure[2]/div/div/button")).click();
-        App.jedah(2);
-        App.driver.findElement(By.xpath("//*[@id=\"lightbox\"]/button/span")).click();
-        App.jedah(2);
+            // scroll lagi
+            for (int i = 0; i < 3; i++) {
+                js.executeScript("window.scrollBy(0, 200)");
+                App.jedah(1);
+            }
 
-        App.driver.findElement(By.xpath("/html/body/main/section[6]/div/div/div[1]/figure[3]/div/div/button")).click();
-        App.jedah(2);
-        App.driver.findElement(By.xpath("//*[@id=\"lightbox\"]/button/span")).click();
-        App.jedah(2);
-
-        // scroll turun lagi
-        for (int i = 0; i < 7; i++) {
-            js.executeScript("window.scrollBy(0, 200)");
-            App.jedah(1);
-        }
-
-        // coba klik expand info
-        App.driver.findElement(By.xpath("//*[@id=\'demoAccordion\']/div[2]/button")).click();
-        App.jedah(2);
-        App.driver.findElement(By.xpath("//*[@id=\'demoAccordion\']/div[3]/button")).click();
-        App.jedah(2);
-        App.driver.findElement(By.xpath("//*[@id=\'demoAccordion\']/div[4]/button")).click();
-        App.jedah(2);
-        App.driver.findElement(By.xpath("//*[@id=\'demoAccordion\']/div[5]/button")).click();
-        App.jedah(2);
-        App.driver.findElement(By.xpath("//*[@id=\'demoAccordion\']/div[6]/button")).click();
-        App.jedah(2);
-
-        // scroll lagi
-        for (int i = 0; i < 3; i++) {
-            js.executeScript("window.scrollBy(0, 200)");
-            App.jedah(1);
-        }
-
+        });
     }
 
 

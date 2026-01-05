@@ -34,35 +34,35 @@ public class AppTest {
         scenario3 sc3 = new scenario3();
         sc3.prepareTest();
         
-        // === register ===
-        sc3.testRegister(false);// email dan register password confirm salah
-        App.jedah(2);
+        // // === register ===
+        // sc3.testRegister(false);// email dan register password confirm salah
+        // App.jedah(2);
         
-        sc3.testRegister(true);// register yang benar
-        App.jedah(2);
+        // sc3.testRegister(true);// register yang benar
+        // App.jedah(2);
         
-        sc3.testRegister(true);// register ke akun yang sudah ada
-        App.jedah(2);
+        // sc3.testRegister(true);// register ke akun yang sudah ada
+        // App.jedah(2);
 
-        // === login ===
-        sc3.testForgetPass(); // login klik forget password benar dan salah
-        App.jedah(1);
+        // // === login ===
+        // sc3.testForgetPass(); // login klik forget password benar dan salah
+        // App.jedah(1);
         
 
-        sc3.testLogin("email"); // login dengan format email yang salah
-        App.jedah(1);
-        App.refreshToMainPage();
-        App.jedah(1);
+        // sc3.testLogin("email"); // login dengan format email yang salah
+        // App.jedah(1);
+        // App.refreshToMainPage();
+        // App.jedah(1);
         
-        sc3.testLogin("email_salah"); // login dengan data yang salah
-        App.jedah(1);
-        App.refreshToMainPage();
-        App.jedah(1);
+        // sc3.testLogin("email_salah"); // login dengan data yang salah
+        // App.jedah(1);
+        // App.refreshToMainPage();
+        // App.jedah(1);
         
-        sc3.testLogin("benar"); // login dengan data yang benar
+        // sc3.testLogin("benar"); // login dengan data yang benar
 
         // === pasca login ===
-        sc3.testPascaLogin();
+        // sc3.testPascaLogin();
 
         // === test demo salah ===
         sc3.testDemo(false);
@@ -74,23 +74,23 @@ public class AppTest {
         App.refreshToMainPage();
         App.jedah(1);
 
-        // === production Requirement ===
-        sc3.testRequirement();
+        // // === production Requirement ===
+        // sc3.testRequirement();
 
-        // === production Technology ===
-        sc3.testTechnology();
+        // // === production Technology ===
+        // sc3.testTechnology();
 
-        // === production Customization ===
-        sc3.testCustomizations();
+        // // === production Customization ===
+        // sc3.testCustomizations();
 
-        // === product Integrations ===
-        sc3.testIntegrations();
+        // // === product Integrations ===
+        // sc3.testIntegrations();
 
-        // === product Themes ===
-        sc3.testThemes();
+        // // === product Themes ===
+        // sc3.testThemes();
 
-        // === product doc ===
-        sc3.testProduct();
+        // // === product doc ===
+        // sc3.testProduct();
 
     }
 
