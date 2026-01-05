@@ -394,1324 +394,1382 @@ public class scenario3 {
 
 
     public void testProduct(){
-        // === klik Product ===
-        WebElement productMenu = App.driver.findElement(
-            By.xpath("//button[.//span[text()='Product']]")
-        );
-        productMenu.click();
-        App.jedah(1);
-
-        // === klik Docs ===
-        WebElement docsMenu = App.driver.findElement(
-            By.xpath("//a[normalize-space()='Docs']")
-        );
-        docsMenu.click();
-        App.jedah(2);
-
-        // === dropdown ===
-        dropdownHeaderTest();
-
-        // == tes header doc ==
-        headerDoctes();
-
-        // === tes welcome page ===
-        App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a")).click();
-        App.jedah(2);
-
-        // === test unsub ===
-        // !!! NANTI DIPERBAIKI (ERROR START VIDIO)
-        // App.driver.findElement(By.xpath("//*[@id=\"movie_player\"]/div[5]/button")).click();
-        // App.jedah(1);
-        App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a[2]")).click();
-        App.jedah(2);
-
-        // === test startup download ===
-        // !!! NANTI DIPERBAIKI (ERROR START VIDIO)
-        // App.driver.findElement(By.xpath("//*[@id=\"movie_player\"]/div[5]/button")).click();
-        // App.jedah(1);
-        App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a[2]")).click();
-        App.jedah(2);
-
-        // === test startup instalation ===
-        WebElement installButton = App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a[2]"));
-        ((JavascriptExecutor) App.driver).executeScript(
-            "arguments[0].scrollIntoView(true);", installButton
-        );
-        App.jedah(1);
-        installButton.click();
-        App.jedah(2);
-
-        // === test setup ===
-        App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a[2]")).click();
-        App.jedah(2);
-
-        // === test setup setting ===
-        App.driver.findElement(
-            By.xpath("//a[@href='/startup/setup/settings']")
-        ).click();
-        App.jedah(2);
-
-        // === test setup setting email ===
-        App.driver.findElement(
-            By.xpath("//a[@href='/startup/setup/settings/email-settings']")
-        ).click();
-        App.jedah(2);
-
-        // === test setup SMTP settings ===
-        App.driver.findElement(
-            By.xpath("//a[@href='/startup/setup/settings/email-settings/smtp-settings']")
-        ).click();
-        App.jedah(2);
-
-        // === test setup SMTP ===
-        WebElement smtp2goApi = App.driver.findElement(
-            By.xpath("//a[@href='/startup/setup/settings/email-settings/smtp2go-api']")
-        );
-        ((JavascriptExecutor) App.driver).executeScript(
-            "arguments[0].scrollIntoView(true);", smtp2goApi
-        );
-        App.jedah(1);
-        smtp2goApi.click();
-        App.jedah(2);
-
-        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
-
-        // === test setup SMTP2 ===
-        WebElement smtp2goLink = wait.until(
-            ExpectedConditions.elementToBeClickable(
-                By.xpath("//a[@href='https://smtp2go.com']")
-            )
-        );
-        smtp2goLink.click();
-        App.jedah(2);
-        App.driver.navigate().back();
-        App.jedah(2);
-
-        WebElement verifiedSenders = wait.until(
-            ExpectedConditions.elementToBeClickable(
-                By.xpath("//a[contains(@href,'verified_senders')]")
-            )
-        );
-        verifiedSenders.click();
-        App.jedah(2);
-        App.driver.navigate().back();
-        App.jedah(2);
-
-        // === test setup currencies ===
-        WebElement currenciesBtn = wait.until(
-            ExpectedConditions.presenceOfElementLocated(
-                By.xpath("//a[@href='/startup/setup/settings/currencies']")
-            )
-        );
-        ((JavascriptExecutor) App.driver).executeScript(
-            "arguments[0].scrollIntoView({block:'center'});", currenciesBtn
-        );
-        App.jedah(1);
-        ((JavascriptExecutor) App.driver).executeScript(
-            "arguments[0].click();", currenciesBtn
-        );
-        App.jedah(2);
-
-        // === test setup currencies API ===
-        WebElement currencyApi = wait.until(
-            ExpectedConditions.presenceOfElementLocated(
-                By.xpath("//a[contains(@href,'apilayer.com/marketplace/currency_data-api')]")
-            )
-        );
-        ((JavascriptExecutor) App.driver).executeScript(
-            "arguments[0].scrollIntoView({block:'center'});", currencyApi
-        );
-        App.jedah(1);
-        ((JavascriptExecutor) App.driver).executeScript(
-            "arguments[0].click();", currencyApi
-        );
-        App.jedah(2);
-        App.driver.navigate().back();
-        App.jedah(2);
-
-        // === test setup markups ===
-        WebElement markupsBtn = wait.until(
-            ExpectedConditions.presenceOfElementLocated(
-                By.xpath("//a[@href='/startup/setup/markups']")
-            )
-        );
-        ((JavascriptExecutor) App.driver).executeScript(
-            "arguments[0].scrollIntoView({block:'center'});", markupsBtn
-        );
-        App.jedah(1);
-        ((JavascriptExecutor) App.driver).executeScript(
-            "arguments[0].click();", markupsBtn
-        );
-        App.jedah(2);
-
-        // === test setup markup ===
-        // !!! NANTI DIPERBAIKI (ERROR START VIDIO)
-        // WebElement playMarkup = App.driver.findElement(
-        //     By.xpath("//button[contains(@class,'ytp-large-play-button')]")
-        // );
-        // ((JavascriptExecutor) App.driver).executeScript(
-        //     "arguments[0].scrollIntoView(true);", playMarkup
-        // );
-        // App.jedah(1);
-        // playMarkup.click();
-        // App.jedah(2);
-
-        App.driver.findElement(
-            By.xpath("//a[@href='/startup/setup/powered-by-linkback']")
-        ).click();
-        App.jedah(2);
-
-        // === test setup linkback ===
-        // !!! NANTI DIPERBAIKI (ERROR START VIDIO)
-        // WebElement playLinkback = App.driver.findElement(
-        //     By.xpath("//button[contains(@class,'ytp-large-play-button')]")
-        // );
-        // playLinkback.click();
-        // App.jedah(2);
-
-        App.driver.findElement(
-            By.xpath("//a[@href='/startup/ssl-force']")
-        ).click();
-        App.jedah(2);
-
-        // === test ssl force ===
-        App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[1]/div[2]/button")).click();
-        App.jedah(1);
-        App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a[2]")).click();
-        App.jedah(2);
-
-        // === NANTIK LANJUT MODULES ===
-        JavascriptExecutor js = (JavascriptExecutor) App.driver;
-
-        // === helper scroll pelan ke element ===
-        java.util.function.Consumer<WebElement> scrollSlowTo = (el) -> {
-            js.executeScript("arguments[0].scrollIntoView({block:'center'});", el);
-            for (int i = 0; i < 3; i++) {
-                js.executeScript("window.scrollBy(0, 80);");
+        Allure.step("Test Product Document", () -> {
+            Allure.step("Bukan Product Doc", () -> {
+                // === klik Product ===
+                WebElement productMenu = App.driver.findElement(
+                    By.xpath("//button[.//span[text()='Product']]")
+                );
+                productMenu.click();
                 App.jedah(1);
-            }
-        };
 
-        // === Hotels ===
-        WebElement hotels = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/modules/hotels']")
-        ));
-        scrollSlowTo.accept(hotels);
-        hotels.click();
-        App.jedah(2);
+                // === klik Docs ===
+                WebElement docsMenu = App.driver.findElement(
+                    By.xpath("//a[normalize-space()='Docs']")
+                );
+                docsMenu.click();
+                App.jedah(2);
+            });
 
-        // === Stuba ===
-        WebElement stuba = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/modules/hotels/stuba']")
-        ));
-        scrollSlowTo.accept(stuba);
-        stuba.click();
-        App.jedah(2);
+            Allure.step("Product - Doc - Dropdown", () -> {
+                // === dropdown ===
+                dropdownHeaderTest();
+            });
 
-        // === link https://stuba.com (FIXED) ===
-        WebElement stubaLink = wait.until(ExpectedConditions.visibilityOfElementLocated(
-            By.xpath("//a[@href='https://stuba.com']")
-        ));
-        scrollSlowTo.accept(stubaLink);
-        js.executeScript("arguments[0].click();", stubaLink);
-        App.jedah(2);
+            Allure.step("Product - Doc - ", () -> {
+                // == tes header doc ==
+                headerDoctes();
+            });
 
-        App.driver.navigate().back();
-        App.jedah(2);
+            Allure.step("Product - Doc - Welcome Page", () -> {
+                // === tes welcome page ===
+                App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a")).click();
+                App.jedah(2);
 
-        // === Hotelbeds ===
-        WebElement hotelbeds = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/modules/hotels/hotelbeds']")
-        ));
-        scrollSlowTo.accept(hotelbeds);
-        hotelbeds.click();
-        App.jedah(2);
+                App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a[2]")).click();
+                App.jedah(2);
 
-        // === Agoda ===
-        WebElement agoda = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/modules/hotels/agoda']")
-        ));
-        scrollSlowTo.accept(agoda);
-        agoda.click();
-        App.jedah(2);
+                App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a[2]")).click();
+                App.jedah(2);
+            });
 
-        // === Flights ===
-        WebElement flights = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/modules/flights']")
-        ));
-        scrollSlowTo.accept(flights);
-        flights.click();
-        App.jedah(2);
+            Allure.step("Product - Doc - Startup Instalation", () -> {
+                // === test startup instalation ===
+                WebElement installButton = App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a[2]"));
+                ((JavascriptExecutor) App.driver).executeScript(
+                    "arguments[0].scrollIntoView(true);", installButton
+                );
+                App.jedah(1);
+                installButton.click();
+                App.jedah(2);
+            });
 
-        // === Amadeus Self Service ===
-        WebElement amadeusSelf = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/modules/flights/amadeus-self-service']")
-        ));
-        scrollSlowTo.accept(amadeusSelf);
-        amadeusSelf.click();
-        App.jedah(2);
+            Allure.step("Product - Doc - Setup", () -> {
+                // === test setup ===
+                App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a[2]")).click();
+                App.jedah(2);
+            });
 
-        // === Amadeus Entreprise ===
-        WebElement amadeusEnt = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/modules/flights/amadeus-entreprise']")
-        ));
-        scrollSlowTo.accept(amadeusEnt);
-        amadeusEnt.click();
-        App.jedah(2);
+            Allure.step("Product - Doc - Setup Setting", () -> {
+                // === test setup setting ===
+                App.driver.findElement(
+                    By.xpath("//a[@href='/startup/setup/settings']")
+                ).click();
+                App.jedah(2);
+            });
 
-        // === Duffel ===
-        WebElement duffel = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/modules/flights/duffel']")
-        ));
-        scrollSlowTo.accept(duffel);
-        duffel.click();
-        App.jedah(2);
+            Allure.step("Product - Doc - Setup Setting Email", () -> {
+                // === test setup setting email ===
+                App.driver.findElement(
+                    By.xpath("//a[@href='/startup/setup/settings/email-settings']")
+                ).click();
+                App.jedah(2);
+            });
 
-        // === Kiwi ===
-        WebElement kiwi = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/modules/flights/kiwi']")
-        ));
-        scrollSlowTo.accept(kiwi);
-        kiwi.click();
-        App.jedah(2);
+            Allure.step("Product - Doc - Setup SMTP Setting", () -> {
+                // === test setup SMTP settings ===
+                App.driver.findElement(
+                    By.xpath("//a[@href='/startup/setup/settings/email-settings/smtp-settings']")
+                ).click();
+                App.jedah(2);
+            });
 
-        // === link https://tequila.kiwi.com (FIXED) ===
-        WebElement kiwiApi = wait.until(ExpectedConditions.visibilityOfElementLocated(
-            By.xpath("//a[@href='https://tequila.kiwi.com/']")
-        ));
-        scrollSlowTo.accept(kiwiApi);
-        js.executeScript("arguments[0].click();", kiwiApi);
-        App.jedah(2);
+            Allure.step("Product - Doc - Setup SMTP", () -> {
+                // === test setup SMTP ===
+                WebElement smtp2goApi = App.driver.findElement(
+                    By.xpath("//a[@href='/startup/setup/settings/email-settings/smtp2go-api']")
+                );
+                ((JavascriptExecutor) App.driver).executeScript(
+                    "arguments[0].scrollIntoView(true);", smtp2goApi
+                );
+                App.jedah(1);
+                smtp2goApi.click();
+                App.jedah(2);
+            });
 
-        App.driver.navigate().back();
-        App.jedah(2);
+            WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
 
-        // === Pkfare ===
-        WebElement pkfare = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/modules/flights/pkfare']")
-        ));
-        scrollSlowTo.accept(pkfare);
-        pkfare.click();
-        App.jedah(2);
+            Allure.step("Product - Doc - Setup SMTP2", () -> {
+                // === test setup SMTP2 ===
+                WebElement smtp2goLink = wait.until(
+                    ExpectedConditions.elementToBeClickable(
+                        By.xpath("//a[@href='https://smtp2go.com']")
+                    )
+                );
+                smtp2goLink.click();
+                App.jedah(2);
+                App.driver.navigate().back();
+                App.jedah(2);
 
-        // === Tours ===
-        WebElement tours = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/modules/tours']")
-        ));
-        scrollSlowTo.accept(tours);
-        tours.click();
-        App.jedah(2);
+                WebElement verifiedSenders = wait.until(
+                    ExpectedConditions.elementToBeClickable(
+                        By.xpath("//a[contains(@href,'verified_senders')]")
+                    )
+                );
+                verifiedSenders.click();
+                App.jedah(2);
+                App.driver.navigate().back();
+                App.jedah(2);
+            });
 
-        // === Viator ===
-        WebElement viator = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/modules/tours/viator']")
-        ));
-        scrollSlowTo.accept(viator);
-        viator.click();
-        App.jedah(2);
+            Allure.step("Product - Doc - Setup Currencies", () -> {
+                // === test setup currencies ===
+                WebElement currenciesBtn = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[@href='/startup/setup/settings/currencies']")
+                    )
+                );
+                ((JavascriptExecutor) App.driver).executeScript(
+                    "arguments[0].scrollIntoView({block:'center'});", currenciesBtn
+                );
+                App.jedah(1);
+                ((JavascriptExecutor) App.driver).executeScript(
+                    "arguments[0].click();", currenciesBtn
+                );
+                App.jedah(2);
 
-        // === Payment Gateways ===
-        WebElement payment = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/payments']")
-        ));
-        scrollSlowTo.accept(payment);
-        payment.click();
-        App.jedah(2);
+            });
 
-        // === PayPal ===
-        WebElement paypal = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/payments/paypal']")
-        ));
-        scrollSlowTo.accept(paypal);
-        paypal.click();
-        App.jedah(2);
+            Allure.step("Product - Doc - Setup Currencies API", () -> {
+                // === test setup currencies API ===
+                WebElement currencyApi = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[contains(@href,'apilayer.com/marketplace/currency_data-api')]")
+                    )
+                );
+                ((JavascriptExecutor) App.driver).executeScript(
+                    "arguments[0].scrollIntoView({block:'center'});", currencyApi
+                );
+                App.jedah(1);
+                ((JavascriptExecutor) App.driver).executeScript(
+                    "arguments[0].click();", currencyApi
+                );
+                App.jedah(2);
+                App.driver.navigate().back();
+                App.jedah(2);
+            });
 
-        // === link developer.paypal.com (external) ===
-        WebElement paypalDev = wait.until(ExpectedConditions.visibilityOfElementLocated(
-            By.xpath("//a[@href='https://developer.paypal.com/home']")
-        ));
-        scrollSlowTo.accept(paypalDev);
-        js.executeScript("arguments[0].click();", paypalDev);
-        App.jedah(2);
+            Allure.step("Product - Doc - Setup Markups", () -> {
+                // === test setup markups ===
+                WebElement markupsBtn = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[@href='/startup/setup/markups']")
+                    )
+                );
+                ((JavascriptExecutor) App.driver).executeScript(
+                    "arguments[0].scrollIntoView({block:'center'});", markupsBtn
+                );
+                App.jedah(1);
+                ((JavascriptExecutor) App.driver).executeScript(
+                    "arguments[0].click();", markupsBtn
+                );
+                App.jedah(2);
 
-        App.driver.navigate().back();
-        App.jedah(2);
+                App.driver.findElement(
+                    By.xpath("//a[@href='/startup/setup/powered-by-linkback']")
+                ).click();
+                App.jedah(2);
 
-        // === Stripe (scroll sampai bawah) ===
-        WebElement stripe = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/payments/stripe']")
-        ));
-        scrollSlowTo.accept(stripe);
-        stripe.click();
-        App.jedah(2);
+                App.driver.findElement(
+                    By.xpath("//a[@href='/startup/ssl-force']")
+                ).click();
+                App.jedah(2);
 
-        // === For Designers ===
-        WebElement forDesigners = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/support/for-designers']")
-        ));
-        scrollSlowTo.accept(forDesigners);
-        forDesigners.click();
-        App.jedah(2);
+            });
 
-        // === For Developers ===
-        WebElement forDevelopers = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/support/for-developers']")
-        ));
-        scrollSlowTo.accept(forDevelopers);
-        forDevelopers.click();
-        App.jedah(2);
+            Allure.step("Product - Doc - SSL FORCE", () -> {
+                // === test ssl force ===
+                App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[1]/div[2]/button")).click();
+                App.jedah(1);
+                App.driver.findElement(By.xpath("/html/body/div[3]/div/div/div/main/div[2]/a[2]")).click();
+                App.jedah(2);
+            });
 
-        // === API Version 9 ===
-        WebElement apiV9 = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/support/for-developers/api-version-9']")
-        ));
-        scrollSlowTo.accept(apiV9);
-        apiV9.click();
-        App.jedah(2);
+            // === NANTIK LANJUT MODULES ===
+            JavascriptExecutor js = (JavascriptExecutor) App.driver;
 
-        // === link Postman docs (external) ===
-        WebElement postmanDoc = wait.until(ExpectedConditions.visibilityOfElementLocated(
-            By.xpath("//a[contains(@href,'documenter.getpostman.com')]")
-        ));
-        scrollSlowTo.accept(postmanDoc);
-        js.executeScript("arguments[0].click();", postmanDoc);
-        App.jedah(2);
+            // === helper scroll pelan ke element ===
+            java.util.function.Consumer<WebElement> scrollSlowTo = (el) -> {
+                js.executeScript("arguments[0].scrollIntoView({block:'center'});", el);
+                for (int i = 0; i < 3; i++) {
+                    js.executeScript("window.scrollBy(0, 80);");
+                    App.jedah(1);
+                }
+            };
 
-        App.driver.navigate().back();
-        App.jedah(2);
+            Allure.step("Product - Doc - Hotels", () -> {
+                // === Hotels ===
+                WebElement hotels = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/modules/hotels']")
+                ));
+                scrollSlowTo.accept(hotels);
+                hotels.click();
+                App.jedah(2);
+            });
 
-        // === Submit Ticket ===
-        WebElement submitTicket = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/support/submit-ticket']")
-        ));
-        scrollSlowTo.accept(submitTicket);
-        submitTicket.click();
-        App.jedah(2);
+            Allure.step("Product - Doc - Stuba", () -> {
+                // === Stuba ===
+                WebElement stuba = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/modules/hotels/stuba']")
+                ));
+                scrollSlowTo.accept(stuba);
+                stuba.click();
+                App.jedah(2);
 
-        // === License ===
-        WebElement license = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//a[@href='/support/license']")
-        ));
-        scrollSlowTo.accept(license);
-        license.click();
-        App.jedah(2);
+                // === link https://stuba.com (FIXED) ===
+                WebElement stubaLink = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//a[@href='https://stuba.com']")
+                ));
+                scrollSlowTo.accept(stubaLink);
+                js.executeScript("arguments[0].click();", stubaLink);
+                App.jedah(2);
 
-        // == bagian utama udah lanjut tes sisanya yang belum ==
-        // ================= Powered by GitBook =================
+                App.driver.navigate().back();
+                App.jedah(2);
+            });
 
-        String mainTab = App.driver.getWindowHandle();
-        App.jedah(2);
+            Allure.step("Product - Doc - Hotelbeds", () -> {
+                // === Hotelbeds ===
+                WebElement hotelbeds = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/modules/hotels/hotelbeds']")
+                ));
+                scrollSlowTo.accept(hotelbeds);
+                hotelbeds.click();
+                App.jedah(2);
+            });
 
-        // klik Powered by GitBook (open new tab)
-        WebElement poweredGitbook = wait.until(
-                ExpectedConditions.presenceOfElementLocated(
-                        By.xpath("//a[contains(.,'Powered by GitBook')]")
-                )
-        );
-        js.executeScript("arguments[0].scrollIntoView({block:'center'});", poweredGitbook);
-        App.jedah(2);
-        js.executeScript("arguments[0].click();", poweredGitbook);
-        App.jedah(2);
+            Allure.step("Product - Doc - Agoda", () -> {
+                // === Agoda ===
+                WebElement agoda = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/modules/hotels/agoda']")
+                ));
+                scrollSlowTo.accept(agoda);
+                agoda.click();
+                App.jedah(2);
+            });
 
-        // pindah ke tab baru
-        for (String tab : App.driver.getWindowHandles()) {
-            if (!tab.equals(mainTab)) {
-                App.driver.switchTo().window(tab);
-                break;
-            }
-        }
-        App.jedah(2);
+            Allure.step("Product - Doc - Flights", () -> {
+                // === Flights ===
+                WebElement flights = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/modules/flights']")
+                ));
+                scrollSlowTo.accept(flights);
+                flights.click();
+                App.jedah(2);
+            });
 
-        // tutup tab baru & balik ke tab utama
-        App.driver.close();
-        App.jedah(2);
-        App.driver.switchTo().window(mainTab);
-        App.jedah(2);
+            Allure.step("Product - Doc - Amadeus Self Service", () -> {
+                // === Amadeus Self Service ===
+                WebElement amadeusSelf = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/modules/flights/amadeus-self-service']")
+                ));
+                scrollSlowTo.accept(amadeusSelf);
+                amadeusSelf.click();
+                App.jedah(2);
+            });
 
-        // ================= Theme Switch =================
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-        App.jedah(2);
+            Allure.step("Product - Doc - Amadeus Entreprise", () -> {
+                // === Amadeus Entreprise ===
+                WebElement amadeusEnt = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/modules/flights/amadeus-entreprise']")
+                ));
+                scrollSlowTo.accept(amadeusEnt);
+                amadeusEnt.click();
+                App.jedah(2);
+            });
 
-        // light
-        js.executeScript("arguments[0].click();",
-                wait.until(ExpectedConditions.presenceOfElementLocated(
-                        By.xpath("//button[@aria-label='Switch to light theme']")
-                ))
-        );
-        App.jedah(2);
+            Allure.step("Product - Doc - Duffel", () -> {
+                // === Duffel ===
+                WebElement duffel = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/modules/flights/duffel']")
+                ));
+                scrollSlowTo.accept(duffel);
+                duffel.click();
+                App.jedah(2);
+            });
 
-        // system
-        js.executeScript("arguments[0].click();",
-                wait.until(ExpectedConditions.presenceOfElementLocated(
-                        By.xpath("//button[@aria-label='Switch to system theme']")
-                ))
-        );
-        App.jedah(2);
+            Allure.step("Product - Doc - ", () -> {
+                // === Kiwi ===
+                WebElement kiwi = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/modules/flights/kiwi']")
+                ));
+                scrollSlowTo.accept(kiwi);
+                kiwi.click();
+                App.jedah(2);
 
-        // dark
-        js.executeScript("arguments[0].click();",
-                wait.until(ExpectedConditions.presenceOfElementLocated(
-                        By.xpath("//button[@aria-label='Switch to dark theme']")
-                ))
-        );
-        App.jedah(2);
+                // === link https://tequila.kiwi.com (FIXED) ===
+                WebElement kiwiApi = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//a[@href='https://tequila.kiwi.com/']")
+                ));
+                scrollSlowTo.accept(kiwiApi);
+                js.executeScript("arguments[0].click();", kiwiApi);
+                App.jedah(2);
 
-        // ================= Feedback YES =================
-        js.executeScript("arguments[0].click();",
-                wait.until(ExpectedConditions.presenceOfElementLocated(
-                        By.xpath("//button[@aria-label='Yes, it was!']")
-                ))
-        );
-        App.jedah(2);
+                App.driver.navigate().back();
+                App.jedah(2);
+            });
 
-        // isi textarea YES
-        WebElement textareaYes = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        By.name("page-feedback-comment")
-                )
-        );
-        textareaYes.sendKeys("Test Saya Puas");
-        App.jedah(2);
+            Allure.step("Product - Doc - Pkfare", () -> {
+                // === Pkfare ===
+                WebElement pkfare = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/modules/flights/pkfare']")
+                ));
+                scrollSlowTo.accept(pkfare);
+                pkfare.click();
+                App.jedah(2);
+            });
 
-        // submit
-        textareaYes.sendKeys(Keys.ENTER);
-        App.jedah(2);
+            Allure.step("Product - Doc - Tours", () -> {
+                // === Tours ===
+                WebElement tours = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/modules/tours']")
+                ));
+                scrollSlowTo.accept(tours);
+                tours.click();
+                App.jedah(2);
+            });
 
-        // ================= Sidebar Submit Ticket =================
-        js.executeScript("arguments[0].click();",
-                wait.until(ExpectedConditions.presenceOfElementLocated(
-                        By.xpath("//a[@href='/support/submit-ticket']")
-                ))
-        );
-        App.jedah(2);
+            Allure.step("Product - Doc - Viator", () -> {
+                // === Viator ===
+                WebElement viator = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/modules/tours/viator']")
+                ));
+                scrollSlowTo.accept(viator);
+                viator.click();
+                App.jedah(2);
+            });
 
-        // ================= Sidebar License =================
-        js.executeScript("arguments[0].click();",
-                wait.until(ExpectedConditions.presenceOfElementLocated(
-                        By.xpath("//a[@href='/support/license']")
-                ))
-        );
-        App.jedah(2);
+            Allure.step("Product - Doc - Payment Gateways", () -> {
+                // === Payment Gateways ===
+                WebElement payment = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/payments']")
+                ));
+                scrollSlowTo.accept(payment);
+                payment.click();
+                App.jedah(2);
+            });
 
-        // ================= Feedback NO =================
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-        App.jedah(2);
+            Allure.step("Product - Doc - PayPal", () -> {
+                // === PayPal ===
+                WebElement paypal = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/payments/paypal']")
+                ));
+                scrollSlowTo.accept(paypal);
+                paypal.click();
+                App.jedah(2);
 
-        js.executeScript("arguments[0].click();",
-                wait.until(ExpectedConditions.presenceOfElementLocated(
-                        By.xpath("//button[@aria-label='No']")
-                ))
-        );
-        App.jedah(2);
+                // === link developer.paypal.com (external) ===
+                WebElement paypalDev = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//a[@href='https://developer.paypal.com/home']")
+                ));
+                scrollSlowTo.accept(paypalDev);
+                js.executeScript("arguments[0].click();", paypalDev);
+                App.jedah(2);
 
-        // isi textarea NO
-        WebElement textareaNo = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        By.name("page-feedback-comment")
-                )
-        );
-        textareaNo.sendKeys("Tes saya tidak puas");
-        App.jedah(2);
+                App.driver.navigate().back();
+                App.jedah(2);
+            });
 
-        // submit
-        textareaNo.sendKeys(Keys.ENTER);
-        App.jedah(2);
+            Allure.step("Product - Doc - Stripe", () -> {
+                // === Stripe (scroll sampai bawah) ===
+                WebElement stripe = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/payments/stripe']")
+                ));
+                scrollSlowTo.accept(stripe);
+                stripe.click();
+                App.jedah(2);
+            });
 
-        // === LANJUTIN NANTIK ===
-        // === TEST SELECTION COPY ===
-        
+            Allure.step("Product - Doc - For Designers", () -> {
+                // === For Designers ===
+                WebElement forDesigners = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/support/for-designers']")
+                ));
+                scrollSlowTo.accept(forDesigners);
+                forDesigners.click();
+                App.jedah(2);
+            });
+            
+            Allure.step("Product - Doc - For Developers", () -> {
+                // === For Designers ===
+                WebElement forDesigners = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/support/for-developers']")
+                ));
+                scrollSlowTo.accept(forDesigners);
+                forDesigners.click();
+                App.jedah(2);
+            });
+
+            Allure.step("Product - Doc - API Version 9", () -> {
+                // === API Version 9 ===
+                WebElement apiV9 = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/support/for-developers/api-version-9']")
+                ));
+                scrollSlowTo.accept(apiV9);
+                apiV9.click();
+                App.jedah(2);
+
+                // === link Postman docs (external) ===
+                WebElement postmanDoc = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//a[contains(@href,'documenter.getpostman.com')]")
+                ));
+                scrollSlowTo.accept(postmanDoc);
+                js.executeScript("arguments[0].click();", postmanDoc);
+                App.jedah(2);
+
+                App.driver.navigate().back();
+                App.jedah(2);
+
+                // === Submit Ticket ===
+                WebElement submitTicket = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/support/submit-ticket']")
+                ));
+                scrollSlowTo.accept(submitTicket);
+                submitTicket.click();
+                App.jedah(2);
+            });
+
+            Allure.step("Product - Doc - License", () -> {
+                // === License ===
+                WebElement license = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[@href='/support/license']")
+                ));
+                scrollSlowTo.accept(license);
+                license.click();
+                App.jedah(2);
+            });
+
+            // ================= Powered by GitBook =================
+
+            String mainTab = App.driver.getWindowHandle();
+            App.jedah(2);
+
+            Allure.step("Product - Doc - GitBook", () -> {
+                // klik Powered by GitBook (open new tab)
+                WebElement poweredGitbook = wait.until(
+                        ExpectedConditions.presenceOfElementLocated(
+                                By.xpath("//a[contains(.,'Powered by GitBook')]")
+                        )
+                );
+                js.executeScript("arguments[0].scrollIntoView({block:'center'});", poweredGitbook);
+                App.jedah(2);
+                js.executeScript("arguments[0].click();", poweredGitbook);
+                App.jedah(2);
+
+                // pindah ke tab baru
+                for (String tab : App.driver.getWindowHandles()) {
+                    if (!tab.equals(mainTab)) {
+                        App.driver.switchTo().window(tab);
+                        break;
+                    }
+                }
+                App.jedah(2);
+
+                // tutup tab baru & balik ke tab utama
+                App.driver.close();
+                App.jedah(2);
+                App.driver.switchTo().window(mainTab);
+                App.jedah(2);
+            });
+
+            Allure.step("Product - Doc - Change Them", () -> {
+                // ================= Theme Switch =================
+                js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+                App.jedah(2);
+
+                // light
+                js.executeScript("arguments[0].click();",
+                        wait.until(ExpectedConditions.presenceOfElementLocated(
+                                By.xpath("//button[@aria-label='Switch to light theme']")
+                        ))
+                );
+                App.jedah(2);
+
+                // system
+                js.executeScript("arguments[0].click();",
+                        wait.until(ExpectedConditions.presenceOfElementLocated(
+                                By.xpath("//button[@aria-label='Switch to system theme']")
+                        ))
+                );
+                App.jedah(2);
+
+                // dark
+                js.executeScript("arguments[0].click();",
+                        wait.until(ExpectedConditions.presenceOfElementLocated(
+                                By.xpath("//button[@aria-label='Switch to dark theme']")
+                        ))
+                );
+                App.jedah(2);
+            });
+
+            Allure.step("Product - Doc - Feedback", () -> {
+                // ================= Feedback YES =================
+                js.executeScript("arguments[0].click();",
+                        wait.until(ExpectedConditions.presenceOfElementLocated(
+                                By.xpath("//button[@aria-label='Yes, it was!']")
+                        ))
+                );
+                App.jedah(2);
+
+                // isi textarea YES
+                WebElement textareaYes = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(
+                                By.name("page-feedback-comment")
+                        )
+                );
+                textareaYes.sendKeys("Test Saya Puas");
+                App.jedah(2);
+
+                // submit
+                textareaYes.sendKeys(Keys.ENTER);
+                App.jedah(2);
+
+                // ================= Sidebar Submit Ticket =================
+                js.executeScript("arguments[0].click();",
+                        wait.until(ExpectedConditions.presenceOfElementLocated(
+                                By.xpath("//a[@href='/support/submit-ticket']")
+                        ))
+                );
+                App.jedah(2);
+
+                // ================= Sidebar License =================
+                js.executeScript("arguments[0].click();",
+                        wait.until(ExpectedConditions.presenceOfElementLocated(
+                                By.xpath("//a[@href='/support/license']")
+                        ))
+                );
+                App.jedah(2);
+
+                // ================= Feedback NO =================
+                js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+                App.jedah(2);
+
+                js.executeScript("arguments[0].click();",
+                        wait.until(ExpectedConditions.presenceOfElementLocated(
+                                By.xpath("//button[@aria-label='No']")
+                        ))
+                );
+                App.jedah(2);
+
+                // isi textarea NO
+                WebElement textareaNo = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(
+                                By.name("page-feedback-comment")
+                        )
+                );
+                textareaNo.sendKeys("Tes saya tidak puas");
+                App.jedah(2);
+
+                // submit
+                textareaNo.sendKeys(Keys.ENTER);
+                App.jedah(2);
+
+                // === LANJUTIN NANTIK ===
+                // === TEST SELECTION COPY ===
+                
+            });
+        });
     }
 
+
     public void testThemes(){
-        // === klik Product ===
-        WebElement productMenu = App.driver.findElement(
-            By.xpath("//button[.//span[text()='Product']]")
-        );
-        productMenu.click();
-        App.jedah(1);
+        Allure.step("Product - Themes page", () -> {
 
-        // === klik Themes ===
-        WebElement docsMenu = App.driver.findElement(
-            By.xpath("//a[normalize-space()='Themes']")
-        );
-        docsMenu.click();
-        App.jedah(2);
+            // === klik Product ===
+            WebElement productMenu = App.driver.findElement(
+                By.xpath("//button[.//span[text()='Product']]")
+            );
+            productMenu.click();
+            App.jedah(1);
 
-        // ================= FREE DOWNLOAD (ANTI NAVBAR) =================
-        JavascriptExecutor js = (JavascriptExecutor) App.driver;
+            // === klik Themes ===
+            WebElement docsMenu = App.driver.findElement(
+                By.xpath("//a[normalize-space()='Themes']")
+            );
+            docsMenu.click();
+            App.jedah(2);
 
-        try {
-            // scroll bertahap agar card ter-load
-            for (int i = 0; i < 10; i++) {
-                js.executeScript("window.scrollBy(0, 300)");
+            // ================= FREE DOWNLOAD (ANTI NAVBAR) =================
+            JavascriptExecutor js = (JavascriptExecutor) App.driver;
+
+            try {
+                // scroll bertahap agar card ter-load
+                for (int i = 0; i < 10; i++) {
+                    js.executeScript("window.scrollBy(0, 300)");
+                    App.jedah(1);
+                }
+
+                // cari tombol berdasarkan icon download (PALING STABIL)
+                WebElement freeDownloadBtn = App.driver.findElement(
+                    By.xpath("//span[text()='download']/ancestor::button")
+                );
+
+                // paksa posisi: tengah layar (hindari navbar)
+                js.executeScript(
+                    "const rect = arguments[0].getBoundingClientRect();" +
+                    "window.scrollBy(0, rect.top - (window.innerHeight / 2));",
+                    freeDownloadBtn
+                );
                 App.jedah(1);
-            }
 
-            // cari tombol berdasarkan icon download (PALING STABIL)
-            WebElement freeDownloadBtn = App.driver.findElement(
-                By.xpath("//span[text()='download']/ancestor::button")
-            );
+                // simpan URL sebelum klik
+                String before = App.driver.getCurrentUrl();
 
-            // paksa posisi: tengah layar (hindari navbar)
-            js.executeScript(
-                "const rect = arguments[0].getBoundingClientRect();" +
-                "window.scrollBy(0, rect.top - (window.innerHeight / 2));",
-                freeDownloadBtn
-            );
-            App.jedah(1);
-
-            // simpan URL sebelum klik
-            String before = App.driver.getCurrentUrl();
-
-            // KLIK VIA JAVASCRIPT (TEMBUS NAVBAR)
-            js.executeScript("arguments[0].click();", freeDownloadBtn);
-            App.jedah(3);
-
-            // cek respon
-            String after = App.driver.getCurrentUrl();
-
-            if (before.equals(after)) {
-                System.out.println("BUG: Free Download tak ada respon");
-            } else {
-                System.out.println("INFO: Free Download ada respon");
-            }
-
-        } catch (Exception e) {
-            System.out.println("BUG: Free Download tidak bisa ditemukan / diklik");
-        }
-
-        // {LANJUT 2}
-
-        /* ---------- Buy Now $100 (PERTAMA) ---------- */
-        try {
-            WebElement buyNowBtn = App.driver.findElement(
-                By.xpath("//a[@onclick='showEnterpriseAlert(event)']")
-            );
-
-            // scroll ke tengah layar (hindari navbar)
-            js.executeScript(
-                "const r = arguments[0].getBoundingClientRect();" +
-                "window.scrollBy(0, r.top - (window.innerHeight / 2));",
-                buyNowBtn
-            );
-            App.jedah(1);
-
-            // WAJIB klik via JS
-            js.executeScript("arguments[0].click();", buyNowBtn);
-            App.jedah(2);
-
-        } catch (Exception e) {
-            System.out.println("BUG: Buy Now pertama tidak bisa diklik");
-        }
-
-        /* ---------- Cancel ---------- */
-        try {
-            WebElement cancelBtn = App.driver.findElement(
-                By.xpath("//button[@onclick='closeAlert()']")
-            );
-
-            js.executeScript("arguments[0].click();", cancelBtn);
-            App.jedah(2);
-
-        } catch (Exception e) {
-            System.out.println("BUG: Tombol Cancel tidak muncul / tidak bisa diklik");
-        }
-
-        /* ---------- Buy Now $100 (KEDUA) ---------- */
-        try {
-            WebElement buyNowBtn = App.driver.findElement(
-                By.xpath("//a[@onclick='showEnterpriseAlert(event)']")
-            );
-
-            js.executeScript(
-                "const r = arguments[0].getBoundingClientRect();" +
-                "window.scrollBy(0, r.top - (window.innerHeight / 2));",
-                buyNowBtn
-            );
-            App.jedah(1);
-
-            js.executeScript("arguments[0].click();", buyNowBtn);
-            App.jedah(2);
-
-        } catch (Exception e) {
-            System.out.println("BUG: Buy Now kedua tidak bisa diklik");
-        }
-
-        /* ---------- Buy Enterprise ---------- */
-        try {
-            String beforeUrl = App.driver.getCurrentUrl();
-
-            WebElement buyEnterpriseBtn = App.driver.findElement(
-                By.xpath("//button[@onclick='redirectToEnterprise()']")
-            );
-
-            js.executeScript("arguments[0].click();", buyEnterpriseBtn);
-            App.jedah(3);
-
-            String afterUrl = App.driver.getCurrentUrl();
-
-            if (!beforeUrl.equals(afterUrl)) {
-                App.driver.navigate().back();
+                // KLIK VIA JAVASCRIPT (TEMBUS NAVBAR)
+                js.executeScript("arguments[0].click();", freeDownloadBtn);
                 App.jedah(3);
-            } else {
-                System.out.println("BUG: Buy Enterprise tidak membuka halaman baru");
+
+                // cek respon
+                String after = App.driver.getCurrentUrl();
+
+                if (before.equals(after)) {
+                    System.out.println("BUG: Free Download tak ada respon");
+                } else {
+                    System.out.println("INFO: Free Download ada respon");
+                }
+
+            } catch (Exception e) {
+                System.out.println("BUG: Free Download tidak bisa ditemukan / diklik");
             }
 
-        } catch (Exception e) {
-            System.out.println("BUG: Buy Enterprise tidak bisa diklik");
-        }
+            // {LANJUT 2}
 
+            /* ---------- Buy Now $100 (PERTAMA) ---------- */
+            try {
+                WebElement buyNowBtn = App.driver.findElement(
+                    By.xpath("//a[@onclick='showEnterpriseAlert(event)']")
+                );
+
+                // scroll ke tengah layar (hindari navbar)
+                js.executeScript(
+                    "const r = arguments[0].getBoundingClientRect();" +
+                    "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+                    buyNowBtn
+                );
+                App.jedah(1);
+
+                // WAJIB klik via JS
+                js.executeScript("arguments[0].click();", buyNowBtn);
+                App.jedah(2);
+
+            } catch (Exception e) {
+                System.out.println("BUG: Buy Now pertama tidak bisa diklik");
+            }
+
+            /* ---------- Cancel ---------- */
+            try {
+                WebElement cancelBtn = App.driver.findElement(
+                    By.xpath("//button[@onclick='closeAlert()']")
+                );
+
+                js.executeScript("arguments[0].click();", cancelBtn);
+                App.jedah(2);
+
+            } catch (Exception e) {
+                System.out.println("BUG: Tombol Cancel tidak muncul / tidak bisa diklik");
+            }
+
+            /* ---------- Buy Now $100 (KEDUA) ---------- */
+            try {
+                WebElement buyNowBtn = App.driver.findElement(
+                    By.xpath("//a[@onclick='showEnterpriseAlert(event)']")
+                );
+
+                js.executeScript(
+                    "const r = arguments[0].getBoundingClientRect();" +
+                    "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+                    buyNowBtn
+                );
+                App.jedah(1);
+
+                js.executeScript("arguments[0].click();", buyNowBtn);
+                App.jedah(2);
+
+            } catch (Exception e) {
+                System.out.println("BUG: Buy Now kedua tidak bisa diklik");
+            }
+
+            /* ---------- Buy Enterprise ---------- */
+            try {
+                String beforeUrl = App.driver.getCurrentUrl();
+
+                WebElement buyEnterpriseBtn = App.driver.findElement(
+                    By.xpath("//button[@onclick='redirectToEnterprise()']")
+                );
+
+                js.executeScript("arguments[0].click();", buyEnterpriseBtn);
+                App.jedah(3);
+
+                String afterUrl = App.driver.getCurrentUrl();
+
+                if (!beforeUrl.equals(afterUrl)) {
+                    App.driver.navigate().back();
+                    App.jedah(3);
+                } else {
+                    System.out.println("BUG: Buy Enterprise tidak membuka halaman baru");
+                }
+
+            } catch (Exception e) {
+                System.out.println("BUG: Buy Enterprise tidak bisa diklik");
+            }
+
+        });
     }
 
     public void testIntegrations(){
-        // === klik Product ===
-        WebElement productMenu = App.driver.findElement(
-            By.xpath("//button[.//span[text()='Product']]")
-        );
-        productMenu.click();
-        App.jedah(1);
+        Allure.step("Product - Integrations page", () -> {
 
-        // === klik Integrations ===
-        WebElement docsMenu = App.driver.findElement(
-            By.xpath("//a[normalize-space()='Integrations']")
-        );
-        docsMenu.click();
-        App.jedah(2);
-
-        // ================= LANJUT 1 : SCROLL PRESISI + FILTER INTEGRATIONS =================
-        JavascriptExecutor js = (JavascriptExecutor) App.driver;
-
-        // --- scroll presisi ke filter Flights ---
-        try {
-            WebElement flightsFilter = App.driver.findElement(
-                By.xpath("//button[@data-filter='Flights']")
+            // === klik Product ===
+            WebElement productMenu = App.driver.findElement(
+                By.xpath("//button[.//span[text()='Product']]")
             );
-
-            js.executeScript(
-                "const r = arguments[0].getBoundingClientRect();" +
-                "window.scrollBy(0, r.top - (window.innerHeight / 2));",
-                flightsFilter
-            );
+            productMenu.click();
             App.jedah(1);
 
-        } catch (Exception e) {
-            System.out.println("INFO: Scroll ke filter gagal");
-        }
-
-        // Flights
-        try {
-            WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Flights']"));
-            js.executeScript("arguments[0].click();", btn);
-            App.jedah(2);
-        } catch (Exception e) {
-            System.out.println("BUG: Filter Flights tidak bisa diklik");
-        }
-
-        // Hotels
-        try {
-            WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Hotels']"));
-            js.executeScript("arguments[0].click();", btn);
-            App.jedah(2);
-        } catch (Exception e) {
-            System.out.println("BUG: Filter Hotels tidak bisa diklik");
-        }
-
-        // Tours
-        try {
-            WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Tours']"));
-            js.executeScript("arguments[0].click();", btn);
-            App.jedah(2);
-        } catch (Exception e) {
-            System.out.println("BUG: Filter Tours tidak bisa diklik");
-        }
-
-        // Cars / Transfer
-        try {
-            WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Transfer']"));
-            js.executeScript("arguments[0].click();", btn);
-            App.jedah(2);
-        } catch (Exception e) {
-            System.out.println("BUG: Filter Cars tidak bisa diklik");
-        }
-
-        // Payment Gateways
-        try {
-            WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Payment Gateway']"));
-            js.executeScript("arguments[0].click();", btn);
-            App.jedah(2);
-        } catch (Exception e) {
-            System.out.println("BUG: Filter Payment Gateways tidak bisa diklik");
-        }
-
-        // Others
-        try {
-            WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Others']"));
-            js.executeScript("arguments[0].click();", btn);
-            App.jedah(2);
-        } catch (Exception e) {
-            System.out.println("BUG: Filter Others tidak bisa diklik");
-        }
-
-        // Coming Soon
-        try {
-            WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Coming Soon']"));
-            js.executeScript("arguments[0].click();", btn);
-            App.jedah(2);
-        } catch (Exception e) {
-            System.out.println("BUG: Filter Coming Soon tidak bisa diklik");
-        }
-
-        // ================= LANJUT 2 =================
-        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
-
-        /* --- scroll sedikit --- */
-        js.executeScript("window.scrollBy(0, 200)");
-        App.jedah(2);
-
-        /* ---------- All Suppliers ---------- */
-        try {
-            WebElement allSuppliersBtn = wait.until(
-                ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//button[@data-filter='all']")
-                )
+            // === klik Integrations ===
+            WebElement docsMenu = App.driver.findElement(
+                By.xpath("//a[normalize-space()='Integrations']")
             );
-
-            js.executeScript(
-                "const r = arguments[0].getBoundingClientRect();" +
-                "window.scrollBy(0, r.top - (window.innerHeight / 2));",
-                allSuppliersBtn
-            );
+            docsMenu.click();
             App.jedah(2);
 
-            js.executeScript("arguments[0].click();", allSuppliersBtn);
-            App.jedah(2);
+            // ================= LANJUT 1 : SCROLL PRESISI + FILTER INTEGRATIONS =================
+            JavascriptExecutor js = (JavascriptExecutor) App.driver;
 
-        } catch (Exception e) {
-            System.out.println("BUG: All Suppliers tidak bisa diklik");
-        }
+            // --- scroll presisi ke filter Flights ---
+            try {
+                WebElement flightsFilter = App.driver.findElement(
+                    By.xpath("//button[@data-filter='Flights']")
+                );
 
-        /* ---------- Search Input ---------- */
-        WebElement searchInput = wait.until(
-            ExpectedConditions.visibilityOfElementLocated(By.id("searchInput"))
-        );
-        App.jedah(2);
+                js.executeScript(
+                    "const r = arguments[0].getBoundingClientRect();" +
+                    "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+                    flightsFilter
+                );
+                App.jedah(1);
 
-        /* ================= KIWI ================= */
-        try {
-            searchInput.clear();
-            App.jedah(2);
-
-            searchInput.sendKeys("Kiw");
-            App.jedah(2);
-
-            WebElement kiwiLink = wait.until(
-                ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//a[contains(@href,'/modules/flights/kiwi')]")
-                )
-            );
-            App.jedah(2);
-
-            js.executeScript(
-                "const r = arguments[0].getBoundingClientRect();" +
-                "window.scrollBy(0, r.top - (window.innerHeight / 2));",
-                kiwiLink
-            );
-            App.jedah(2);
-
-            String mainTab = App.driver.getWindowHandle();
-            js.executeScript("arguments[0].click();", kiwiLink);
-            App.jedah(2);
-
-            wait.until(d -> d.getWindowHandles().size() > 1);
-            App.jedah(2);
-
-            for (String tab : App.driver.getWindowHandles()) {
-                if (!tab.equals(mainTab)) {
-                    App.driver.switchTo().window(tab);
-                    App.jedah(2);
-                    App.driver.close();
-                    App.jedah(2);
-                }
+            } catch (Exception e) {
+                System.out.println("INFO: Scroll ke filter gagal");
             }
 
-            App.driver.switchTo().window(mainTab);
-            App.jedah(2);
-
-        } catch (Exception e) {
-            System.out.println("BUG: Kiwi View Details gagal");
-        }
-
-        /* ================= AGODA ================= */
-        try {
-            searchInput.clear();
-            App.jedah(2);
-
-            searchInput.sendKeys("Ago");
-            App.jedah(2);
-
-            WebElement agodaLink = wait.until(
-                ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//a[contains(@href,'/modules/hotels/agoda')]")
-                )
-            );
-            App.jedah(2);
-
-            js.executeScript(
-                "const r = arguments[0].getBoundingClientRect();" +
-                "window.scrollBy(0, r.top - (window.innerHeight / 2));",
-                agodaLink
-            );
-            App.jedah(2);
-
-            String mainTab = App.driver.getWindowHandle();
-            js.executeScript("arguments[0].click();", agodaLink);
-            App.jedah(2);
-
-            wait.until(d -> d.getWindowHandles().size() > 1);
-            App.jedah(2);
-
-            for (String tab : App.driver.getWindowHandles()) {
-                if (!tab.equals(mainTab)) {
-                    App.driver.switchTo().window(tab);
-                    App.jedah(2);
-                    App.driver.close();
-                    App.jedah(2);
-                }
+            // Flights
+            try {
+                WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Flights']"));
+                js.executeScript("arguments[0].click();", btn);
+                App.jedah(2);
+            } catch (Exception e) {
+                System.out.println("BUG: Filter Flights tidak bisa diklik");
             }
 
-            App.driver.switchTo().window(mainTab);
-            App.jedah(2);
+            // Hotels
+            try {
+                WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Hotels']"));
+                js.executeScript("arguments[0].click();", btn);
+                App.jedah(2);
+            } catch (Exception e) {
+                System.out.println("BUG: Filter Hotels tidak bisa diklik");
+            }
 
-        } catch (Exception e) {
-            System.out.println("BUG: Agoda View Details gagal");
-        }
+            // Tours
+            try {
+                WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Tours']"));
+                js.executeScript("arguments[0].click();", btn);
+                App.jedah(2);
+            } catch (Exception e) {
+                System.out.println("BUG: Filter Tours tidak bisa diklik");
+            }
 
-        // ================= LANJUT 3 =================
+            // Cars / Transfer
+            try {
+                WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Transfer']"));
+                js.executeScript("arguments[0].click();", btn);
+                App.jedah(2);
+            } catch (Exception e) {
+                System.out.println("BUG: Filter Cars tidak bisa diklik");
+            }
 
-        /* ---------- Reset Filters ---------- */
-        try {
-            WebElement resetBtn = wait.until(
-                ExpectedConditions.presenceOfElementLocated(By.id("resetBtn"))
-            );
+            // Payment Gateways
+            try {
+                WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Payment Gateway']"));
+                js.executeScript("arguments[0].click();", btn);
+                App.jedah(2);
+            } catch (Exception e) {
+                System.out.println("BUG: Filter Payment Gateways tidak bisa diklik");
+            }
 
-            js.executeScript(
-                "const r = arguments[0].getBoundingClientRect();" +
-                "window.scrollBy(0, r.top - (window.innerHeight / 2));",
-                resetBtn
-            );
-            App.jedah(2);
+            // Others
+            try {
+                WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Others']"));
+                js.executeScript("arguments[0].click();", btn);
+                App.jedah(2);
+            } catch (Exception e) {
+                System.out.println("BUG: Filter Others tidak bisa diklik");
+            }
 
-            js.executeScript("arguments[0].click();", resetBtn);
-            App.jedah(2);
+            // Coming Soon
+            try {
+                WebElement btn = App.driver.findElement(By.xpath("//button[@data-filter='Coming Soon']"));
+                js.executeScript("arguments[0].click();", btn);
+                App.jedah(2);
+            } catch (Exception e) {
+                System.out.println("BUG: Filter Coming Soon tidak bisa diklik");
+            }
 
-        } catch (Exception e) {
-            System.out.println("BUG: Reset Filters tidak bisa diklik");
-        }
+            // ================= LANJUT 2 =================
+            WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
 
-        /* ---------- Assert 0 integrations found ---------- */
-        try {
-            WebElement resultsCount = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("resultsCount"))
-            );
-            App.jedah(2);
-
-            String actualText = resultsCount.getText();
-            Assert.assertEquals(
-                resultsCount.getText(),
-                "23 integrations found",
-                "BUG: Jumlah integration tidak 23"
-            );
-
-        } catch (AssertionError ae) {
-            throw ae; // wajib fail test
-        } catch (Exception e) {
-            System.out.println("BUG: resultsCount tidak ditemukan");
-        }
-
-        /* ---------- Scroll perlahan sampai Live Demo ---------- */
-        WebElement liveDemoBtn = wait.until(
-            ExpectedConditions.presenceOfElementLocated(
-                By.xpath("//a[contains(@href,'/demo')]")
-            )
-        );
-        App.jedah(2);
-
-        // scroll bertahap (smooth & aman)
-        for (int i = 0; i < 8; i++) {
-            js.executeScript("window.scrollBy(0, 150)");
-            App.jedah(2);
-        }
-
-        /* pastikan tombol di tengah layar */
-        js.executeScript(
-            "const r = arguments[0].getBoundingClientRect();" +
-            "window.scrollBy(0, r.top - (window.innerHeight / 2));",
-            liveDemoBtn
-        );
-        App.jedah(2);
-
-        /* klik via JS */
-        js.executeScript("arguments[0].click();", liveDemoBtn);
-        App.jedah(2);
-
-        /* ---------- Back ke halaman awal ---------- */
-        App.driver.navigate().back();
-        App.jedah(2);
-
-        /* ---------- View Pricing ---------- */
-        WebElement pricingBtn = wait.until(
-            ExpectedConditions.presenceOfElementLocated(
-                By.xpath("//a[contains(@href,'/pricing')]")
-            )
-        );
-        App.jedah(2);
-
-        js.executeScript(
-            "const r = arguments[0].getBoundingClientRect();" +
-            "window.scrollBy(0, r.top - (window.innerHeight / 2));",
-            pricingBtn
-        );
-        App.jedah(2);
-
-        js.executeScript("arguments[0].click();", pricingBtn);
-        App.jedah(2);
-
-        /* ---------- Back ke halaman awal ---------- */
-        App.driver.navigate().back();
-        App.jedah(2);
-        
-        // ================= LANJUT 4 =================
-
-        /* ---------- Scroll perlahan ke paling bawah ---------- */
-        for (int i = 0; i < 15; i++) {
+            /* --- scroll sedikit --- */
             js.executeScript("window.scrollBy(0, 200)");
             App.jedah(2);
-        }
 
-        /* ---------- Privacy (tab sama) ---------- */
-        try {
-            WebElement privacyLink = wait.until(
-                ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//a[contains(@href,'/privacy-statement')]")
-                )
-            );
+            /* ---------- All Suppliers ---------- */
+            try {
+                WebElement allSuppliersBtn = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//button[@data-filter='all']")
+                    )
+                );
 
-            js.executeScript(
-                "arguments[0].scrollIntoView({block:'center'});",
-                privacyLink
-            );
-            App.jedah(2);
+                js.executeScript(
+                    "const r = arguments[0].getBoundingClientRect();" +
+                    "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+                    allSuppliersBtn
+                );
+                App.jedah(2);
 
-            js.executeScript("arguments[0].click();", privacyLink);
-            App.jedah(2);
+                js.executeScript("arguments[0].click();", allSuppliersBtn);
+                App.jedah(2);
 
-            App.driver.navigate().back();
-            App.jedah(2);
-
-        } catch (Exception e) {
-            System.out.println("BUG: Privacy link gagal");
-        }
-
-        /* ---------- Terms (tab sama) ---------- */
-        try {
-            WebElement termsLink = wait.until(
-                ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//a[contains(@href,'/terms-and-conditions')]")
-                )
-            );
-
-            js.executeScript(
-                "arguments[0].scrollIntoView({block:'center'});",
-                termsLink
-            );
-            App.jedah(2);
-
-            js.executeScript("arguments[0].click();", termsLink);
-            App.jedah(2);
-
-            App.driver.navigate().back();
-            App.jedah(2);
-
-        } catch (Exception e) {
-            System.out.println("BUG: Terms link gagal");
-        }
-
-        /* ---------- Support (tab baru) ---------- */
-        try {
-            WebElement supportLink = wait.until(
-                ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//a[contains(@href,'direct.lc.chat')]")
-                )
-            );
-
-            js.executeScript(
-                "arguments[0].scrollIntoView({block:'center'});",
-                supportLink
-            );
-            App.jedah(2);
-
-            String mainTab = App.driver.getWindowHandle();
-            js.executeScript("arguments[0].click();", supportLink);
-            App.jedah(2);
-
-            wait.until(d -> d.getWindowHandles().size() > 1);
-            App.jedah(2);
-
-            for (String tab : App.driver.getWindowHandles()) {
-                if (!tab.equals(mainTab)) {
-                    App.driver.switchTo().window(tab);
-                    App.jedah(2);
-                    App.driver.close();
-                    App.jedah(2);
-                }
+            } catch (Exception e) {
+                System.out.println("BUG: All Suppliers tidak bisa diklik");
             }
 
-            App.driver.switchTo().window(mainTab);
+            /* ---------- Search Input ---------- */
+            WebElement searchInput = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("searchInput"))
+            );
             App.jedah(2);
 
-        } catch (Exception e) {
-            System.out.println("BUG: Support link gagal");
-        }
+            /* ================= KIWI ================= */
+            try {
+                searchInput.clear();
+                App.jedah(2);
+
+                searchInput.sendKeys("Kiw");
+                App.jedah(2);
+
+                WebElement kiwiLink = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[contains(@href,'/modules/flights/kiwi')]")
+                    )
+                );
+                App.jedah(2);
+
+                js.executeScript(
+                    "const r = arguments[0].getBoundingClientRect();" +
+                    "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+                    kiwiLink
+                );
+                App.jedah(2);
+
+                String mainTab = App.driver.getWindowHandle();
+                js.executeScript("arguments[0].click();", kiwiLink);
+                App.jedah(2);
+
+                wait.until(d -> d.getWindowHandles().size() > 1);
+                App.jedah(2);
+
+                for (String tab : App.driver.getWindowHandles()) {
+                    if (!tab.equals(mainTab)) {
+                        App.driver.switchTo().window(tab);
+                        App.jedah(2);
+                        App.driver.close();
+                        App.jedah(2);
+                    }
+                }
+
+                App.driver.switchTo().window(mainTab);
+                App.jedah(2);
+
+            } catch (Exception e) {
+                System.out.println("BUG: Kiwi View Details gagal");
+            }
+
+            /* ================= AGODA ================= */
+            try {
+                searchInput.clear();
+                App.jedah(2);
+
+                searchInput.sendKeys("Ago");
+                App.jedah(2);
+
+                WebElement agodaLink = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[contains(@href,'/modules/hotels/agoda')]")
+                    )
+                );
+                App.jedah(2);
+
+                js.executeScript(
+                    "const r = arguments[0].getBoundingClientRect();" +
+                    "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+                    agodaLink
+                );
+                App.jedah(2);
+
+                String mainTab = App.driver.getWindowHandle();
+                js.executeScript("arguments[0].click();", agodaLink);
+                App.jedah(2);
+
+                wait.until(d -> d.getWindowHandles().size() > 1);
+                App.jedah(2);
+
+                for (String tab : App.driver.getWindowHandles()) {
+                    if (!tab.equals(mainTab)) {
+                        App.driver.switchTo().window(tab);
+                        App.jedah(2);
+                        App.driver.close();
+                        App.jedah(2);
+                    }
+                }
+
+                App.driver.switchTo().window(mainTab);
+                App.jedah(2);
+
+            } catch (Exception e) {
+                System.out.println("BUG: Agoda View Details gagal");
+            }
+
+            // ================= LANJUT 3 =================
+
+            /* ---------- Reset Filters ---------- */
+            try {
+                WebElement resetBtn = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(By.id("resetBtn"))
+                );
+
+                js.executeScript(
+                    "const r = arguments[0].getBoundingClientRect();" +
+                    "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+                    resetBtn
+                );
+                App.jedah(2);
+
+                js.executeScript("arguments[0].click();", resetBtn);
+                App.jedah(2);
+
+            } catch (Exception e) {
+                System.out.println("BUG: Reset Filters tidak bisa diklik");
+            }
+
+            /* ---------- Assert 0 integrations found ---------- */
+            try {
+                WebElement resultsCount = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.id("resultsCount"))
+                );
+                App.jedah(2);
+
+                Assert.assertEquals(
+                    resultsCount.getText(),
+                    "23 integrations found",
+                    "BUG: Jumlah integration tidak 23"
+                );
+
+            } catch (AssertionError ae) {
+                throw ae;
+            } catch (Exception e) {
+                System.out.println("BUG: resultsCount tidak ditemukan");
+            }
+
+            /* ---------- Scroll perlahan sampai Live Demo ---------- */
+            WebElement liveDemoBtn = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//a[contains(@href,'/demo')]")
+                )
+            );
+            App.jedah(2);
+
+            for (int i = 0; i < 8; i++) {
+                js.executeScript("window.scrollBy(0, 150)");
+                App.jedah(2);
+            }
+
+            js.executeScript(
+                "const r = arguments[0].getBoundingClientRect();" +
+                "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+                liveDemoBtn
+            );
+            App.jedah(2);
+
+            js.executeScript("arguments[0].click();", liveDemoBtn);
+            App.jedah(2);
+
+            App.driver.navigate().back();
+            App.jedah(2);
+
+            /* ---------- View Pricing ---------- */
+            WebElement pricingBtn = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//a[contains(@href,'/pricing')]")
+                )
+            );
+            App.jedah(2);
+
+            js.executeScript(
+                "const r = arguments[0].getBoundingClientRect();" +
+                "window.scrollBy(0, r.top - (window.innerHeight / 2));",
+                pricingBtn
+            );
+            App.jedah(2);
+
+            js.executeScript("arguments[0].click();", pricingBtn);
+            App.jedah(2);
+
+            App.driver.navigate().back();
+            App.jedah(2);
+
+            // ================= LANJUT 4 =================
+
+            for (int i = 0; i < 15; i++) {
+                js.executeScript("window.scrollBy(0, 200)");
+                App.jedah(2);
+            }
+
+            /* ---------- Privacy ---------- */
+            try {
+                WebElement privacyLink = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[contains(@href,'/privacy-statement')]")
+                    )
+                );
+
+                js.executeScript(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    privacyLink
+                );
+                App.jedah(2);
+
+                js.executeScript("arguments[0].click();", privacyLink);
+                App.jedah(2);
+
+                App.driver.navigate().back();
+                App.jedah(2);
+
+            } catch (Exception e) {
+                System.out.println("BUG: Privacy link gagal");
+            }
+
+            /* ---------- Terms ---------- */
+            try {
+                WebElement termsLink = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[contains(@href,'/terms-and-conditions')]")
+                    )
+                );
+
+                js.executeScript(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    termsLink
+                );
+                App.jedah(2);
+
+                js.executeScript("arguments[0].click();", termsLink);
+                App.jedah(2);
+
+                App.driver.navigate().back();
+                App.jedah(2);
+
+            } catch (Exception e) {
+                System.out.println("BUG: Terms link gagal");
+            }
+
+            /* ---------- Support ---------- */
+            try {
+                WebElement supportLink = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[contains(@href,'direct.lc.chat')]")
+                    )
+                );
+
+                js.executeScript(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    supportLink
+                );
+                App.jedah(2);
+
+                String mainTab = App.driver.getWindowHandle();
+                js.executeScript("arguments[0].click();", supportLink);
+                App.jedah(2);
+
+                wait.until(d -> d.getWindowHandles().size() > 1);
+                App.jedah(2);
+
+                for (String tab : App.driver.getWindowHandles()) {
+                    if (!tab.equals(mainTab)) {
+                        App.driver.switchTo().window(tab);
+                        App.jedah(2);
+                        App.driver.close();
+                        App.jedah(2);
+                    }
+                }
+
+                App.driver.switchTo().window(mainTab);
+                App.jedah(2);
+
+            } catch (Exception e) {
+                System.out.println("BUG: Support link gagal");
+            }
+
+        });
     }
 
     public void testCustomizations(){
-        // === klik Product ===
-        WebElement productMenu = App.driver.findElement(
-            By.xpath("//button[.//span[text()='Product']]")
-        );
-        productMenu.click();
-        App.jedah(1);
+        Allure.step("Product - Customization page", () -> {
 
-        // === klik Customizations ===
-        WebElement docsMenu = App.driver.findElement(
-            By.xpath("//a[normalize-space()='Customization']")
-        );
-        docsMenu.click();
-        App.jedah(2);
-
-        // ================= LANJUT 2 =================
-        JavascriptExecutor js = (JavascriptExecutor) App.driver;
-        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
-
-        /* ---------- scroll sedikit sampai tombol muncul ---------- */
-        for (int i = 0; i < 4; i++) {
-            js.executeScript("window.scrollBy(0, 200)");
-            App.jedah(2);
-        }
-
-        /* ---------- Live Demo ---------- */
-        try {
-            WebElement liveDemoBtn = wait.until(
-                ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//a[contains(@href,'/demo')]")
-                )
+            // === klik Product ===
+            WebElement productMenu = App.driver.findElement(
+                By.xpath("//button[.//span[text()='Product']]")
             );
-            App.jedah(2);
+            productMenu.click();
+            App.jedah(1);
 
-            js.executeScript(
-                "arguments[0].scrollIntoView({block:'center'});",
-                liveDemoBtn
+            // === klik Customizations ===
+            WebElement docsMenu = App.driver.findElement(
+                By.xpath("//a[normalize-space()='Customization']")
             );
+            docsMenu.click();
             App.jedah(2);
 
-            js.executeScript("arguments[0].click();", liveDemoBtn);
-            App.jedah(2);
+            // ================= LANJUT 2 =================
+            JavascriptExecutor js = (JavascriptExecutor) App.driver;
+            WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
 
-            App.driver.navigate().back();
-            App.jedah(2);
+            /* ---------- scroll sedikit sampai tombol muncul ---------- */
+            for (int i = 0; i < 4; i++) {
+                js.executeScript("window.scrollBy(0, 200)");
+                App.jedah(2);
+            }
 
-        } catch (Exception e) {
-            System.out.println("BUG: Live Demo tidak bisa diklik");
-        }
+            /* ---------- Live Demo ---------- */
+            try {
+                WebElement liveDemoBtn = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[contains(@href,'/demo')]")
+                    )
+                );
+                App.jedah(2);
 
-        /* ---------- View Pricing ---------- */
-        try {
-            WebElement pricingBtn = wait.until(
-                ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//a[contains(@href,'/pricing')]")
-                )
-            );
-            App.jedah(2);
+                js.executeScript(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    liveDemoBtn
+                );
+                App.jedah(2);
 
-            js.executeScript(
-                "arguments[0].scrollIntoView({block:'center'});",
-                pricingBtn
-            );
-            App.jedah(2);
+                js.executeScript("arguments[0].click();", liveDemoBtn);
+                App.jedah(2);
 
-            js.executeScript("arguments[0].click();", pricingBtn);
-            App.jedah(2);
+                App.driver.navigate().back();
+                App.jedah(2);
 
-            App.driver.navigate().back();
-            App.jedah(2);
+            } catch (Exception e) {
+                System.out.println("BUG: Live Demo tidak bisa diklik");
+            }
 
-        } catch (Exception e) {
-            System.out.println("BUG: View Pricing tidak bisa diklik");
-        }
+            /* ---------- View Pricing ---------- */
+            try {
+                WebElement pricingBtn = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[contains(@href,'/pricing')]")
+                    )
+                );
+                App.jedah(2);
 
-        /* ---------- scroll sampai mentok ke bawah ---------- */
-        for (int i = 0; i < 15; i++) {
-            js.executeScript("window.scrollBy(0, 200)");
-            App.jedah(2);
-        }
+                js.executeScript(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    pricingBtn
+                );
+                App.jedah(2);
+
+                js.executeScript("arguments[0].click();", pricingBtn);
+                App.jedah(2);
+
+                App.driver.navigate().back();
+                App.jedah(2);
+
+            } catch (Exception e) {
+                System.out.println("BUG: View Pricing tidak bisa diklik");
+            }
+
+            /* ---------- scroll sampai mentok ke bawah ---------- */
+            for (int i = 0; i < 15; i++) {
+                js.executeScript("window.scrollBy(0, 200)");
+                App.jedah(2);
+            }
+
+        });
     }
 
     public void testTechnology(){
-        // === klik Product ===
-        WebElement productMenu = App.driver.findElement(
-            By.xpath("//button[.//span[text()='Product']]")
-        );
-        productMenu.click();
-        App.jedah(1);
+        Allure.step("Product - Technology page", () -> {
 
-        // === klik Technology ===
-        WebElement docsMenu = App.driver.findElement(
-            By.xpath("//a[normalize-space()='Technology']")
-        );
-        docsMenu.click();
-        App.jedah(2);
-
-        // ================= LANJUT 2 =================
-        JavascriptExecutor js = (JavascriptExecutor) App.driver;
-
-        /* ===== scroll perlahan seperti manusia ===== */
-        for (int i = 0; i < 14; i++) {
-            js.executeScript("window.scrollBy(0, 200)");
-            App.jedah(2);
-        }
-        
-        // ==== LANJUT 3 ======
-        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
-
-        /* ===== Live Demo ===== */
-        try {
-            WebElement liveDemoBtn = wait.until(
-                ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//a[contains(@href,'/demo')]")
-                )
+            // === klik Product ===
+            WebElement productMenu = App.driver.findElement(
+                By.xpath("//button[.//span[text()='Product']]")
             );
+            productMenu.click();
+            App.jedah(1);
 
-            // pastikan posisi aman (tengah layar)
-            js.executeScript(
-                "arguments[0].scrollIntoView({block:'center'});",
-                liveDemoBtn
+            // === klik Technology ===
+            WebElement docsMenu = App.driver.findElement(
+                By.xpath("//a[normalize-space()='Technology']")
             );
+            docsMenu.click();
             App.jedah(2);
 
-            // klik via JS
-            js.executeScript("arguments[0].click();", liveDemoBtn);
-            App.jedah(3);
+            // ================= LANJUT 2 =================
+            JavascriptExecutor js = (JavascriptExecutor) App.driver;
 
-            // kembali ke halaman awal
-            App.driver.navigate().back();
-            App.jedah(3);
+            /* ===== scroll perlahan seperti manusia ===== */
+            for (int i = 0; i < 14; i++) {
+                js.executeScript("window.scrollBy(0, 200)");
+                App.jedah(2);
+            }
+            
+            // ==== LANJUT 3 ======
+            WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
 
-        } catch (Exception e) {
-            System.out.println("BUG: Live Demo tidak bisa dibuka");
-        }
+            /* ===== Live Demo ===== */
+            try {
+                WebElement liveDemoBtn = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[contains(@href,'/demo')]")
+                    )
+                );
 
-        /* ===== View Pricing ===== */
-        try {
-            WebElement pricingBtn = wait.until(
-                ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//a[contains(@href,'/pricing')]")
-                )
-            );
+                // pastikan posisi aman (tengah layar)
+                js.executeScript(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    liveDemoBtn
+                );
+                App.jedah(2);
 
-            js.executeScript(
-                "arguments[0].scrollIntoView({block:'center'});",
-                pricingBtn
-            );
-            App.jedah(2);
+                // klik via JS
+                js.executeScript("arguments[0].click();", liveDemoBtn);
+                App.jedah(3);
 
-            js.executeScript("arguments[0].click();", pricingBtn);
-            App.jedah(3);
+                // kembali ke halaman awal
+                App.driver.navigate().back();
+                App.jedah(3);
 
-            App.driver.navigate().back();
-            App.jedah(3);
+            } catch (Exception e) {
+                System.out.println("BUG: Live Demo tidak bisa dibuka");
+            }
 
-        } catch (Exception e) {
-            System.out.println("BUG: View Pricing tidak bisa dibuka");
-        }
+            /* ===== View Pricing ===== */
+            try {
+                WebElement pricingBtn = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[contains(@href,'/pricing')]")
+                    )
+                );
 
+                js.executeScript(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    pricingBtn
+                );
+                App.jedah(2);
+
+                js.executeScript("arguments[0].click();", pricingBtn);
+                App.jedah(3);
+
+                App.driver.navigate().back();
+                App.jedah(3);
+
+            } catch (Exception e) {
+                System.out.println("BUG: View Pricing tidak bisa dibuka");
+            }
+
+        });
     }
 
     public void testRequirement(){
-        // === klik Product ===
-        WebElement productMenu = App.driver.findElement(
-            By.xpath("//button[.//span[text()='Product']]")
-        );
-        productMenu.click();
-        App.jedah(1);
-
-        // === klik Customizations ===
-        WebElement docsMenu = App.driver.findElement(
-            By.xpath("//a[normalize-space()='Requirements']")
-        );
-        docsMenu.click();
-        App.jedah(2);
-
-        // scroll sampek bawah
-        JavascriptExecutor js = (JavascriptExecutor) App.driver;
-
-        /* ===== scroll perlahan seperti manusia ===== */
-        for (int i = 0; i < 13; i++) {
-            js.executeScript("window.scrollBy(0, 200)");
+        Allure.step("Product - Requirements page", () -> {
+            // === klik Product ===
+            WebElement productMenu = App.driver.findElement(
+                By.xpath("//button[.//span[text()='Product']]")
+            );
+            productMenu.click();
             App.jedah(1);
-        }
 
-        // ====== klik tombol demo dama live ======
-        WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
-
-        /* ===== Live Demo ===== */
-        try {
-            WebElement liveDemoBtn = wait.until(
-                ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//a[contains(@href,'/demo')]")
-                )
+            // === klik Customizations ===
+            WebElement docsMenu = App.driver.findElement(
+                By.xpath("//a[normalize-space()='Requirements']")
             );
-
-            // pastikan posisi aman (tengah layar)
-            js.executeScript(
-                "arguments[0].scrollIntoView({block:'center'});",
-                liveDemoBtn
-            );
+            docsMenu.click();
             App.jedah(2);
 
-            js.executeScript("arguments[0].click();", liveDemoBtn);
-            App.jedah(3);
+            // scroll sampek bawah
+            JavascriptExecutor js = (JavascriptExecutor) App.driver;
 
-            App.driver.navigate().back();
-            App.jedah(3);
+            /* ===== scroll perlahan seperti manusia ===== */
+            for (int i = 0; i < 13; i++) {
+                js.executeScript("window.scrollBy(0, 200)");
+                App.jedah(1);
+            }
 
-        } catch (Exception e) {
-            System.out.println("BUG: Tombol bland dengan background");
-        }
+            // ====== klik tombol demo dama live ======
+            WebDriverWait wait = new WebDriverWait(App.driver, Duration.ofSeconds(30));
 
-        /* ===== View Pricing ===== */
-        try {
-            WebElement pricingBtn = wait.until(
-                ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//a[contains(@href,'/pricing')]")
-                )
-            );
+            /* ===== Live Demo ===== */
+            try {
+                WebElement liveDemoBtn = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[contains(@href,'/demo')]")
+                    )
+                );
 
-            js.executeScript(
-                "arguments[0].scrollIntoView({block:'center'});",
-                pricingBtn
-            );
-            App.jedah(2);
+                js.executeScript(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    liveDemoBtn
+                );
+                App.jedah(2);
 
-            js.executeScript("arguments[0].click();", pricingBtn);
-            App.jedah(3);
+                js.executeScript("arguments[0].click();", liveDemoBtn);
+                App.jedah(3);
 
-            App.driver.navigate().back();
-            App.jedah(3);
+                App.driver.navigate().back();
+                App.jedah(3);
 
-        } catch (Exception e) {
-            System.out.println("BUG: View Pricing tidak bisa diklik");
-        }
+            } catch (Exception e) {
+                System.out.println("BUG: Tombol bland dengan background");
+            }
 
+            /* ===== View Pricing ===== */
+            try {
+                WebElement pricingBtn = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//a[contains(@href,'/pricing')]")
+                    )
+                );
+
+                js.executeScript(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    pricingBtn
+                );
+                App.jedah(2);
+
+                js.executeScript("arguments[0].click();", pricingBtn);
+                App.jedah(3);
+
+                App.driver.navigate().back();
+                App.jedah(3);
+
+            } catch (Exception e) {
+                System.out.println("BUG: View Pricing tidak bisa diklik");
+            }
+
+        });
     }
 
     public void testDemo(Boolean benar){

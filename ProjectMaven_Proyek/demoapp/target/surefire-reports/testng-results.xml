@@ -2,28 +2,28 @@
 <testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-01-05T17:11:53 WIB" name="Surefire suite" finished-at="2026-01-05T17:13:45 WIB" duration-ms="111960">
+  <suite started-at="2026-01-05T19:19:00 WIB" name="Surefire suite" finished-at="2026-01-05T19:24:31 WIB" duration-ms="330602">
     <groups>
     </groups>
-    <test started-at="2026-01-05T17:11:53 WIB" name="Surefire test" finished-at="2026-01-05T17:13:45 WIB" duration-ms="111960">
+    <test started-at="2026-01-05T19:19:00 WIB" name="Surefire test" finished-at="2026-01-05T19:24:31 WIB" duration-ms="330602">
       <class name="com.selenium.AppTest">
-        <test-method is-config="true" signature="start()[pri:0, instance:com.selenium.AppTest@50ad3bc1]" started-at="2026-01-05T17:11:53 WIB" name="start" finished-at="2026-01-05T17:12:07 WIB" duration-ms="14146" status="PASS">
+        <test-method is-config="true" signature="start()[pri:0, instance:com.selenium.AppTest@50ad3bc1]" started-at="2026-01-05T19:19:00 WIB" name="start" finished-at="2026-01-05T19:19:11 WIB" duration-ms="11054" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- start -->
-        <test-method signature="scenario1()[pri:1, instance:com.selenium.AppTest@50ad3bc1]" started-at="2026-01-05T17:12:07 WIB" name="scenario1" finished-at="2026-01-05T17:12:07 WIB" duration-ms="59" status="PASS">
+        <test-method signature="scenario1()[pri:1, instance:com.selenium.AppTest@50ad3bc1]" started-at="2026-01-05T19:19:11 WIB" name="scenario1" finished-at="2026-01-05T19:19:11 WIB" duration-ms="52" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- scenario1 -->
-        <test-method signature="scenario2()[pri:2, instance:com.selenium.AppTest@50ad3bc1]" started-at="2026-01-05T17:12:07 WIB" name="scenario2" finished-at="2026-01-05T17:12:07 WIB" duration-ms="2" status="PASS">
+        <test-method signature="scenario2()[pri:2, instance:com.selenium.AppTest@50ad3bc1]" started-at="2026-01-05T19:19:11 WIB" name="scenario2" finished-at="2026-01-05T19:19:11 WIB" duration-ms="3" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- scenario2 -->
-        <test-method signature="scenario3()[pri:3, instance:com.selenium.AppTest@50ad3bc1]" started-at="2026-01-05T17:12:07 WIB" name="scenario3" finished-at="2026-01-05T17:13:34 WIB" duration-ms="87129" status="PASS">
+        <test-method signature="scenario3()[pri:3, instance:com.selenium.AppTest@50ad3bc1]" started-at="2026-01-05T19:19:11 WIB" name="scenario3" finished-at="2026-01-05T19:24:20 WIB" duration-ms="308480" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- scenario3 -->
-        <test-method is-config="true" signature="end()[pri:0, instance:com.selenium.AppTest@50ad3bc1]" started-at="2026-01-05T17:13:34 WIB" name="end" finished-at="2026-01-05T17:13:45 WIB" duration-ms="10459" status="PASS">
+        <test-method is-config="true" signature="end()[pri:0, instance:com.selenium.AppTest@50ad3bc1]" started-at="2026-01-05T19:24:20 WIB" name="end" finished-at="2026-01-05T19:24:31 WIB" duration-ms="10817" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- end -->
