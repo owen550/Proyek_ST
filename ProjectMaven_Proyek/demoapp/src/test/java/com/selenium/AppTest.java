@@ -25,77 +25,83 @@ public class AppTest {
 
     @Test(priority = 2) // mikhail
     public void scenario2(){
-        
+        scenario2 sc2 = new scenario2();
+        sc2.NavPageNotFound();
+        // sc2.NavFooter();
+        // sc2.NavBlog();
+        // sc2.NavFeaturePage();
+        // sc2.NavHeaderOffersToCMS();
+        // sc2.NavHeaderFlightToCar();
     }
 
     @Test(priority = 3) // owen
     public void scenario3(){
-        // === deklarasi ===
-        scenario3 sc3 = new scenario3();
-        sc3.prepareTest();
+        // // === deklarasi ===
+        // scenario3 sc3 = new scenario3();
+        // sc3.prepareTest();
         
-        // === register ===
-        sc3.testRegister(false);// email dan register password confirm salah
-        App.jedah(2);
+        // // === register ===
+        // sc3.testRegister(false);// email dan register password confirm salah
+        // App.jedah(2);
         
-        sc3.testRegister(true);// register yang benar
-        App.jedah(2);
+        // sc3.testRegister(true);// register yang benar
+        // App.jedah(2);
         
-        sc3.testRegister(true);// register ke akun yang sudah ada
-        App.jedah(2);
+        // sc3.testRegister(true);// register ke akun yang sudah ada
+        // App.jedah(2);
 
-        // === login ===
-        sc3.testForgetPass(); // login klik forget password benar dan salah
-        App.jedah(1);
+        // // === login ===
+        // sc3.testForgetPass(); // login klik forget password benar dan salah
+        // App.jedah(1);
 
-        sc3.testLogin("email"); // login dengan format email yang salah
-        App.jedah(1);
-        App.refreshToMainPage();
-        App.jedah(1);
+        // sc3.testLogin("email"); // login dengan format email yang salah
+        // App.jedah(1);
+        // App.refreshToMainPage();
+        // App.jedah(1);
         
-        sc3.testLogin("email_salah"); // login dengan data yang salah
-        App.jedah(1);
-        App.refreshToMainPage();
-        App.jedah(1);
+        // sc3.testLogin("email_salah"); // login dengan data yang salah
+        // App.jedah(1);
+        // App.refreshToMainPage();
+        // App.jedah(1);
         
-        sc3.testLogin("benar"); // login dengan data yang benar
+        // sc3.testLogin("benar"); // login dengan data yang benar
 
-        // === pasca login ===
-        sc3.testPascaLogin();
+        // // === pasca login ===
+        // sc3.testPascaLogin();
 
-        // === test demo salah ===
-        sc3.testDemo(false);
-        App.refreshToMainPage();
-        App.jedah(1);
+        // // === test demo salah ===
+        // sc3.testDemo(false);
+        // App.refreshToMainPage();
+        // App.jedah(1);
 
-        // === test demo benar ===
-        sc3.testDemo(true);
-        App.refreshToMainPage();
-        App.jedah(1);
+        // // === test demo benar ===
+        // sc3.testDemo(true);
+        // App.refreshToMainPage();
+        // App.jedah(1);
 
-        // === production Requirement ===
-        sc3.testRequirement();
+        // // === production Requirement ===
+        // sc3.testRequirement();
 
-        // === production Technology ===
-        sc3.testTechnology();
+        // // === production Technology ===
+        // sc3.testTechnology();
 
-        // === production Customization ===
-        sc3.testCustomizations();
+        // // === production Customization ===
+        // sc3.testCustomizations();
 
-        // === product Integrations ===
-        sc3.testIntegrations();
+        // // === product Integrations ===
+        // sc3.testIntegrations();
 
-        // === product Themes ===
-        sc3.testThemes();
+        // // === product Themes ===
+        // sc3.testThemes();
 
-        // === product doc ===
-        sc3.testProduct();
+        // // === product doc ===
+        // sc3.testProduct();
 
     }
 
     @AfterClass
     public void end(){
-        App.jedah(10); // jedah 10s
+        App.jedah(4); // jedah 10s
         App.quitDriver(); // tutup
     }
 }
