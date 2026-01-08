@@ -24,6 +24,10 @@ public class scenario2 {
         Assert.assertEquals(headerText.trim(), "Page Not Found", "Halaman tidak menampilkan pesan Page Not Found");
 
         App.driver.switchTo().window(mainWindow);
+        App.jedah(2);
+
+        App.refreshToMainPage();
+        App.jedah(2);
     });
 }
 
@@ -85,72 +89,7 @@ public class scenario2 {
         });
     }
 
-    public void NavHeaderOffersToCMS(){
-        Allure.step("Header Navbar CMS, NewsletterModule, BlogsModule, OffersModule", () -> {
-            navigateHeaderCMS();
-            App.jedah(2);
-            navigateHeaderNewsletterModule();
-            App.jedah(2);
-            navigateHeaderBlogsModule();
-            App.jedah(2);
-            navigateHeaderOffersModule();
-            App.jedah(2);
-
-            App.refreshToMainPage();
-            App.jedah(2);
-        });
-    }
-
-    public void NavHeaderFlightToCar(){
-        Allure.step("Header Navbar Flight, hotel, tour, car module", () -> {
-            navigateHeaderFlightModule();
-            App.jedah(2);
-
-        //     navigateFlightBookingSystem();
-        //     App.jedah(2);
-
-
-        //     navigateFlightBookingSoftware();
-        //     App.jedah(2);
-
-
-        //    navigateFlightBookingEngine();
-        //     App.jedah(2);
-
-
-        //     navigateTBOFlightsAPIIntegration();
-        //     App.jedah(2);
-
-        //     navigateNDCflightsBookingSystem();
-        //     App.jedah(2);
-
-        //     navigateFlightTicketReservationSystem();
-        //     App.jedah(2);
-
-        //     navigateFlightTicketBookingSoftware();
-        //     App.jedah(2);
-
-            // navigateFlightAPIStrategy();
-            // App.jedah(2);
-
-
-            // navigateHeaderHotelModule();
-            // App.jedah(2);
-
-            // navigateHeaderTourModule();
-            // App.jedah(2);
-
-
-            // navigateHeaderCarModule();
-            // App.jedah(2);
-
-
-            App.refreshToMainPage();
-            App.jedah(2);
-        });
-    }
-
-    public void NavFeaturePage(){
+     public void NavFeaturePage(){
         Allure.step("Links di FeaturesPage", () -> {
             navigateFooterFeatures();
             App.jedah(2);
@@ -212,6 +151,695 @@ public class scenario2 {
             App.jedah(2);
         });
     }
+
+    public void NavHeaderOffersToCMS(){
+        Allure.step("Header Navbar CMS, NewsletterModule, BlogsModule, OffersModule", () -> {
+            navigateHeaderCMS();
+            App.jedah(2);
+            navigateHeaderNewsletterModule();
+            App.jedah(2);
+            navigateHeaderBlogsModule();
+            App.jedah(2);
+            navigateHeaderOffersModule();
+            App.jedah(2);
+
+            App.refreshToMainPage();
+            App.jedah(2);
+        });
+    }
+
+    public void NavHeaderFlightToCar(){
+        Allure.step("Header Navbar Flight, hotel, tour, car module", () -> {
+            navigateHeaderFlightModule();
+            App.jedah(2);
+
+            navigateFlightBookingSystem();
+            App.jedah(2);
+
+
+            navigateFlightBookingSoftware();
+            App.jedah(2);
+
+
+           navigateFlightBookingEngine();
+            App.jedah(2);
+
+
+            navigateTBOFlightsAPIIntegration();
+            App.jedah(2);
+
+            navigateNDCflightsBookingSystem();
+            App.jedah(2);
+
+            navigateFlightTicketReservationSystem();
+            App.jedah(2);
+
+            navigateFlightTicketBookingSoftware();
+            App.jedah(2);
+
+            navigateFlightAPIStrategy();
+            App.jedah(2);
+
+
+            navigateHeaderHotelModule();
+            App.jedah(2);
+
+
+            navigateHotelBookingPortal();
+            App.jedah(2);
+
+            navigateHotelBookingEngine();
+            App.jedah(2);
+
+            navigateHotelManagementSystemSoftware();
+            App.jedah(2);
+
+            navigateHotelCheckInSoftware();
+            App.jedah(2);
+
+            navigateHotelsAPIBookingSystem();
+            App.jedah(2);
+            
+            navigateHotelAPIIntegrationWithBookingComAndPriceline();
+            App.jedah(2);
+
+            navigateB2BHotelBookingPortal();
+            App.jedah(2);
+            
+            navigateHotelBedsAPI_XMLIntegration();
+            App.jedah(2);
+
+
+            App.refreshToMainPage();
+            App.jedah(2);
+
+
+            navigateHeaderTourModule();
+            App.jedah(2);
+
+
+            navigateHeaderCarModule();
+            App.jedah(2);
+
+            navigateB2BBookingEngine();
+            App.jedah(2);
+
+            navigateTravelBookingEngine();
+            App.jedah(2);
+
+            navigateBookingEngineSoftware();
+            App.jedah(2);
+
+            navigateMobileApps();
+            App.jedah(2);
+
+            navigateTravelWebsite();
+            App.jedah(2);
+
+            navigateMultiBranchSetup();
+            App.jedah(2);
+
+            navigateAccounting();
+            App.jedah(2);
+
+            navigateOnlineBookingSystem();
+            App.jedah(2);
+
+            StripeAPIIntegration();
+            App.jedah(2);
+
+            PaypalAPIIntegration();
+            App.jedah(2);
+
+            RazorPayAPIIntegration();
+            App.jedah(2);
+
+            navigateTravelAPIIntegration();
+            App.jedah(2);
+
+            navigateSharedHosting();
+            App.jedah(2);
+
+            navigateVPS();
+            App.jedah(2);
+
+            navigateDedicatedServers();
+            App.jedah(2);
+
+            App.refreshToMainPage();
+            App.jedah(2);
+        });
+
+    }
+    private void navigateDedicatedServers(){
+        Allure.step("Navigasi Dedicated Servers", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("/html/body/main/section[5]/div/div/div[1]/p/a[3]")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+    private void navigateVPS(){
+        Allure.step("Navigasi VPS", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("/html/body/main/section[5]/div/div/div[1]/p/a[2]")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+    private void navigateSharedHosting(){
+        Allure.step("Navigasi shared hosting", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("/html/body/main/section[5]/div/div/div[1]/p/a[1]")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+    private void navigateTravelAPIIntegration(){
+        Allure.step("Navigasi Travel API integration", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("//*[@id=\"reservations\"]/div/div/div[1]/div[2]/div[2]/div/p/a")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+    
+     private void navigateOnlineBookingSystem(){
+        Allure.step("Navigasi online booking system", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("//*[@id=\"reservations\"]/div/div/div[1]/p/a[5]")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+     private void navigateAccounting(){
+        Allure.step("Navigasi Accounting", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("//*[@id=\"reservations\"]/div/div/div[1]/p/a[2]")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+    private void RazorPayAPIIntegration(){
+        Allure.step("Navigasi Razor Pay API Integration lalu cek Page Not Found", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement firstLink = App.driver.findElement(
+                By.xpath("//*[@id=\"reservations\"]/div/div/div[1]/div[2]/div[1]/div/p/a[3]")
+            );
+            firstLink.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah klik Reservation link");
+
+            WebElement secondLink = App.driver.findElement(
+                By.xpath("/html/body/main/section[2]/div[2]/div/div/div/div[2]/div[2]/a")
+            );
+            secondLink.click();
+            App.jedah(2);
+
+            WebElement notFoundHeader = App.driver.findElement(
+                By.xpath("/html/body/main/div/div/div[2]/h2")
+            );
+            String headerText = notFoundHeader.getText();
+            Assert.assertEquals(headerText.trim(), "Page Not Found", "Halaman tidak menampilkan pesan Page Not Found");
+
+            App.driver.close(); 
+            App.driver.switchTo().window(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+    private void PaypalAPIIntegration(){
+        Allure.step("Navigasi Paypal API Integration lalu cek Page Not Found", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement firstLink = App.driver.findElement(
+                By.xpath("//*[@id=\"reservations\"]/div/div/div[1]/div[2]/div[1]/div/p/a[2]")
+            );
+            firstLink.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah klik Reservation link");
+
+            WebElement secondLink = App.driver.findElement(
+                By.xpath("/html/body/main/section[2]/div[2]/div/div/div/div[2]/div[2]/a")
+            );
+            secondLink.click();
+            App.jedah(2);
+
+            WebElement notFoundHeader = App.driver.findElement(
+                By.xpath("/html/body/main/div/div/div[2]/h2")
+            );
+            String headerText = notFoundHeader.getText();
+            Assert.assertEquals(headerText.trim(), "Page Not Found", "Halaman tidak menampilkan pesan Page Not Found");
+
+            App.driver.close(); 
+            App.driver.switchTo().window(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+    private void StripeAPIIntegration(){
+        Allure.step("Navigasi Stripe API Integration lalu cek Page Not Found", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement firstLink = App.driver.findElement(
+                By.xpath("//*[@id=\"reservations\"]/div/div/div[1]/div[2]/div[1]/div/p/a[1]")
+            );
+            firstLink.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah klik Reservation link");
+
+            WebElement secondLink = App.driver.findElement(
+                By.xpath("/html/body/main/section[2]/div[2]/div/div/div/div[2]/div[2]/a")
+            );
+            secondLink.click();
+            App.jedah(2);
+
+            WebElement notFoundHeader = App.driver.findElement(
+                By.xpath("/html/body/main/div/div/div[2]/h2")
+            );
+            String headerText = notFoundHeader.getText();
+            Assert.assertEquals(headerText.trim(), "Page Not Found", "Halaman tidak menampilkan pesan Page Not Found");
+
+            App.driver.close(); 
+            App.driver.switchTo().window(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+
+    private void navigateMultiBranchSetup(){
+        Allure.step("Navigasi multi-branch setup", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("//*[@id=\"booking-system\"]/div/div/div[1]/p/a[4]")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+     private void navigateTravelWebsite(){
+        Allure.step("Navigasi travel website", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("//*[@id=\"booking-system\"]/div/div/div[1]/p/a[2]")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+
+    private void navigateMobileApps(){
+        Allure.step("Navigasi Mobile apps", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("//*[@id=\"overview\"]/div/div/div[1]/div[1]/a[4]")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+
+    private void navigateBookingEngineSoftware(){
+        Allure.step("Navigasi Booking engine software", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("//*[@id=\"overview\"]/div/div/div[1]/div[1]/a[2]")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+   private void navigateTravelBookingEngine(){
+        Allure.step("Navigasi Travel booking engine", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("//*[@id=\"overview\"]/div/div/div[1]/div[1]/a[1]")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+    private void navigateB2BBookingEngine(){
+        Allure.step("Navigasi B2B Booking Engine", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("//*[@id=\"overview\"]/div/div/div[1]/p/a[1]")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+
+    private void navigateHotelBookingPortal(){
+        Allure.step("Navigasi hotel booking portal", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("//*[@id=\"hotel-module-overview\"]/div/div/div[1]/p/a")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+         private void navigateHotelBookingEngine(){
+        Allure.step("Navigasi hotel booking engine", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("/html/body/main/p/a[1]")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+     private void navigateHotelManagementSystemSoftware(){
+        Allure.step("Navigasi hotel management system software", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("/html/body/main/p/a[2]")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+    private void navigateHotelCheckInSoftware(){
+        Allure.step("Navigasi hotel check in software", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("//*[@id=\"hotel-calendar-system\"]/div/div/div[2]/p[2]/a")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+    private void navigateHotelsAPIBookingSystem(){
+        Allure.step("Navigasi hotels API booking system", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("//*[@id=\"hotel-calendar-system\"]/div/div/div[2]/div[2]/div[1]/div/div[2]/a")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+    private void navigateHotelAPIIntegrationWithBookingComAndPriceline(){
+        Allure.step("Navigasi hotels API integration with Booking com and Priceline", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("//*[@id=\"hotel-key-features\"]/div/div[1]/p/a")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+     private void navigateB2BHotelBookingPortal(){
+        Allure.step("Navigasi B2B hotel booking portal", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("//*[@id=\"hotel-key-features\"]/div/div[2]/div[7]/p/a")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
+     private void navigateHotelBedsAPI_XMLIntegration(){
+        Allure.step("Navigasi Hotelbeds API XML integration", () -> {
+            String mainWindow = App.driver.getWindowHandle();
+            String oldUrl = App.driver.getCurrentUrl();
+
+            WebElement Link = App.driver.findElement(
+                By.xpath("/html/body/main/section[5]/div/div[1]/p/a")
+            );
+            Link.click();
+            App.jedah(2);
+
+            switchToNewTab(mainWindow);
+            App.jedah(2);
+
+            String newUrl = App.driver.getCurrentUrl();
+            Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
+
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
+        });
+    }
+
 
      private void navigateHeaderFlightModule() {
         Allure.step("Navigasi ke Header FlightModule", () -> {
@@ -364,6 +992,8 @@ public class scenario2 {
             String newUrl = App.driver.getCurrentUrl();
             Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
 
+            switchBackToMainWindow(mainWindow);
+            App.jedah(2);
         });
     }
 
@@ -521,8 +1151,6 @@ public class scenario2 {
             String newUrl = App.driver.getCurrentUrl();
             Assert.assertNotEquals(newUrl, oldUrl, "Halaman tidak berubah setelah di klik");
 
-            switchBackToMainWindow(mainWindow);
-            App.jedah(2);
         });
     }
 
