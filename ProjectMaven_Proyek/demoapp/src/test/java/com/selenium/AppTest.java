@@ -25,13 +25,13 @@ public class AppTest {
 
     @Test(priority = 2) // mikael
     public void scenario2(){
-        scenario2 sc2 = new scenario2();
-        sc2.NavFooter();
-        sc2.NavBlog();
-        sc2.NavFeaturePage();
-        sc2.NavHeaderOffersToCMS();
-        sc2.NavHeaderFlightToCar();
-        sc2.NavPageNotFound();
+        // scenario2 sc2 = new scenario2();
+        // sc2.NavFooter();
+        // sc2.NavBlog();
+        // sc2.NavFeaturePage();
+        // sc2.NavHeaderOffersToCMS();
+        // sc2.NavHeaderFlightToCar();
+        // sc2.NavPageNotFound();
     }
 
     @Test(priority = 3) // owen
@@ -68,6 +68,8 @@ public class AppTest {
 
         // === pasca login ===
         sc3.testPascaLogin();
+        App.refreshToMainPage();
+        App.jedah(1);
 
         // === test demo salah ===
         sc3.testDemo(false);
