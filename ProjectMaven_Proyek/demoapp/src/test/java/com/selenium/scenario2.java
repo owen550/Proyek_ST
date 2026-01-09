@@ -32,7 +32,9 @@ public class scenario2 {
 }
 
     public void NavFooter(){
-        Allure.step("Navigasi Footer", () -> {
+        Allure.step("Navigasi Footer", () -> { 
+            App.refreshToMainPage();
+            App.jedah(2);
             navigateFooterDemo();
             App.jedah(2);
             navigateFooterPricing();
