@@ -22,15 +22,29 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class scenario1 {
+import io.qameta.allure.AllureId;
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 
+@Epic("PHPTravels Website Automation")
+@Feature("Company Menu End-to-End Testing")
+
+public class scenario1 {
         private static JavascriptExecutor je = (JavascriptExecutor) App.driver;
         private static Actions actions = new Actions(App.driver);
         private static String mainWindow = App.driver.getWindowHandle();
 
+@Test(description = "End-to-End Automation Scenario for Company Pages")
+@Story("Company Navigation & Validation Flow")
+@Severity(SeverityLevel.CRITICAL)
         public static void run() throws Exception {
         CompanyClientsPage();
         CompanyAboutPage();
@@ -41,6 +55,9 @@ public class scenario1 {
         CompanyPartners();
         CompanyMediaKit();
         }
+
+@Story("Company - Clients Page")
+@Severity(SeverityLevel.NORMAL)
 
      private static void CompanyClientsPage() throws Exception  {
     // ============================
@@ -94,6 +111,7 @@ WebElement metaTitle = App.wait.until(
 
 String expectedMetaTitle = "Clients - Phptravels";
 String actualMetaTitle = metaTitle.getAttribute("content");
+
 Assert.assertEquals(
         actualMetaTitle,
         expectedMetaTitle,
@@ -217,6 +235,10 @@ App.driver.getWindowHandle();
 
 
     }
+
+    @Story("Company - About Page")
+@Severity(SeverityLevel.NORMAL)
+
 
     private static void CompanyAboutPage() throws Exception {
 
@@ -373,6 +395,9 @@ for (WebElement pill : featurePills) {
 
 System.out.println("✔ Feature pills berhasil di-hover satu per satu");
 }
+
+@Story("Company - Team Page")
+@Severity(SeverityLevel.NORMAL)
 
 private static void CompanyTeamPageandViewOpenings() throws Exception {
 // ======================================================
@@ -573,6 +598,10 @@ try {
     takeScreenshot("company_values_hover");
 
 }
+
+@Story("Company - Contact Page")
+@Severity(SeverityLevel.NORMAL)
+
 
 private static void CompanyContactPageandInteractions() throws Exception {
     // ======================================================
@@ -778,6 +807,9 @@ App.driver.switchTo().window(mainWindow);
     // screenshot akhir
 takeScreenshot("contact_page_completed");
 }
+
+@Story("Company - Meeting Page")
+@Severity(SeverityLevel.CRITICAL)
 
 private static void MeetingPage() throws Exception {
 
@@ -1143,6 +1175,8 @@ App.driver.switchTo().window(mainWindow);
 App.jedah(2);
     }
 
+@Story("Company - Career Page")
+@Severity(SeverityLevel.MINOR)
 
 private static void CompanyCareerandJobs() throws Exception {
 // tombol Company (berdasarkan teks)
@@ -1217,6 +1251,9 @@ for (int i = 0; i < jobCards.size(); i++) {
     App.jedah(2);
 }
 }
+
+@Story("Company - Partners Page")
+@Severity(SeverityLevel.NORMAL)
 
 private static void CompanyPartners() throws Exception {
  // buka dropdown Company (hover + click aman)
@@ -1302,6 +1339,9 @@ for (String win : App.driver.getWindowHandles()) {
 App.driver.switchTo().window(mainWindow);
 
 }
+
+@Story("Company - Media Kit Page")
+@Severity(SeverityLevel.NORMAL)
 
 private static void CompanyMediaKit() throws Exception {
 String mainWindow = App.driver.getWindowHandle();
@@ -1448,7 +1488,7 @@ je.executeScript("arguments[0].click();", backBtn);
 
 }
 
-    
+@Attachment(value = "{name}", type = "image/png")
 // ============================
 // HELPER: SCREENSHOT ASSERT
 // ============================
