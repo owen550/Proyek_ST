@@ -19,8 +19,8 @@ public class AppTest {
     }
 
     @Test(priority = 1) // ricard
-    public void scenario1(){
-        
+    public void scenario1() throws Exception{
+        scenario1.run();
     }
 
     @Test(priority = 2) // mikael

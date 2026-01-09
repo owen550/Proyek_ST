@@ -1,0 +1,7 @@
+{
+  "name": "Automation Test User",
+  "email": "automation.user@example.com",
+  "guest_email": "guest.user@example.com",
+  "whatsapp_number": "8123456789",
+  "description": "Automated meeting booking flow testing"
+}
